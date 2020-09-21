@@ -513,14 +513,24 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul>
 <li>
 <p>Main algorithm</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ideal case</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Found the biggest contour and the polyline with the fewest lines.</p>
+<p>Found the biggest contour to match the two pages.</p>
 </div>
 <div class="paragraph">
-<p>The line that separate the two pages in the top of the two "waves".</p>
+<p>Found the polyline with the fewest lines but that have 3 points in the two interessing areas (wave).</p>
+</div>
+<div class="paragraph">
+<p>The line that separate the two pages is the top (in blue) of the two "waves".</p>
 </div>
 <div class="paragraph">
 <p>Image 0_4.png in debug mode :</p>
@@ -528,6 +538,32 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="imageblock">
 <div class="content">
 <img src="separate-1-mainalgo.png" alt="separate 1 mainalgo">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Contour match only page per page</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Instead of having one big contour, you have two contours, one per page.</p>
+</div>
+<div class="paragraph">
+<p>Then found the polyline with the fewest lines but that have 2 points in the two interessing areas (wave).</p>
+</div>
+<div class="paragraph">
+<p>The line that separate the two pages is the mean of the top (in blue) of the two "waves" of the two contours.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="separate-1-algo2_1.png" alt="separate 1 algo2 1">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="separate-1-algo2_2.png" alt="separate 1 algo2 2">
 </div>
 </div>
 <div class="ulist">
@@ -694,6 +730,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <img src="removeborder-1-mainalgo2.png" alt="removeborder 1 mainalgo2">
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+It&#8217;s possible that no contour is found after the filter of all contours (blank image). Then return the pixel at the center of the image.
+</td>
+</tr>
+</table>
 </div>
 <div class="ulist">
 <ul>
