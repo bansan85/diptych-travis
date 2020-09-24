@@ -475,7 +475,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_separate_double_page_images">Separate double page images</h2>
+<h2 id="_split_double_page_images">Split double page images</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_curve_presence_at_top_and_bottom_of_folding">Curve presence at top and bottom of folding</h3>
@@ -499,7 +499,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </div>
 <div class="paragraph">
-<p>Apply a blur then a threshold to work with a B/W image with less noise.</p>
+<p>Apply :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a blur : for black and white only</p>
+</li>
+<li>
+<p>a threshold : to remove small noise and to convert gray to black / white</p>
+</li>
+<li>
+<p>a erode : to work with a B/W image with big dot instead of lots of small data.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>Image 0_2.png in debug mode :</p>
