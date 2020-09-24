@@ -479,6 +479,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_curve_presence_at_top_and_bottom_of_folding">Curve presence at top and bottom of folding</h3>
+<div class="paragraph">
+<p>Method <code>SeparatePage.found_split_line_with_wave</code></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -515,7 +518,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </div>
 <div class="paragraph">
-<p>Image 0_2.png in debug mode :</p>
+<p>Image 2_4.png in debug mode :</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -546,7 +549,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>The line that separate the two pages is the top (in blue) of the two "waves".</p>
 </div>
 <div class="paragraph">
-<p>Image 0_4.png in debug mode :</p>
+<p>Image 2_6_*.png in debug mode :</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -590,7 +593,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Apply a mask with an inclined line to separe pages.</p>
 </div>
 <div class="paragraph">
-<p>Image 0_5.png and 0_6.png in debug mode :</p>
+<p>Image 3_1.png and 3_2.png in debug mode :</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -628,10 +631,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </div>
 <div class="paragraph">
-<p>Apply a blur to thicken letter to have just a big black mass to have less noise and to ease detect of liner.</p>
+<p>Apply a erode to thicken letter to have just a big black mass to have less noise and to ease detect of liner.</p>
 </div>
 <div class="paragraph">
-<p>Image 1_0a.png in debug mode :</p>
+<p>Image 4_*_2.png in debug mode :</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -649,7 +652,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Found all lines then keep only them who have a angle less than 20°. Then keep them who have a angle closed to the mean.</p>
 </div>
 <div class="paragraph">
-<p>Image 1_0b.png in debug mode :</p>
+<p>Image 4_*_4.png in debug mode :</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -667,7 +670,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Rotate image.</p>
 </div>
 <div class="paragraph">
-<p>Image 1_0c.png in debug mode :</p>
+<p>Image 4_*_5.png in debug mode :</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -705,10 +708,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </div>
 <div class="paragraph">
-<p>Apply a blur to reduce noise.</p>
+<p>Apply a erode to thicken letter to have just a big black mass to have less noise and to ease detect of liner.</p>
 </div>
 <div class="paragraph">
-<p>Image 1-1b.png in debug mode :</p>
+<p>Image 5_*_3.png in debug mode :</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -726,7 +729,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Found the biggest (red) contour and the associated (blue) rectangle. With this action, you have isolated the border of the page.</p>
 </div>
 <div class="paragraph">
-<p>Image 1_1d.png in debug mode :</p>
+<p>Image 5_*_5.png in debug mode :</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -737,7 +740,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Then crop.</p>
 </div>
 <div class="paragraph">
-<p>Found all (not to big and not to small) contours to find all interesting data (1_1h.png in debug mode).</p>
+<p>Found all (not to big and not to small) contours to find all interesting data.</p>
+</div>
+<div class="paragraph">
+<p>Image 5_*_9.png in debug mode :</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -767,7 +773,7 @@ It&#8217;s possible that no contour is found after the filter of all contours (b
 <p>Then found the rectangle that catch all contours and crop again.</p>
 </div>
 <div class="paragraph">
-<p>Image 1_1i.png in debug mode :</p>
+<p>Image 5_*_10.png in debug mode :</p>
 </div>
 <div class="imageblock">
 <div class="content">
