@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="0" hostname="travis-job-ee640b96-6abd-4200-937d-322700ee57a6" name="pytest" skipped="0" tests="4" time="641.228" timestamp="2020-10-19T13:47:10.109425"><testcase classname="tests.test_images" name="test_0001_png" time="74.317"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+0001.png
+1603115277131337472 : Checking separation double page angle 90.55285531542692
+1603115277131516928 : Checking separation double page y=0 2485
+1603115288686397440 : Checking page rotation 1 0.7373305530706303
+1603115303216743936 : Checking page rotation 2 0.16366951180068876
+1603115303891077376 : Checking image 1 crop x1 331
+1603115303891180544 : Checking image 1 crop y1 336
+1603115303891218176 : Checking image 1 crop x2 2342
+1603115303891252992 : Checking image 1 crop y2 3223
+1603115304589103872 : Checking image 2 crop x1 170
+1603115304589201664 : Checking image 2 crop y1 649
+1603115304589236224 : Checking image 2 crop x2 2184
+1603115304589268480 : Checking image 2 crop y2 3361
+1603115304646464512 : Checking image 1 dpi 300
+1603115304646626048 : Checking image 1 recadre haut 324
+1603115304646657536 : Checking image 1 recadre bas 276
+1603115304646684672 : Checking image 1 recadre gauche 224
+1603115304646710016 : Checking image 1 recadre droite 224
+1603115304648852736 : Checking image 2 dpi 300
+1603115304649029376 : Checking image 2 recadre haut 674
+1603115304649059584 : Checking image 2 recadre bas 101
+1603115304649085952 : Checking image 2 recadre gauche 223
+1603115304649111552 : Checking image 2 recadre droite 223
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_2_pages_2_contours_png" time="36.329"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+2-pages-2-contours.png
+1603115328583253248 : Checking separation double page angle 90.2210765693812
+1603115328583360512 : Checking separation double page y=0 2487
+1603115329590565888 : Checking page rotation 1 0.08368996715487577
+1603115339824418304 : Checking page rotation 2 0.2596174801002939
+1603115340339379712 : Checking image 1 crop x1 1185
+1603115340339461888 : Checking image 1 crop y1 1720
+1603115340339490816 : Checking image 1 crop x2 1186
+1603115340339517952 : Checking image 1 crop y2 1721
+1603115340962061824 : Checking image 2 crop x1 108
+1603115340962192384 : Checking image 2 crop y1 241
+1603115340962231040 : Checking image 2 crop x2 2154
+1603115340962275072 : Checking image 2 crop y2 3240
+1603115340991258112 : Checking image 1 dpi 300
+1603115340991384320 : Checking image 1 recadre haut 1752
+1603115340991415040 : Checking image 1 recadre bas 1753
+1603115340991441920 : Checking image 1 recadre gauche 1239
+1603115340991468032 : Checking image 1 recadre droite 1239
+1603115340993026304 : Checking image 2 dpi 300
+1603115340993194240 : Checking image 2 recadre haut 240
+1603115340993236992 : Checking image 2 recadre bas 248
+1603115340993264384 : Checking image 2 recadre gauche 207
+1603115340993290752 : Checking image 2 recadre droite 207
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_black_border_not_removed_png" time="87.712"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+black-border-not-removed.png
+1603115397754571264 : Checking separation double page angle 89.96520148719509
+1603115397754698496 : Checking separation double page y=0 2454
+1603115409424962048 : Checking page rotation 1 0.012926055410434633
+1603115427202045184 : Checking page rotation 2 -0.10329084947001053
+1603115427904459520 : Checking image 1 crop x1 298
+1603115427904561664 : Checking image 1 crop y1 143
+1603115427904596224 : Checking image 1 crop x2 2308
+1603115427904628480 : Checking image 1 crop y2 3346
+1603115428627549696 : Checking image 2 crop x1 158
+1603115428627637504 : Checking image 2 crop y1 144
+1603115428627671296 : Checking image 2 crop x2 2172
+1603115428627754240 : Checking image 2 crop y2 3353
+1603115428692516608 : Checking image 1 dpi 300
+1603115428692685824 : Checking image 1 recadre haut 127
+1603115428692717824 : Checking image 1 recadre bas 157
+1603115428692746752 : Checking image 1 recadre gauche 225
+1603115428692774144 : Checking image 1 recadre droite 225
+1603115428694604288 : Checking image 2 dpi 300
+1603115428694751488 : Checking image 2 recadre haut 132
+1603115428694781696 : Checking image 2 recadre bas 146
+1603115428694810112 : Checking image 2 recadre gauche 223
+1603115428694837760 : Checking image 2 recadre droite 223
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_rotate_png" time="441.681"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+image_failed_to_rotate.png
+1603115461648862208 : Checking separation double page angle 90.44047961375287
+1603115461649009664 : Checking separation double page y=0 2495
+1603115464652635904 : Checking page rotation 1 0.40194312869130805
+1603115475791986944 : Checking page rotation 2 0.3482554401679422
+1603115869420878336 : Checking image 1 crop x1 194
+1603115869421012736 : Checking image 1 crop y1 9
+1603115869421050368 : Checking image 1 crop x2 2439
+1603115869421082880 : Checking image 1 crop y2 3453
+1603115870146389760 : Checking image 2 crop x1 169
+1603115870146521344 : Checking image 2 crop y1 234
+1603115870146558208 : Checking image 2 crop x2 2250
+1603115870146602752 : Checking image 2 crop y2 3356
+1603115870292601856 : Checking image 1 dpi 300
+1603115870292826624 : Checking image 1 recadre haut 32
+1603115870292865280 : Checking image 1 recadre bas 32
+1603115870292892160 : Checking image 1 recadre gauche 118
+1603115870292918784 : Checking image 1 recadre droite 118
+1603115870296358400 : Checking image 2 dpi 300
+1603115870296592384 : Checking image 2 recadre haut 205
+1603115870296625152 : Checking image 2 recadre bas 160
+1603115870296655104 : Checking image 2 recadre gauche 189
+1603115870296682240 : Checking image 2 recadre droite 189
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase></testsuite></testsuites>
