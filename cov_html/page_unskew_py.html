@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
-    <title>Coverage for page/unskew.py: 85%</title>
+    <title>Coverage for page/unskew.py: 87%</title>
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="jquery.hotkeys.js"></script>
@@ -17,7 +17,7 @@
 <div id="header">
     <div class="content">
         <h1>Coverage for <b>page/unskew.py</b> :
-            <span class="pc_cov">85%</span>
+            <span class="pc_cov">87%</span>
         </h1>
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
@@ -25,7 +25,7 @@
             <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">70 run</button>
             <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">7 missing</button>
             <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">0 excluded</button>
-            <button type="button" class="par run show_par shortkey_p button_toggle_par" title="Toggle lines partially run">2 partial</button>
+            <button type="button" class="par run show_par shortkey_p button_toggle_par" title="Toggle lines partially run">0 partial</button>
         </h2>
     </div>
 </div>
@@ -185,7 +185,7 @@
     <p id="t131" class="pln"><span class="n"><a href="#t131">131</a></span><span class="t">    <span class="com"># Le deuxi&#232;me niveau de liste ne contient toujours qu'une ligne.</span>&nbsp;</span><span class="r"></span></p>
     <p id="t132" class="run"><span class="n"><a href="#t132">132</a></span><span class="t">    <span class="nam">lines</span> <span class="op">=</span> <span class="nam">list</span><span class="op">(</span><span class="nam">map</span><span class="op">(</span><span class="key">lambda</span> <span class="nam">line</span><span class="op">:</span> <span class="nam">line</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">,</span> <span class="nam">list_lines</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t133" class="pln"><span class="n"><a href="#t133">133</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p id="t134" class="par run show_par"><span class="n"><a href="#t134">134</a></span><span class="t">    <span class="key">if</span> <span class="nam">enable_debug</span> <span class="key">is</span> <span class="key">not</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">134&#x202F;&#x219B;&#x202F;159</span><span class="annotate long">line 134 didn't jump to line 159, because the condition on line 134 was never false</span></span></p>
+    <p id="t134" class="run"><span class="n"><a href="#t134">134</a></span><span class="t">    <span class="key">if</span> <span class="nam">enable_debug</span> <span class="key">is</span> <span class="key">not</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t135" class="run"><span class="n"><a href="#t135">135</a></span><span class="t">        <span class="nam">image_with_lines</span> <span class="op">=</span> <span class="nam">cv2ext</span><span class="op">.</span><span class="nam">convertion_en_couleur</span><span class="op">(</span><span class="nam">image</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t136" class="run"><span class="n"><a href="#t136">136</a></span><span class="t">        <span class="nam">img</span> <span class="op">=</span> <span class="nam">cv2ext</span><span class="op">.</span><span class="nam">convertion_en_couleur</span><span class="op">(</span><span class="nam">images_mask</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t137" class="run"><span class="n"><a href="#t137">137</a></span><span class="t">        <span class="key">for</span> <span class="nam">line_x1</span><span class="op">,</span> <span class="nam">line_y1</span><span class="op">,</span> <span class="nam">line_x2</span><span class="op">,</span> <span class="nam">line_y2</span> <span class="key">in</span> <span class="nam">lines</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
@@ -224,7 +224,7 @@
     <p id="t170" class="run"><span class="n"><a href="#t170">170</a></span><span class="t">        <span class="key">if</span> <span class="nam">cv2</span><span class="op">.</span><span class="nam">countNonZero</span><span class="op">(</span><span class="nam">image_line</span><span class="op">)</span> <span class="op">==</span> <span class="num">0</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t171" class="run"><span class="n"><a href="#t171">171</a></span><span class="t">            <span class="nam">lines_filtered</span><span class="op">.</span><span class="nam">append</span><span class="op">(</span><span class="op">(</span><span class="nam">line_x1</span><span class="op">,</span> <span class="nam">line_y1</span><span class="op">,</span> <span class="nam">line_x2</span><span class="op">,</span> <span class="nam">line_y2</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t172" class="pln"><span class="n"><a href="#t172">172</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p id="t173" class="par run show_par"><span class="n"><a href="#t173">173</a></span><span class="t">    <span class="key">if</span> <span class="nam">enable_debug</span> <span class="key">is</span> <span class="key">not</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">173&#x202F;&#x219B;&#x202F;187</span><span class="annotate long">line 173 didn't jump to line 187, because the condition on line 173 was never false</span></span></p>
+    <p id="t173" class="run"><span class="n"><a href="#t173">173</a></span><span class="t">    <span class="key">if</span> <span class="nam">enable_debug</span> <span class="key">is</span> <span class="key">not</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t174" class="run"><span class="n"><a href="#t174">174</a></span><span class="t">        <span class="nam">image_with_lines</span> <span class="op">=</span> <span class="nam">cv2ext</span><span class="op">.</span><span class="nam">convertion_en_couleur</span><span class="op">(</span><span class="nam">image</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t175" class="run"><span class="n"><a href="#t175">175</a></span><span class="t">        <span class="key">for</span> <span class="nam">line_x1</span><span class="op">,</span> <span class="nam">line_y1</span><span class="op">,</span> <span class="nam">line_x2</span><span class="op">,</span> <span class="nam">line_y2</span> <span class="key">in</span> <span class="nam">lines_filtered</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t176" class="run"><span class="n"><a href="#t176">176</a></span><span class="t">            <span class="nam">cv2</span><span class="op">.</span><span class="nam">line</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
