@@ -21,8 +21,8 @@
         </h1>
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
-            161 statements &nbsp;
-            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">147 run</button>
+            165 statements &nbsp;
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">151 run</button>
             <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">14 missing</button>
             <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">0 excluded</button>
             <button type="button" class="par run show_par shortkey_p button_toggle_par" title="Toggle lines partially run">13 partial</button>
@@ -352,6 +352,16 @@
     <p id="t298" class="pln"><span class="n"><a href="#t298">298</a></span><span class="t">        <span class="nam">iterations</span><span class="op">=</span><span class="nam">iterations</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p id="t299" class="pln"><span class="n"><a href="#t299">299</a></span><span class="t">    <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t300" class="run"><span class="n"><a href="#t300">300</a></span><span class="t">    <span class="key">return</span> <span class="nam">dilate</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t301" class="pln"><span class="n"><a href="#t301">301</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t302" class="pln"><span class="n"><a href="#t302">302</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t303" class="run"><span class="n"><a href="#t303">303</a></span><span class="t"><span class="key">def</span> <span class="nam">threshold_from_gaussian_histogram</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t304" class="pln"><span class="n"><a href="#t304">304</a></span><span class="t">    <span class="nam">image</span><span class="op">:</span> <span class="nam">Any</span><span class="op">,</span> <span class="nam">ksize</span><span class="op">:</span> <span class="nam">int</span> <span class="op">=</span> <span class="num">5</span><span class="op">,</span> <span class="nam">pourcentage</span><span class="op">:</span> <span class="nam">float</span> <span class="op">=</span> <span class="num">0.8</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t305" class="pln"><span class="n"><a href="#t305">305</a></span><span class="t"><span class="op">)</span> <span class="op">-></span> <span class="nam">Any</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t306" class="run"><span class="n"><a href="#t306">306</a></span><span class="t">    <span class="nam">histogram</span> <span class="op">=</span> <span class="nam">compute</span><span class="op">.</span><span class="nam">image_to_256_histogram</span><span class="op">(</span><span class="nam">image</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t307" class="run"><span class="n"><a href="#t307">307</a></span><span class="t">    <span class="nam">blur</span> <span class="op">=</span> <span class="nam">cv2</span><span class="op">.</span><span class="nam">GaussianBlur</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t308" class="pln"><span class="n"><a href="#t308">308</a></span><span class="t">        <span class="nam">histogram</span><span class="op">,</span> <span class="op">(</span><span class="num">1</span><span class="op">,</span> <span class="nam">ksize</span><span class="op">)</span><span class="op">,</span> <span class="nam">ksize</span><span class="op">,</span> <span class="nam">borderType</span><span class="op">=</span><span class="nam">cv2</span><span class="op">.</span><span class="nam">BORDER_REPLICATE</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t309" class="pln"><span class="n"><a href="#t309">309</a></span><span class="t">    <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t310" class="run"><span class="n"><a href="#t310">310</a></span><span class="t">    <span class="key">return</span> <span class="nam">int</span><span class="op">(</span><span class="nam">pourcentage</span> <span class="op">*</span> <span class="nam">np</span><span class="op">.</span><span class="nam">argmin</span><span class="op">(</span><span class="nam">blur</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
 </div>
 <div id="footer">
     <div class="content">
