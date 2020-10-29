@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
-    <title>Coverage for cv2ext.py: 86%</title>
+    <title>Coverage for cv2ext.py: 87%</title>
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="jquery.hotkeys.js"></script>
@@ -17,15 +17,15 @@
 <div id="header">
     <div class="content">
         <h1>Coverage for <b>cv2ext.py</b> :
-            <span class="pc_cov">86%</span>
+            <span class="pc_cov">87%</span>
         </h1>
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
-            172 statements &nbsp;
-            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">157 run</button>
-            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">15 missing</button>
+            176 statements &nbsp;
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">162 run</button>
+            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">14 missing</button>
             <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">0 excluded</button>
-            <button type="button" class="par run show_par shortkey_p button_toggle_par" title="Toggle lines partially run">16 partial</button>
+            <button type="button" class="par run show_par shortkey_p button_toggle_par" title="Toggle lines partially run">15 partial</button>
         </h2>
     </div>
 </div>
@@ -155,9 +155,9 @@
     <p id="t101" class="pln"><span class="n"><a href="#t101">101</a></span><span class="t">    <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t102" class="mis show_mis"><span class="n"><a href="#t102">102</a></span><span class="t">        <span class="nam">one_channel_image</span> <span class="op">=</span> <span class="nam">convertion_en_niveau_de_gris</span><span class="op">(</span><span class="nam">image</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t103" class="pln"><span class="n"><a href="#t103">103</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p id="t104" class="par run show_par"><span class="n"><a href="#t104">104</a></span><span class="t">    <span class="key">if</span> <span class="nam">force_blur</span> <span class="key">or</span> <span class="nam">is_black_white</span><span class="op">(</span><span class="nam">one_channel_image</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">104&#x202F;&#x219B;&#x202F;106</span><span class="annotate long">line 104 didn't jump to line 106, because the condition on line 104 was never false</span></span></p>
+    <p id="t104" class="run"><span class="n"><a href="#t104">104</a></span><span class="t">    <span class="key">if</span> <span class="nam">force_blur</span> <span class="key">or</span> <span class="nam">is_black_white</span><span class="op">(</span><span class="nam">one_channel_image</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t105" class="run"><span class="n"><a href="#t105">105</a></span><span class="t">        <span class="key">return</span> <span class="nam">cv2</span><span class="op">.</span><span class="nam">blur</span><span class="op">(</span><span class="nam">one_channel_image</span><span class="op">,</span> <span class="nam">blur_kernel_size</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t106" class="mis show_mis"><span class="n"><a href="#t106">106</a></span><span class="t">    <span class="key">return</span> <span class="nam">one_channel_image</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t106" class="run"><span class="n"><a href="#t106">106</a></span><span class="t">    <span class="key">return</span> <span class="nam">one_channel_image</span>&nbsp;</span><span class="r"></span></p>
     <p id="t107" class="pln"><span class="n"><a href="#t107">107</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t108" class="pln"><span class="n"><a href="#t108">108</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t109" class="run"><span class="n"><a href="#t109">109</a></span><span class="t"><span class="key">def</span> <span class="nam">draw_lines_from_hough_lines</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
@@ -368,6 +368,23 @@
     <p id="t314" class="run"><span class="n"><a href="#t314">314</a></span><span class="t">            <span class="nam">i</span> <span class="op">=</span> <span class="nam">j</span>&nbsp;</span><span class="r"></span></p>
     <p id="t315" class="run"><span class="n"><a href="#t315">315</a></span><span class="t">            <span class="key">break</span>&nbsp;</span><span class="r"></span></p>
     <p id="t316" class="run"><span class="n"><a href="#t316">316</a></span><span class="t">    <span class="key">return</span> <span class="nam">int</span><span class="op">(</span><span class="nam">pourcentage</span> <span class="op">*</span> <span class="nam">i</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t317" class="pln"><span class="n"><a href="#t317">317</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t318" class="pln"><span class="n"><a href="#t318">318</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t319" class="run"><span class="n"><a href="#t319">319</a></span><span class="t"><span class="key">def</span> <span class="nam">gaussian_blur_wrap</span><span class="op">(</span><span class="nam">histogram</span><span class="op">:</span> <span class="nam">Any</span><span class="op">,</span> <span class="nam">kernel_size</span><span class="op">:</span> <span class="nam">int</span><span class="op">)</span> <span class="op">-></span> <span class="nam">Any</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t320" class="run"><span class="n"><a href="#t320">320</a></span><span class="t">    <span class="nam">histogram_wrap</span> <span class="op">=</span> <span class="nam">np</span><span class="op">.</span><span class="nam">concatenate</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t321" class="pln"><span class="n"><a href="#t321">321</a></span><span class="t">        <span class="op">[</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t322" class="pln"><span class="n"><a href="#t322">322</a></span><span class="t">            <span class="nam">histogram</span><span class="op">[</span><span class="op">-</span><span class="nam">kernel_size</span><span class="op">:</span><span class="op">]</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t323" class="pln"><span class="n"><a href="#t323">323</a></span><span class="t">            <span class="nam">histogram</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t324" class="pln"><span class="n"><a href="#t324">324</a></span><span class="t">            <span class="nam">histogram</span><span class="op">[</span><span class="op">:</span><span class="nam">kernel_size</span><span class="op">]</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t325" class="pln"><span class="n"><a href="#t325">325</a></span><span class="t">        <span class="op">]</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t326" class="pln"><span class="n"><a href="#t326">326</a></span><span class="t">    <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t327" class="run"><span class="n"><a href="#t327">327</a></span><span class="t">    <span class="nam">histogram_wrap_blur</span> <span class="op">=</span> <span class="nam">cv2</span><span class="op">.</span><span class="nam">GaussianBlur</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t328" class="pln"><span class="n"><a href="#t328">328</a></span><span class="t">        <span class="nam">histogram_wrap</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t329" class="pln"><span class="n"><a href="#t329">329</a></span><span class="t">        <span class="op">(</span><span class="num">1</span><span class="op">,</span> <span class="nam">kernel_size</span><span class="op">)</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t330" class="pln"><span class="n"><a href="#t330">330</a></span><span class="t">        <span class="nam">kernel_size</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t331" class="pln"><span class="n"><a href="#t331">331</a></span><span class="t">        <span class="nam">borderType</span><span class="op">=</span><span class="nam">cv2</span><span class="op">.</span><span class="nam">BORDER_REPLICATE</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t332" class="pln"><span class="n"><a href="#t332">332</a></span><span class="t">    <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t333" class="run"><span class="n"><a href="#t333">333</a></span><span class="t">    <span class="key">return</span> <span class="nam">histogram_wrap_blur</span><span class="op">[</span><span class="nam">kernel_size</span><span class="op">:</span><span class="op">-</span><span class="nam">kernel_size</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
 </div>
 <div id="footer">
     <div class="content">
