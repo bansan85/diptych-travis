@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="0" hostname="travis-job-6104650a-ed51-40c7-8caf-6ee45b6f746d" name="pytest" skipped="1" tests="12" time="550.631" timestamp="2020-10-29T12:59:13.401108"><testcase classname="tests.test_features" name="test_disabled_enable_debug" time="55.991"><system-out>--------------------------------- Captured Log ---------------------------------
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="0" hostname="travis-job-78a49245-c0e3-4da8-8c9b-9d0efba8b00b" name="pytest" skipped="1" tests="12" time="654.844" timestamp="2020-10-29T13:33:31.620190"><testcase classname="tests.test_features" name="test_disabled_enable_debug" time="67.531"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/travis/build/bansan85/ocr-book/tests/0001_debug.png
@@ -27,14 +27,14 @@ image 2 border right 223
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_0" time="0.034"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_0" time="0.036"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/travis/build/bansan85/ocr-book/tests/0001_0.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_1" time="35.045"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_1" time="38.586"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/travis/build/bansan85/ocr-book/tests/0001_1.png
@@ -43,7 +43,7 @@ separation double page y=0 2489
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_2" time="58.348"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_2" time="72.110"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/travis/build/bansan85/ocr-book/tests/0001_2.png
@@ -54,7 +54,7 @@ page rotation 2 0.2
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_3" time="58.602"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_3" time="70.040"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/travis/build/bansan85/ocr-book/tests/0001_3.png
@@ -73,7 +73,7 @@ image 2 crop y2 3360
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_4" time="58.487"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_4" time="69.816"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/travis/build/bansan85/ocr-book/tests/0001_4.png
@@ -102,7 +102,7 @@ image 2 border right 223
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_5" time="59.342"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_5" time="68.903"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/travis/build/bansan85/ocr-book/tests/0001_5.png
@@ -131,90 +131,90 @@ image 2 border right 223
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_0001_png" time="58.480"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_0001_png" time="69.001"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/travis/build/bansan85/ocr-book/tests/0001.png
-1603976713009960837 : Checking separation double page angle 90.62846302565308
-1603976713010053310 : Checking separation double page y=0 2489
-1603976723355905605 : Checking page rotation 1 0.75
-1603976736285230400 : Checking page rotation 2 0.2
-1603976737087627738 : Checking image 1 crop x1 332
-1603976737087711616 : Checking image 1 crop y1 337
-1603976737087745844 : Checking image 1 crop x2 2342
-1603976737087777919 : Checking image 1 crop y2 3223
-1603976737912129604 : Checking image 2 crop x1 171
-1603976737912213097 : Checking image 2 crop y1 649
-1603976737912257362 : Checking image 2 crop x2 2185
-1603976737912289542 : Checking image 2 crop y2 3360
-1603976737939076199 : Checking image 1 dpi 300
-1603976737939190045 : Checking image 1 border top 325
-1603976737939227094 : Checking image 1 border bottom 276
-1603976737939254904 : Checking image 1 border left 225
-1603976737939281984 : Checking image 1 border right 225
-1603976737940758750 : Checking image 2 dpi 300
-1603976737940842111 : Checking image 2 border top 672
-1603976737940871436 : Checking image 2 border bottom 104
-1603976737940898053 : Checking image 2 border left 223
-1603976737940925177 : Checking image 2 border right 223
+1603978835871206578 : Checking separation double page angle 90.62846302565308
+1603978835871320112 : Checking separation double page y=0 2489
+1603978849153004002 : Checking page rotation 1 0.75
+1603978866203562530 : Checking page rotation 2 0.2
+1603978867022460195 : Checking image 1 crop x1 332
+1603978867022549143 : Checking image 1 crop y1 337
+1603978867022583736 : Checking image 1 crop x2 2342
+1603978867022616889 : Checking image 1 crop y2 3223
+1603978867867624384 : Checking image 2 crop x1 171
+1603978867867713469 : Checking image 2 crop y1 649
+1603978867867747640 : Checking image 2 crop x2 2185
+1603978867867779862 : Checking image 2 crop y2 3360
+1603978867895084673 : Checking image 1 dpi 300
+1603978867895212234 : Checking image 1 border top 325
+1603978867895242627 : Checking image 1 border bottom 276
+1603978867895270136 : Checking image 1 border left 225
+1603978867895296045 : Checking image 1 border right 225
+1603978867896963997 : Checking image 2 dpi 300
+1603978867897064170 : Checking image 2 border top 672
+1603978867897092312 : Checking image 2 border bottom 104
+1603978867897118902 : Checking image 2 border left 223
+1603978867897144682 : Checking image 2 border right 223
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_2_pages_2_contours_png" time="32.333"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_2_pages_2_contours_png" time="38.868"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/travis/build/bansan85/ocr-book/tests/2-pages-2-contours.png
-1603976757748687618 : Checking separation double page angle 90.08740368421233
-1603976757748774382 : Checking separation double page y=0 2489
-1603976759588858437 : Checking page rotation 1 0.05
-1603976768921804315 : Checking page rotation 2 0.35000000000000003
-1603976769538455994 : Checking image 1 crop x1 1186
-1603976769538521854 : Checking image 1 crop y1 1720
-1603976769538549361 : Checking image 1 crop x2 1187
-1603976769538575658 : Checking image 1 crop y2 1721
-1603976770256794265 : Checking image 2 crop x1 99
-1603976770256872786 : Checking image 2 crop y1 241
-1603976770256907345 : Checking image 2 crop x2 2144
-1603976770256939618 : Checking image 2 crop y2 3239
-1603976770283332470 : Checking image 1 dpi 300
-1603976770283408739 : Checking image 1 border top 1753
-1603976770283438392 : Checking image 1 border bottom 1753
-1603976770283465450 : Checking image 1 border left 1239
-1603976770283491805 : Checking image 1 border right 1239
-1603976770284715728 : Checking image 2 dpi 300
-1603976770284806280 : Checking image 2 border top 228
-1603976770284834963 : Checking image 2 border bottom 261
-1603976770284861620 : Checking image 2 border left 207
-1603976770284888083 : Checking image 2 border right 207
+1603978890996327257 : Checking separation double page angle 90.08740368421233
+1603978890996421378 : Checking separation double page y=0 2489
+1603978892968107518 : Checking page rotation 1 0.05
+1603978905367010566 : Checking page rotation 2 0.35000000000000003
+1603978906005404105 : Checking image 1 crop x1 1186
+1603978906005465061 : Checking image 1 crop y1 1720
+1603978906005493065 : Checking image 1 crop x2 1187
+1603978906005519257 : Checking image 1 crop y2 1721
+1603978906746606045 : Checking image 2 crop x1 99
+1603978906746697514 : Checking image 2 crop y1 241
+1603978906746732325 : Checking image 2 crop x2 2144
+1603978906746768281 : Checking image 2 crop y2 3239
+1603978906773718378 : Checking image 1 dpi 300
+1603978906773811958 : Checking image 1 border top 1753
+1603978906773841958 : Checking image 1 border bottom 1753
+1603978906773869236 : Checking image 1 border left 1239
+1603978906773896326 : Checking image 1 border right 1239
+1603978906775146687 : Checking image 2 dpi 300
+1603978906775288736 : Checking image 2 border top 228
+1603978906775326829 : Checking image 2 border bottom 261
+1603978906775353632 : Checking image 2 border left 207
+1603978906775380396 : Checking image 2 border right 207
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_black_border_not_removed_png" time="73.470"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_black_border_not_removed_png" time="88.207"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/travis/build/bansan85/ocr-book/tests/black-border-not-removed.png
-1603976814942213449 : Checking separation double page angle 89.96841710309258
-1603976814942301591 : Checking separation double page y=0 2453
-1603976825768606509 : Checking page rotation 1 0.0
-1603976842066206801 : Checking page rotation 2 0.0
-1603976842869887216 : Checking image 1 crop x1 298
-1603976842869966248 : Checking image 1 crop y1 144
-1603976842869999917 : Checking image 1 crop x2 2308
-1603976842870032323 : Checking image 1 crop y2 3346
-1603976843720511437 : Checking image 2 crop x1 159
-1603976843720592427 : Checking image 2 crop y1 146
-1603976843720626212 : Checking image 2 crop x2 2170
-1603976843720658625 : Checking image 2 crop y2 3351
-1603976843749287659 : Checking image 1 dpi 300
-1603976843749403735 : Checking image 1 border top 129
-1603976843749433703 : Checking image 1 border bottom 156
-1603976843749461175 : Checking image 1 border left 225
-1603976843749488539 : Checking image 1 border right 225
-1603976843751384093 : Checking image 2 dpi 300
-1603976843751482553 : Checking image 2 border top 131
-1603976843751510927 : Checking image 2 border bottom 151
-1603976843751537070 : Checking image 2 border left 224
-1603976843751563266 : Checking image 2 border right 224
+1603978957217296458 : Checking separation double page angle 89.96841710309258
+1603978957217393179 : Checking separation double page y=0 2453
+1603978971758270371 : Checking page rotation 1 0.0
+1603978993254226232 : Checking page rotation 2 0.0
+1603978994073917780 : Checking image 1 crop x1 298
+1603978994074041810 : Checking image 1 crop y1 144
+1603978994074076648 : Checking image 1 crop x2 2308
+1603978994074109244 : Checking image 1 crop y2 3346
+1603978994946504824 : Checking image 2 crop x1 159
+1603978994946591997 : Checking image 2 crop y1 146
+1603978994946626534 : Checking image 2 crop x2 2170
+1603978994946658803 : Checking image 2 crop y2 3351
+1603978994975882659 : Checking image 1 dpi 300
+1603978994976005537 : Checking image 1 border top 129
+1603978994976036835 : Checking image 1 border bottom 156
+1603978994976065257 : Checking image 1 border left 225
+1603978994976094637 : Checking image 1 border right 225
+1603978994978114067 : Checking image 2 dpi 300
+1603978994978245002 : Checking image 2 border top 131
+1603978994978276154 : Checking image 2 border bottom 151
+1603978994978303612 : Checking image 2 border left 224
+1603978994978330223 : Checking image 2 border right 224
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
@@ -230,32 +230,32 @@ image 2 border right 223
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_crop_data_png" time="59.318"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_crop_data_png" time="70.451"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/travis/build/bansan85/ocr-book/tests/image_failed_to_crop_data.png
-1603976873575072917 : Checking separation double page angle 90.1003611125701
-1603976873575166507 : Checking separation double page y=0 2479
-1603976879784833154 : Checking page rotation 1 0.2
-1603976889161158538 : Checking page rotation 2 0.2
-1603976902134010468 : Checking image 1 crop x1 81
-1603976902134105455 : Checking image 1 crop y1 13
-1603976902134140427 : Checking image 1 crop x2 2477
-1603976902134174062 : Checking image 1 crop y2 3499
-1603976902985544472 : Checking image 2 crop x1 167
-1603976902985634356 : Checking image 2 crop y1 220
-1603976902985671657 : Checking image 2 crop x2 2243
-1603976902985704778 : Checking image 2 crop y2 3348
-1603976903015263397 : Checking image 1 dpi 300
-1603976903015371926 : Checking image 1 border top 11
-1603976903015402593 : Checking image 1 border bottom 11
-1603976903015430549 : Checking image 1 border left 42
-1603976903015458627 : Checking image 1 border right 42
-1603976903017376213 : Checking image 2 dpi 300
-1603976903017477671 : Checking image 2 border top 212
-1603976903017506528 : Checking image 2 border bottom 146
-1603976903017532929 : Checking image 2 border left 192
-1603976903017559802 : Checking image 2 border right 192
+1603979028256942569 : Checking separation double page angle 90.1003611125701
+1603979028257048447 : Checking separation double page y=0 2479
+1603979035809650707 : Checking page rotation 1 0.2
+1603979047776953577 : Checking page rotation 2 0.2
+1603979064481878241 : Checking image 1 crop x1 81
+1603979064481981006 : Checking image 1 crop y1 13
+1603979064482015528 : Checking image 1 crop x2 2477
+1603979064482051904 : Checking image 1 crop y2 3499
+1603979065344216579 : Checking image 2 crop x1 167
+1603979065344317112 : Checking image 2 crop y1 220
+1603979065344352663 : Checking image 2 crop x2 2243
+1603979065344385839 : Checking image 2 crop y2 3348
+1603979065374179927 : Checking image 1 dpi 300
+1603979065374315761 : Checking image 1 border top 11
+1603979065374349744 : Checking image 1 border bottom 11
+1603979065374377513 : Checking image 1 border left 42
+1603979065374404831 : Checking image 1 border right 42
+1603979065376225653 : Checking image 2 dpi 300
+1603979065376360427 : Checking image 2 border top 212
+1603979065376389931 : Checking image 2 border bottom 146
+1603979065376417280 : Checking image 2 border left 192
+1603979065376444093 : Checking image 2 border right 192
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
