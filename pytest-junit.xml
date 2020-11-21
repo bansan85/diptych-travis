@@ -1,394 +1,187 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="0" hostname="travis-job-fb5f0c53-858c-4809-9709-e56a5047c313" name="pytest" skipped="0" tests="16" time="729.139" timestamp="2020-11-20T22:15:16.242230"><testcase classname="tests.test_features" name="test_disabled_enable_debug" time="42.749"><system-out>--------------------------------- Captured Log ---------------------------------
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="15" tests="16" time="2.287" timestamp="2020-11-21T12:52:16.556378" hostname="fv-az71-140"><testcase classname="tests.test_features" name="test_disabled_enable_debug" time="0.001"><skipped type="pytest.skip" message="no way of currently testing this">/home/runner/work/ocr-book/ocr-book/tests/test_features.py:12: no way of currently testing this</skipped><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/travis/build/bansan85/ocr-book/tests/0001_debug.png
-separation double page angle 90.53945493634917
-separation double page y=0 2485
-page rotation 1 0.75
-page rotation 2 0.2
-image 1 crop x1 330
-image 1 crop y1 336
-image 1 crop x2 2343
-image 1 crop y2 3223
-image 2 crop x1 169
-image 2 crop y1 648
-image 2 crop x2 2186
-image 2 crop y2 3361
-image 1 dpi 300
-image 1 border top 324
-image 1 border bottom 276
-image 1 border left 223
-image 1 border right 223
-image 2 dpi 300
-image 2 border top 671
-image 2 border bottom 103
-image 2 border left 221
-image 2 border right 221
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_0" time="0.034"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/travis/build/bansan85/ocr-book/tests/0001_0.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_1" time="24.832"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_0" time="0.050"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/travis/build/bansan85/ocr-book/tests/0001_1.png
-separation double page angle 90.53945493634917
-separation double page y=0 2485
+/home/runner/work/ocr-book/ocr-book/tests/0001_0.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_2" time="46.994"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_1" time="0.000"><skipped type="pytest.skip" message="no way of currently testing this">/home/runner/work/ocr-book/ocr-book/tests/test_features.py:94: no way of currently testing this</skipped><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/travis/build/bansan85/ocr-book/tests/0001_2.png
-separation double page angle 90.53945493634917
-separation double page y=0 2485
-page rotation 1 0.75
-page rotation 2 0.2
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_3" time="48.746"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/travis/build/bansan85/ocr-book/tests/0001_3.png
-separation double page angle 90.53945493634917
-separation double page y=0 2485
-page rotation 1 0.75
-page rotation 2 0.2
-image 1 crop x1 330
-image 1 crop y1 336
-image 1 crop x2 2343
-image 1 crop y2 3223
-image 2 crop x1 169
-image 2 crop y1 648
-image 2 crop x2 2186
-image 2 crop y2 3361
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_4" time="50.437"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_2" time="0.000"><skipped type="pytest.skip" message="no way of currently testing this">/home/runner/work/ocr-book/ocr-book/tests/test_features.py:155: no way of currently testing this</skipped><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/travis/build/bansan85/ocr-book/tests/0001_4.png
-separation double page angle 90.53945493634917
-separation double page y=0 2485
-page rotation 1 0.75
-page rotation 2 0.2
-image 1 crop x1 330
-image 1 crop y1 336
-image 1 crop x2 2343
-image 1 crop y2 3223
-image 2 crop x1 169
-image 2 crop y1 648
-image 2 crop x2 2186
-image 2 crop y2 3361
-image 1 dpi 300
-image 1 border top 324
-image 1 border bottom 276
-image 1 border left 223
-image 1 border right 223
-image 2 dpi 300
-image 2 border top 671
-image 2 border bottom 103
-image 2 border left 221
-image 2 border right 221
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_5" time="49.812"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/travis/build/bansan85/ocr-book/tests/0001_5.png
-separation double page angle 90.53945493634917
-separation double page y=0 2485
-page rotation 1 0.75
-page rotation 2 0.2
-image 1 crop x1 330
-image 1 crop y1 336
-image 1 crop x2 2343
-image 1 crop y2 3223
-image 2 crop x1 169
-image 2 crop y1 648
-image 2 crop x2 2186
-image 2 crop y2 3361
-image 1 dpi 300
-image 1 border top 324
-image 1 border bottom 276
-image 1 border left 223
-image 1 border right 223
-image 2 dpi 300
-image 2 border top 671
-image 2 border bottom 103
-image 2 border left 221
-image 2 border right 221
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_0001_png" time="50.321"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_3" time="0.000"><skipped type="pytest.skip" message="no way of currently testing this">/home/runner/work/ocr-book/ocr-book/tests/test_features.py:216: no way of currently testing this</skipped><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/travis/build/bansan85/ocr-book/tests/0001.png
-1605910805292565921 : Checking separation double page angle 90.53945493634917
-1605910805292651419 : Checking separation double page y=0 2485
-1605910815563707710 : Checking page rotation 1 0.75
-1605910828074565506 : Checking page rotation 2 0.2
-1605910829307613234 : Checking image 1 crop x1 330
-1605910829307681947 : Checking image 1 crop y1 336
-1605910829307715155 : Checking image 1 crop x2 2343
-1605910829307746455 : Checking image 1 crop y2 3223
-1605910830724990272 : Checking image 2 crop x1 169
-1605910830725059903 : Checking image 2 crop y1 648
-1605910830725093011 : Checking image 2 crop x2 2186
-1605910830725123590 : Checking image 2 crop y2 3361
-1605910830751967079 : Checking image 1 dpi 300
-1605910830752083043 : Checking image 1 border top 324
-1605910830752112540 : Checking image 1 border bottom 276
-1605910830752138530 : Checking image 1 border left 223
-1605910830752163561 : Checking image 1 border right 223
-1605910830754069657 : Checking image 2 dpi 300
-1605910830754184121 : Checking image 2 border top 671
-1605910830754211638 : Checking image 2 border bottom 103
-1605910830754236543 : Checking image 2 border left 221
-1605910830754260964 : Checking image 2 border right 221
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_2_pages_2_contours_png" time="28.685"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/travis/build/bansan85/ocr-book/tests/2-pages-2-contours.png
-1605910846487153564 : Checking separation double page angle 90.15647898380502
-1605910846487229517 : Checking separation double page y=0 2489
-1605910848560229315 : Checking page rotation 1 0.05
-1605910857622219456 : Checking page rotation 2 0.35000000000000003
-1605910858274159074 : Checking image 1 crop x1 1186
-1605910858274217146 : Checking image 1 crop y1 1720
-1605910858274243289 : Checking image 1 crop x2 1187
-1605910858274267520 : Checking image 1 crop y2 1721
-1605910859422507583 : Checking image 2 crop x1 102
-1605910859422578123 : Checking image 2 crop y1 240
-1605910859422610743 : Checking image 2 crop x2 2149
-1605910859422640789 : Checking image 2 crop y2 3239
-1605910859449154049 : Checking image 1 dpi 300
-1605910859449234501 : Checking image 1 border top 1753
-1605910859449262193 : Checking image 1 border bottom 1753
-1605910859449288364 : Checking image 1 border left 1239
-1605910859449313414 : Checking image 1 border right 1239
-1605910859450665649 : Checking image 2 dpi 300
-1605910859450771272 : Checking image 2 border top 229
-1605910859450799062 : Checking image 2 border bottom 259
-1605910859450823626 : Checking image 2 border left 206
-1605910859450848434 : Checking image 2 border right 206
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_black_border_not_removed_png" time="64.631"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_4" time="0.000"><skipped type="pytest.skip" message="no way of currently testing this">/home/runner/work/ocr-book/ocr-book/tests/test_features.py:277: no way of currently testing this</skipped><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/travis/build/bansan85/ocr-book/tests/black-border-not-removed.png
-1605910895108704852 : Checking separation double page angle 89.9903688802698
-1605910895108778992 : Checking separation double page y=0 2455
-1605910905535480309 : Checking page rotation 1 0.0
-1605910920945654065 : Checking page rotation 2 0.0
-1605910922390841958 : Checking image 1 crop x1 297
-1605910922390914266 : Checking image 1 crop y1 143
-1605910922390946903 : Checking image 1 crop x2 2309
-1605910922390977377 : Checking image 1 crop y2 3346
-1605910924047260415 : Checking image 2 crop x1 156
-1605910924047337187 : Checking image 2 crop y1 145
-1605910924047370466 : Checking image 2 crop x2 2168
-1605910924047400906 : Checking image 2 crop y2 3352
-1605910924076026436 : Checking image 1 dpi 300
-1605910924076141801 : Checking image 1 border top 128
-1605910924076170522 : Checking image 1 border bottom 156
-1605910924076196209 : Checking image 1 border left 224
-1605910924076221063 : Checking image 1 border right 224
-1605910924078164711 : Checking image 2 dpi 300
-1605910924078285555 : Checking image 2 border top 130
-1605910924078313231 : Checking image 2 border bottom 150
-1605910924078338211 : Checking image 2 border left 224
-1605910924078363001 : Checking image 2 border right 224
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_rotate_png" time="47.425"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/travis/build/bansan85/ocr-book/tests/image_failed_to_rotate.png
-1605910943766890289 : Checking separation double page angle 90.14353501543772
-1605910943766970080 : Checking separation double page y=0 2476
-1605910948779862695 : Checking page rotation 1 0.35000000000000003
-1605910959129624538 : Checking page rotation 2 0.45
-1605910970037009701 : Checking image 1 crop x1 34
-1605910970037080411 : Checking image 1 crop y1 1
-1605910970037110184 : Checking image 1 crop x2 2474
-1605910970037137974 : Checking image 1 crop y2 3500
-1605910971383551579 : Checking image 2 crop x1 171
-1605910971383621214 : Checking image 2 crop y1 234
-1605910971383653507 : Checking image 2 crop x2 2250
-1605910971383684212 : Checking image 2 crop y2 3355
-1605910971417920587 : Checking image 1 dpi 300
-1605910971418034705 : Checking image 1 border top 4
-1605910971418063469 : Checking image 1 border bottom 4
-1605910971418088393 : Checking image 1 border left 20
-1605910971418113838 : Checking image 1 border right 20
-1605910971420043399 : Checking image 2 dpi 300
-1605910971420155654 : Checking image 2 border top 206
-1605910971420183563 : Checking image 2 border bottom 160
-1605910971420208509 : Checking image 2 border left 190
-1605910971420233344 : Checking image 2 border right 190
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_crop_data_png" time="49.886"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_5" time="0.000"><skipped type="pytest.skip" message="no way of currently testing this">/home/runner/work/ocr-book/ocr-book/tests/test_features.py:338: no way of currently testing this</skipped><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/travis/build/bansan85/ocr-book/tests/image_failed_to_crop_data.png
-1605910995200877346 : Checking separation double page angle 90.06228874101497
-1605910995200955161 : Checking separation double page y=0 2482
-1605911000885947988 : Checking page rotation 1 0.2
-1605911009395849312 : Checking page rotation 2 0.05
-1605911020108911655 : Checking image 1 crop x1 58
-1605911020108983170 : Checking image 1 crop y1 8
-1605911020109011901 : Checking image 1 crop x2 2480
-1605911020109038823 : Checking image 1 crop y2 3504
-1605911021303924442 : Checking image 2 crop x1 159
-1605911021303996670 : Checking image 2 crop y1 217
-1605911021304029316 : Checking image 2 crop x2 2240
-1605911021304059664 : Checking image 2 crop y2 3350
-1605911021333419834 : Checking image 1 dpi 300
-1605911021333534092 : Checking image 1 border top 6
-1605911021333562573 : Checking image 1 border bottom 6
-1605911021333587900 : Checking image 1 border left 29
-1605911021333613105 : Checking image 1 border right 29
-1605911021335588406 : Checking image 2 dpi 300
-1605911021335688385 : Checking image 2 border top 209
-1605911021335715681 : Checking image 2 border bottom 145
-1605911021335740200 : Checking image 2 border left 189
-1605911021335765632 : Checking image 2 border right 189
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_angle_split_line_png" time="59.867"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/travis/build/bansan85/ocr-book/tests/wrong_angle_split_line.png
-1605911048098231492 : Checking separation double page angle 90.08422009258813
-1605911048098319702 : Checking separation double page y=0 2487
-1605911056105565670 : Checking page rotation 1 0.0
-1605911067434088463 : Checking page rotation 2 0.0
-1605911078653802455 : Checking image 1 crop x1 53
-1605911078653878941 : Checking image 1 crop y1 8
-1605911078653908001 : Checking image 1 crop x2 2485
-1605911078653934323 : Checking image 1 crop y2 3505
-1605911080558748071 : Checking image 2 crop x1 154
-1605911080558819027 : Checking image 2 crop y1 217
-1605911080558852428 : Checking image 2 crop x2 2237
-1605911080558882895 : Checking image 2 crop y2 3350
-1605911080689044644 : Checking image 1 dpi 300
-1605911080689161818 : Checking image 1 border top 5
-1605911080689190060 : Checking image 1 border bottom 5
-1605911080689214978 : Checking image 1 border left 24
-1605911080689239744 : Checking image 1 border right 24
-1605911080694908728 : Checking image 2 dpi 300
-1605911080695038396 : Checking image 2 border top 195
-1605911080695065259 : Checking image 2 border bottom 159
-1605911080695089675 : Checking image 2 border left 188
-1605911080695113964 : Checking image 2 border right 188
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_angle_page_lower_split_line_png" time="43.072"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_0001_png" time="0.000"><skipped type="pytest.skip" message="no way of currently testing this">/home/runner/work/ocr-book/ocr-book/tests/test_images.py:18: no way of currently testing this</skipped><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/travis/build/bansan85/ocr-book/tests/angle_page_lower_split_line.png
-1605911096959936232 : Checking separation double page angle 89.74710364870903
-1605911096960012287 : Checking separation double page y=0 2471
-1605911111047957993 : Checking page rotation 1 -0.44999999999998863
-1605911121530610397 : Checking page rotation 2 0.2
-1605911123034872313 : Checking image 1 crop x1 245
-1605911123034947610 : Checking image 1 crop y1 161
-1605911123034980591 : Checking image 1 crop x2 2351
-1605911123035010529 : Checking image 1 crop y2 3364
-1605911124298189064 : Checking image 2 crop x1 153
-1605911124298279938 : Checking image 2 crop y1 147
-1605911124298315925 : Checking image 2 crop x2 2260
-1605911124298346434 : Checking image 2 crop y2 3350
-1605911124328517105 : Checking image 1 dpi 300
-1605911124328635345 : Checking image 1 border top 131
-1605911124328663525 : Checking image 1 border bottom 152
-1605911124328688548 : Checking image 1 border left 177
-1605911124328712882 : Checking image 1 border right 177
-1605911124330642250 : Checking image 2 dpi 300
-1605911124330755540 : Checking image 2 border top 118
-1605911124330783253 : Checking image 2 border bottom 166
-1605911124330808005 : Checking image 2 border left 176
-1605911124330832055 : Checking image 2 border right 176
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_png" time="45.062"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/travis/build/bansan85/ocr-book/tests/wrong_split_line.png
-1605911150303661768 : Checking separation double page angle 89.81531182790899
-1605911150303749360 : Checking separation double page y=0 2465
-1605911158457237080 : Checking page rotation 1 -0.04999999999999716
-1605911167244629855 : Checking page rotation 2 0.6000000000000001
-1605911168328442986 : Checking image 1 crop x1 211
-1605911168328545426 : Checking image 1 crop y1 156
-1605911168328578347 : Checking image 1 crop x2 2323
-1605911168328608649 : Checking image 1 crop y2 3363
-1605911169369189242 : Checking image 2 crop x1 124
-1605911169369267054 : Checking image 2 crop y1 167
-1605911169369300675 : Checking image 2 crop x2 2236
-1605911169369330872 : Checking image 2 crop y2 3373
-1605911169397700656 : Checking image 1 dpi 300
-1605911169397815866 : Checking image 1 border top 180
-1605911169397844320 : Checking image 1 border bottom 100
-1605911169397869190 : Checking image 1 border left 174
-1605911169397893937 : Checking image 1 border right 174
-1605911169399829583 : Checking image 2 dpi 300
-1605911169399928764 : Checking image 2 border top 129
-1605911169399955719 : Checking image 2 border bottom 152
-1605911169399980176 : Checking image 2 border left 174
-1605911169400004463 : Checking image 2 border right 174
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_png" time="74.847"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_2_pages_2_contours_png" time="0.000"><skipped type="pytest.skip" message="no way of currently testing this">/home/runner/work/ocr-book/ocr-book/tests/test_images.py:55: no way of currently testing this</skipped><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/travis/build/bansan85/ocr-book/tests/crop_too_much.png
-1605911203224708347 : Checking separation double page angle 90.14985593620918
-1605911203224789227 : Checking separation double page y=0 2457
-1605911221826957413 : Checking page rotation 1 0.0
-1605911240115006903 : Checking page rotation 2 0.4
-1605911242189874034 : Checking image 1 crop x1 303
-1605911242189945412 : Checking image 1 crop y1 148
-1605911242189977495 : Checking image 1 crop x2 2313
-1605911242190007536 : Checking image 1 crop y2 3351
-1605911244195468461 : Checking image 2 crop x1 166
-1605911244195543892 : Checking image 2 crop y1 154
-1605911244195583899 : Checking image 2 crop x2 2180
-1605911244195614880 : Checking image 2 crop y2 3360
-1605911244233336327 : Checking image 1 dpi 300
-1605911244233447498 : Checking image 1 border top 116
-1605911244233476536 : Checking image 1 border bottom 168
-1605911244233501864 : Checking image 1 border left 225
-1605911244233526347 : Checking image 1 border right 225
-1605911244235172014 : Checking image 2 dpi 300
-1605911244235284766 : Checking image 2 border top 95
-1605911244235312020 : Checking image 2 border bottom 186
-1605911244235336358 : Checking image 2 border left 223
-1605911244235360608 : Checking image 2 border right 223
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_black_border_not_removed_png" time="0.000"><skipped type="pytest.skip" message="no way of currently testing this">/home/runner/work/ocr-book/ocr-book/tests/test_images.py:94: no way of currently testing this</skipped><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_rotate_png" time="0.001"><skipped type="pytest.skip" message="no way of currently testing this">/home/runner/work/ocr-book/ocr-book/tests/test_images.py:133: no way of currently testing this</skipped><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_crop_data_png" time="0.001"><skipped type="pytest.skip" message="no way of currently testing this">/home/runner/work/ocr-book/ocr-book/tests/test_images.py:170: no way of currently testing this</skipped><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_angle_split_line_png" time="0.000"><skipped type="pytest.skip" message="no way of currently testing this">/home/runner/work/ocr-book/ocr-book/tests/test_images.py:211: no way of currently testing this</skipped><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_angle_page_lower_split_line_png" time="0.000"><skipped type="pytest.skip" message="no way of currently testing this">/home/runner/work/ocr-book/ocr-book/tests/test_images.py:258: no way of currently testing this</skipped><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_png" time="0.001"><skipped type="pytest.skip" message="no way of currently testing this">/home/runner/work/ocr-book/ocr-book/tests/test_images.py:299: no way of currently testing this</skipped><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_png" time="0.000"><skipped type="pytest.skip" message="no way of currently testing this">/home/runner/work/ocr-book/ocr-book/tests/test_images.py:339: no way of currently testing this</skipped><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
