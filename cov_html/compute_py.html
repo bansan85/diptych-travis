@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
-    <title>Coverage for compute.py: 88%</title>
+    <title>Coverage for compute.py: 86%</title>
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="jquery.hotkeys.js"></script>
@@ -17,13 +17,13 @@
 <div id="header">
     <div class="content">
         <h1>Coverage for <b>compute.py</b> :
-            <span class="pc_cov">88%</span>
+            <span class="pc_cov">86%</span>
         </h1>
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
             149 statements &nbsp;
-            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">137 run</button>
-            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">12 missing</button>
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">135 run</button>
+            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">14 missing</button>
             <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">0 excluded</button>
             <button type="button" class="par run show_par shortkey_p button_toggle_par" title="Toggle lines partially run">14 partial</button>
         </h2>
@@ -263,11 +263,11 @@
     <p id="t209" class="run"><span class="n"><a href="#t209">209</a></span><span class="t"><span class="key">def</span> <span class="nam">find_closed_value</span><span class="op">(</span><span class="nam">histogram</span><span class="op">:</span> <span class="nam">Dict</span><span class="op">[</span><span class="nam">int</span><span class="op">,</span> <span class="nam">_T</span><span class="op">]</span><span class="op">,</span> <span class="nam">i</span><span class="op">:</span> <span class="nam">int</span><span class="op">)</span> <span class="op">-></span> <span class="nam">_T</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t210" class="run"><span class="n"><a href="#t210">210</a></span><span class="t">    <span class="nam">ibis</span> <span class="op">=</span> <span class="num">0</span>&nbsp;</span><span class="r"></span></p>
     <p id="t211" class="run"><span class="n"><a href="#t211">211</a></span><span class="t">    <span class="key">while</span> <span class="key">True</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t212" class="run"><span class="n"><a href="#t212">212</a></span><span class="t">        <span class="key">if</span> <span class="nam">i</span> <span class="op">+</span> <span class="nam">ibis</span> <span class="key">in</span> <span class="nam">histogram</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t212" class="par run show_par"><span class="n"><a href="#t212">212</a></span><span class="t">        <span class="key">if</span> <span class="nam">i</span> <span class="op">+</span> <span class="nam">ibis</span> <span class="key">in</span> <span class="nam">histogram</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">212&#x202F;&#x219B;&#x202F;214</span><span class="annotate long">line 212 didn't jump to line 214, because the condition on line 212 was never false</span></span></p>
     <p id="t213" class="run"><span class="n"><a href="#t213">213</a></span><span class="t">            <span class="key">return</span> <span class="nam">histogram</span><span class="op">[</span><span class="nam">i</span> <span class="op">+</span> <span class="nam">ibis</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t214" class="par run show_par"><span class="n"><a href="#t214">214</a></span><span class="t">        <span class="key">if</span> <span class="nam">i</span> <span class="op">-</span> <span class="nam">ibis</span> <span class="key">in</span> <span class="nam">histogram</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">214&#x202F;&#x219B;&#x202F;215</span><span class="annotate long">line 214 didn't jump to line 215, because the condition on line 214 was never true</span></span></p>
+    <p id="t214" class="mis show_mis"><span class="n"><a href="#t214">214</a></span><span class="t">        <span class="key">if</span> <span class="nam">i</span> <span class="op">-</span> <span class="nam">ibis</span> <span class="key">in</span> <span class="nam">histogram</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t215" class="mis show_mis"><span class="n"><a href="#t215">215</a></span><span class="t">            <span class="key">return</span> <span class="nam">histogram</span><span class="op">[</span><span class="nam">i</span> <span class="op">-</span> <span class="nam">ibis</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t216" class="run"><span class="n"><a href="#t216">216</a></span><span class="t">        <span class="nam">ibis</span> <span class="op">=</span> <span class="nam">ibis</span> <span class="op">+</span> <span class="num">1</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t216" class="mis show_mis"><span class="n"><a href="#t216">216</a></span><span class="t">        <span class="nam">ibis</span> <span class="op">=</span> <span class="nam">ibis</span> <span class="op">+</span> <span class="num">1</span>&nbsp;</span><span class="r"></span></p>
     <p id="t217" class="pln"><span class="n"><a href="#t217">217</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t218" class="pln"><span class="n"><a href="#t218">218</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t219" class="run"><span class="n"><a href="#t219">219</a></span><span class="t"><span class="key">def</span> <span class="nam">optional_concat</span><span class="op">(</span><span class="nam">root</span><span class="op">:</span> <span class="nam">Optional</span><span class="op">[</span><span class="nam">str</span><span class="op">]</span><span class="op">,</span> <span class="nam">string</span><span class="op">:</span> <span class="nam">str</span><span class="op">)</span> <span class="op">-></span> <span class="nam">Optional</span><span class="op">[</span><span class="nam">str</span><span class="op">]</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
