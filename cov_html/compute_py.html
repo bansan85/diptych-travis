@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
-    <title>Coverage for compute.py: 90%</title>
+    <title>Coverage for compute.py: 87%</title>
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="jquery.hotkeys.js"></script>
@@ -17,13 +17,13 @@
 <div id="header">
     <div class="content">
         <h1>Coverage for <b>compute.py</b> :
-            <span class="pc_cov">90%</span>
+            <span class="pc_cov">87%</span>
         </h1>
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
             205 statements &nbsp;
-            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">190 run</button>
-            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">15 missing</button>
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">184 run</button>
+            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">21 missing</button>
             <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">0 excluded</button>
             <button type="button" class="par run show_par shortkey_p button_toggle_par" title="Toggle lines partially run">14 partial</button>
         </h2>
@@ -291,15 +291,15 @@
     <p id="t237" class="pln"><span class="n"><a href="#t237">237</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t238" class="pln"><span class="n"><a href="#t238">238</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t239" class="run"><span class="n"><a href="#t239">239</a></span><span class="t"><span class="key">def</span> <span class="nam">optional_concat</span><span class="op">(</span><span class="nam">root</span><span class="op">:</span> <span class="nam">Optional</span><span class="op">[</span><span class="nam">str</span><span class="op">]</span><span class="op">,</span> <span class="nam">string</span><span class="op">:</span> <span class="nam">str</span><span class="op">)</span> <span class="op">-></span> <span class="nam">Optional</span><span class="op">[</span><span class="nam">str</span><span class="op">]</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t240" class="run"><span class="n"><a href="#t240">240</a></span><span class="t">    <span class="key">if</span> <span class="nam">root</span> <span class="key">is</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t241" class="run"><span class="n"><a href="#t241">241</a></span><span class="t">        <span class="key">return</span> <span class="key">None</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t242" class="run"><span class="n"><a href="#t242">242</a></span><span class="t">    <span class="key">return</span> <span class="nam">root</span> <span class="op">+</span> <span class="nam">string</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t240" class="mis show_mis"><span class="n"><a href="#t240">240</a></span><span class="t">    <span class="key">if</span> <span class="nam">root</span> <span class="key">is</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t241" class="mis show_mis"><span class="n"><a href="#t241">241</a></span><span class="t">        <span class="key">return</span> <span class="key">None</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t242" class="mis show_mis"><span class="n"><a href="#t242">242</a></span><span class="t">    <span class="key">return</span> <span class="nam">root</span> <span class="op">+</span> <span class="nam">string</span>&nbsp;</span><span class="r"></span></p>
     <p id="t243" class="pln"><span class="n"><a href="#t243">243</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t244" class="pln"><span class="n"><a href="#t244">244</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t245" class="run"><span class="n"><a href="#t245">245</a></span><span class="t"><span class="key">def</span> <span class="nam">optional_str</span><span class="op">(</span><span class="nam">condition</span><span class="op">:</span> <span class="nam">bool</span><span class="op">,</span> <span class="nam">string</span><span class="op">:</span> <span class="nam">str</span><span class="op">)</span> <span class="op">-></span> <span class="nam">Optional</span><span class="op">[</span><span class="nam">str</span><span class="op">]</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t246" class="run"><span class="n"><a href="#t246">246</a></span><span class="t">    <span class="key">if</span> <span class="nam">condition</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t247" class="run"><span class="n"><a href="#t247">247</a></span><span class="t">        <span class="key">return</span> <span class="nam">string</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t248" class="run"><span class="n"><a href="#t248">248</a></span><span class="t">    <span class="key">return</span> <span class="key">None</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t246" class="mis show_mis"><span class="n"><a href="#t246">246</a></span><span class="t">    <span class="key">if</span> <span class="nam">condition</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t247" class="mis show_mis"><span class="n"><a href="#t247">247</a></span><span class="t">        <span class="key">return</span> <span class="nam">string</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t248" class="mis show_mis"><span class="n"><a href="#t248">248</a></span><span class="t">    <span class="key">return</span> <span class="key">None</span>&nbsp;</span><span class="r"></span></p>
     <p id="t249" class="pln"><span class="n"><a href="#t249">249</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t250" class="pln"><span class="n"><a href="#t250">250</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t251" class="run"><span class="n"><a href="#t251">251</a></span><span class="t"><span class="key">def</span> <span class="nam">get_timestamp_ns</span><span class="op">(</span><span class="op">)</span> <span class="op">-></span> <span class="nam">int</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
