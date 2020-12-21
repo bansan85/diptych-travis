@@ -1,11 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="35" skipped="0" tests="36" time="23.269" timestamp="2020-12-21T21:37:34.126943" hostname="fv-az135-139"><testcase classname="tests.test_features" name="test_mock_stop_at_0" time="0.054"><system-out>--------------------------------- Captured Log ---------------------------------
-
---------------------------------- Captured Out ---------------------------------
-/home/runner/work/ocr-book/ocr-book/tests/0001_0.png
-
-</system-out><system-err>--------------------------------- Captured Err ---------------------------------
-
-</system-err></testcase><testcase classname="tests.test_features" name="test_disabled_enable_debug" time="1.016"><failure message="Failed: Timeout &gt;1.0s">def test_disabled_enable_debug() -&gt; None:
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="35" skipped="0" tests="36" time="22.648" timestamp="2020-12-21T21:52:10.360780" hostname="fv-az68-408"><testcase classname="tests.test_features" name="test_disabled_enable_debug" time="1.018"><failure message="Failed: Timeout &gt;1.0s">def test_disabled_enable_debug() -&gt; None:
         """Check that enable_debug=False works."""
         tc.assertTrue(
             fsext.is_file_exists(
@@ -32,42 +25,67 @@ script.py:36: in split_two_waves
     self.__images_found = page.find_images.find_images(
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:154: in find_images
-    blurimg_bc2 = cv2ext.erode_and_dilate(gray2, (xxx, xxx), xxx, True)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-image = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-size = (7, 7), iterations = 7, reverse = True
+image = array([[255, 255, 255, ...,   0,   0,   0],
+       [255, 255, 255, ...,   0,   0,   0],
+       [255, 255, 255, ...,   ...,   0,   0,   0],
+       [  0,   0,   0, ...,   0,   0,   0],
+       [  0,   0,   0, ...,   0,   0,   0]], dtype=uint8)
+param = &lt;page.find_images.FindImageParameters object at 0x7f801dd488e0&gt;
+page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7f801ddf9280&gt;
 
-    def erode_and_dilate(
+    @inc_debug
+    def find_images(
         image: np.ndarray,
-        size: Tuple[int, int],
-        iterations: int,
-        reverse: bool = False,
+        param: FindImageParameters,
+        page_angle: Optional[Angle],
+        debug: DebugImage,
     ) -&gt; np.ndarray:
-        start = int(reverse)
-        img = image
-        for i in range(2):
-            if (i + start) % 2 == 0:
-&gt;               img = cv2.erode(
-                    img,
-                    cv2.getStructuringElement(cv2.MORPH_ELLIPSE, size),
-                    iterations=iterations,
-                )
-E               Failed: Timeout &gt;1.0s
+        __internal_border__ = 20
+        xxx = 7
+    
+        debug.image(image, DebugImage.Level.DEBUG)
+        gray = cv2ext.force_image_to_be_grayscale(image, (xxx, xxx))
+        debug.image(gray, DebugImage.Level.DEBUG)
+        blurimg_bc = cv2ext.erode_and_dilate(gray, (xxx, xxx), xxx)
+        debug.image(blurimg_bc, DebugImage.Level.DEBUG)
+    
+        if page_angle is not None:
+            mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+            image_no_border = cv2ext.apply_mask(image, mask)
+            debug.image(image_no_border, DebugImage.Level.DEBUG)
+            gray2 = cv2ext.force_image_to_be_grayscale(image_no_border, (xxx, xxx))
+            debug.image(gray2, DebugImage.Level.DEBUG)
+            blurimg_bc2 = cv2ext.erode_and_dilate(gray2, (xxx, xxx), xxx, True)
+            debug.image(blurimg_bc2, DebugImage.Level.DEBUG)
+            gray_no_border = blurimg_bc2
+        else:
+            gray_no_border = blurimg_bc
+        gray_bordered = cv2.copyMakeBorder(
+            gray_no_border,
+            __internal_border__,
+            __internal_border__,
+            __internal_border__,
+            __internal_border__,
+            cv2.BORDER_CONSTANT,
+            value=[255],
+        )
+        debug.image(gray_bordered, DebugImage.Level.DEBUG)
+&gt;       dilated = cv2.dilate(
+            gray_bordered,
+            cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (xxx, xxx)),
+        )
+E       Failed: Timeout &gt;1.0s
 
-cv2ext.py:840: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+page/find_images.py:169: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/0001_debug.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139801380992768) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140189047998208) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -79,7 +97,14 @@ cv2ext.py:840: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_2" time="1.021"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_2() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_0" time="0.057"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+/home/runner/work/ocr-book/ocr-book/tests/0001_0.png
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_2" time="1.015"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_2() -&gt; None:
         """Check that stop_at 2 works."""
         tc.assertTrue(
             fsext.is_file_exists(
@@ -116,8 +141,8 @@ image = array([[255, 255, 255, ...,   0,   0,   0],
        [255, 255, 255, ...,   ...,   0,   0,   0],
        [  0,   0,   0, ...,   0,   0,   0],
        [  0,   0,   0, ...,   0,   0,   0]], dtype=uint8)
-param = &lt;page.find_images.FindImageParameters object at 0x7f58a1e8b940&gt;
-page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7f58a1f3d550&gt;
+param = &lt;page.find_images.FindImageParameters object at 0x7fef09e32940&gt;
+page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7fef0a0a71f0&gt;
 
     @inc_debug
     def find_images(
@@ -169,7 +194,7 @@ page/find_images.py:169: Failed</failure><system-out>---------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140019465221888) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140665456289536) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -181,7 +206,7 @@ page/find_images.py:169: Failed</failure><system-out>---------------------------
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_1" time="1.032"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_1() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_1" time="1.006"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_1() -&gt; None:
         """Check that stop_at 1 works."""
         tc.assertTrue(
             fsext.is_file_exists(
@@ -211,72 +236,6 @@ script.py:36: in split_two_waves
     self.__images_found = page.find_images.find_images(
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:174: in find_images
-    thresholdi = cv2ext.threshold_from_gaussian_histogram_white(dilated)
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-image = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-pourcentage = 0.2, blur_kernel_size = 31
-
-    def threshold_from_gaussian_histogram_white(
-        image: np.ndarray, pourcentage: float = 0.2, blur_kernel_size: int = 31
-    ) -&gt; int:
-&gt;       histogram = cv2.calcHist([image], [0], None, [256], [0, 256])
-E       Failed: Timeout &gt;1.0s
-
-cv2ext.py:857: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
-
---------------------------------- Captured Out ---------------------------------
-/home/runner/work/ocr-book/ocr-book/tests/0001_1.png
-
-</system-out><system-err>--------------------------------- Captured Err ---------------------------------
-
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139801380992768) ~~~~~~~~~~~~~~~~~~~~~
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
-    reply.run()
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
-    self._result = func(*args, **kwargs)
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
-    msg = Message.from_io(io)
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 432, in from_io
-    header = io.read(9)  # type 1, channel 4, payload 4
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
-    data = self._read(numbytes - len(buf))
-
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_4" time="1.020"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_4() -&gt; None:
-        """Check that stop_at 4 works."""
-        tc.assertTrue(
-            fsext.is_file_exists(
-                get_absolute_from_current_path(__file__, "0001.png")
-            )
-        )
-        fsext.copy_file(
-            get_absolute_from_current_path(__file__, "0001.png"),
-            get_absolute_from_current_path(__file__, "0001_4.png"),
-        )
-        fsext.del_pattern(fsext.extract_path(__file__), "0001_4.png_*")
-&gt;       treat_file(
-            MockDisableSeparatePage(4),
-            get_absolute_from_current_path(__file__, "0001_4.png"),
-            debug=DebugImage(DebugImage.Level.TOP),
-        )
-
-tests/test_features.py:365: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-script.py:372: in treat_file
-    sep.treat_file(
-script.py:298: in treat_file
-    image1, image2 = self.split_two_waves(
-tests/mock_separate_page.py:23: in split_two_waves
-    return super().split_two_waves(image, parameters, debug)
-script.py:36: in split_two_waves
-    self.__images_found = page.find_images.find_images(
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 image = array([[255, 255, 255, ...,   0,   0,   0],
@@ -284,8 +243,8 @@ image = array([[255, 255, 255, ...,   0,   0,   0],
        [255, 255, 255, ...,   ...,   0,   0,   0],
        [  0,   0,   0, ...,   0,   0,   0],
        [  0,   0,   0, ...,   0,   0,   0]], dtype=uint8)
-param = &lt;page.find_images.FindImageParameters object at 0x7f58a1e8b940&gt;
-page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7f58a0618ca0&gt;
+param = &lt;page.find_images.FindImageParameters object at 0x7f801dd488e0&gt;
+page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7f801c4eb7c0&gt;
 
     @inc_debug
     def find_images(
@@ -333,11 +292,179 @@ E       Failed: Timeout &gt;1.0s
 page/find_images.py:169: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
+/home/runner/work/ocr-book/ocr-book/tests/0001_1.png
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140189047998208) ~~~~~~~~~~~~~~~~~~~~~
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
+    reply.run()
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
+    self._result = func(*args, **kwargs)
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
+    msg = Message.from_io(io)
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 432, in from_io
+    header = io.read(9)  # type 1, channel 4, payload 4
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
+    data = self._read(numbytes - len(buf))
+
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_4" time="1.034"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_4() -&gt; None:
+        """Check that stop_at 4 works."""
+        tc.assertTrue(
+            fsext.is_file_exists(
+                get_absolute_from_current_path(__file__, "0001.png")
+            )
+        )
+        fsext.copy_file(
+            get_absolute_from_current_path(__file__, "0001.png"),
+            get_absolute_from_current_path(__file__, "0001_4.png"),
+        )
+        fsext.del_pattern(fsext.extract_path(__file__), "0001_4.png_*")
+&gt;       treat_file(
+            MockDisableSeparatePage(4),
+            get_absolute_from_current_path(__file__, "0001_4.png"),
+            debug=DebugImage(DebugImage.Level.TOP),
+        )
+
+tests/test_features.py:365: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+script.py:372: in treat_file
+    sep.treat_file(
+script.py:298: in treat_file
+    image1, image2 = self.split_two_waves(
+tests/mock_separate_page.py:23: in split_two_waves
+    return super().split_two_waves(image, parameters, debug)
+script.py:36: in split_two_waves
+    self.__images_found = page.find_images.find_images(
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:174: in find_images
+    thresholdi = cv2ext.threshold_from_gaussian_histogram_white(dilated)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+image = array([[255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 25..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
+pourcentage = 0.2, blur_kernel_size = 31
+
+    def threshold_from_gaussian_histogram_white(
+        image: np.ndarray, pourcentage: float = 0.2, blur_kernel_size: int = 31
+    ) -&gt; int:
+&gt;       histogram = cv2.calcHist([image], [0], None, [256], [0, 256])
+E       Failed: Timeout &gt;1.0s
+
+cv2ext.py:857: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/0001_4.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140019465221888) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140665456289536) ~~~~~~~~~~~~~~~~~~~~~
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
+    reply.run()
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
+    self._result = func(*args, **kwargs)
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
+    msg = Message.from_io(io)
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 432, in from_io
+    header = io.read(9)  # type 1, channel 4, payload 4
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
+    data = self._read(numbytes - len(buf))
+
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_3" time="1.006"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_3() -&gt; None:
+        """Check that stop_at 3 works."""
+        tc.assertTrue(
+            fsext.is_file_exists(
+                get_absolute_from_current_path(__file__, "0001.png")
+            )
+        )
+        fsext.copy_file(
+            get_absolute_from_current_path(__file__, "0001.png"),
+            get_absolute_from_current_path(__file__, "0001_3.png"),
+        )
+        fsext.del_pattern(fsext.extract_path(__file__), "0001_3.png_*")
+&gt;       treat_file(
+            MockDisableSeparatePage(3),
+            get_absolute_from_current_path(__file__, "0001_3.png"),
+            debug=DebugImage(DebugImage.Level.TOP),
+        )
+
+tests/test_features.py:285: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+script.py:372: in treat_file
+    sep.treat_file(
+script.py:298: in treat_file
+    image1, image2 = self.split_two_waves(
+tests/mock_separate_page.py:23: in split_two_waves
+    return super().split_two_waves(image, parameters, debug)
+script.py:36: in split_two_waves
+    self.__images_found = page.find_images.find_images(
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+image = array([[255, 255, 255, ...,   0,   0,   0],
+       [255, 255, 255, ...,   0,   0,   0],
+       [255, 255, 255, ...,   ...,   0,   0,   0],
+       [  0,   0,   0, ...,   0,   0,   0],
+       [  0,   0,   0, ...,   0,   0,   0]], dtype=uint8)
+param = &lt;page.find_images.FindImageParameters object at 0x7f801dd488e0&gt;
+page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7f801c69fc10&gt;
+
+    @inc_debug
+    def find_images(
+        image: np.ndarray,
+        param: FindImageParameters,
+        page_angle: Optional[Angle],
+        debug: DebugImage,
+    ) -&gt; np.ndarray:
+        __internal_border__ = 20
+        xxx = 7
+    
+        debug.image(image, DebugImage.Level.DEBUG)
+        gray = cv2ext.force_image_to_be_grayscale(image, (xxx, xxx))
+        debug.image(gray, DebugImage.Level.DEBUG)
+        blurimg_bc = cv2ext.erode_and_dilate(gray, (xxx, xxx), xxx)
+        debug.image(blurimg_bc, DebugImage.Level.DEBUG)
+    
+        if page_angle is not None:
+            mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+            image_no_border = cv2ext.apply_mask(image, mask)
+            debug.image(image_no_border, DebugImage.Level.DEBUG)
+            gray2 = cv2ext.force_image_to_be_grayscale(image_no_border, (xxx, xxx))
+            debug.image(gray2, DebugImage.Level.DEBUG)
+            blurimg_bc2 = cv2ext.erode_and_dilate(gray2, (xxx, xxx), xxx, True)
+            debug.image(blurimg_bc2, DebugImage.Level.DEBUG)
+            gray_no_border = blurimg_bc2
+        else:
+            gray_no_border = blurimg_bc
+        gray_bordered = cv2.copyMakeBorder(
+            gray_no_border,
+            __internal_border__,
+            __internal_border__,
+            __internal_border__,
+            __internal_border__,
+            cv2.BORDER_CONSTANT,
+            value=[255],
+        )
+        debug.image(gray_bordered, DebugImage.Level.DEBUG)
+&gt;       dilated = cv2.dilate(
+            gray_bordered,
+            cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (xxx, xxx)),
+        )
+E       Failed: Timeout &gt;1.0s
+
+page/find_images.py:169: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+/home/runner/work/ocr-book/ocr-book/tests/0001_3.png
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140189047998208) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -413,23 +540,19 @@ page/find_images.py:109: in remove_black_border_in_image
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 shape = (3507, 4960), epsilon = 5
-cnt = array([[[ 790, 2386]],
+cnt = array([[[3700,  854]],
 
-       [[ 790, 2408]],
+       [[3699,  855]],
 
-       [[ 791, 2407]],
+       [[3698,  855]],
 
-       [[ 792, 2407]],
+       ...,
 
-       [[ 793, 2406]],..., 2389]],
+       [[3709,  855]],
 
-       [[ 794, 2388]],
+       [[3708,  855]],
 
-       [[ 793, 2388]],
-
-       [[ 792, 2387]],
-
-       [[ 791, 2387]]], dtype=int32)
+       [[3707,  854]]], dtype=int32)
 
     def find_longest_lines_in_border(
         shape: Tuple[int, int], epsilon: int, cnt: np.ndarray
@@ -444,17 +567,19 @@ cnt = array([[[ 790, 2386]],
         bottom_left = width
         bottom_right = 0
         for pt1, pt2 in compute.iterator_zip_n_n_1(cnt):
-&gt;           point1_x, point1_y = pt1[0]
+            point1_x, point1_y = pt1[0]
+            point2_x, point2_y = pt2[0]
+&gt;           if point1_x &lt;= epsilon and point2_x &lt;= epsilon:
 E           Failed: Timeout &gt;1.0s
 
-cv2ext.py:656: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+cv2ext.py:658: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/0001.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140019465221888) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140665456289536) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -466,73 +591,7 @@ cv2ext.py:656: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_3" time="1.007"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_3() -&gt; None:
-        """Check that stop_at 3 works."""
-        tc.assertTrue(
-            fsext.is_file_exists(
-                get_absolute_from_current_path(__file__, "0001.png")
-            )
-        )
-        fsext.copy_file(
-            get_absolute_from_current_path(__file__, "0001.png"),
-            get_absolute_from_current_path(__file__, "0001_3.png"),
-        )
-        fsext.del_pattern(fsext.extract_path(__file__), "0001_3.png_*")
-&gt;       treat_file(
-            MockDisableSeparatePage(3),
-            get_absolute_from_current_path(__file__, "0001_3.png"),
-            debug=DebugImage(DebugImage.Level.TOP),
-        )
-
-tests/test_features.py:285: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-script.py:372: in treat_file
-    sep.treat_file(
-script.py:298: in treat_file
-    image1, image2 = self.split_two_waves(
-tests/mock_separate_page.py:23: in split_two_waves
-    return super().split_two_waves(image, parameters, debug)
-script.py:36: in split_two_waves
-    self.__images_found = page.find_images.find_images(
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:174: in find_images
-    thresholdi = cv2ext.threshold_from_gaussian_histogram_white(dilated)
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-image = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-pourcentage = 0.2, blur_kernel_size = 31
-
-    def threshold_from_gaussian_histogram_white(
-        image: np.ndarray, pourcentage: float = 0.2, blur_kernel_size: int = 31
-    ) -&gt; int:
-&gt;       histogram = cv2.calcHist([image], [0], None, [256], [0, 256])
-E       Failed: Timeout &gt;1.0s
-
-cv2ext.py:857: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
-
---------------------------------- Captured Out ---------------------------------
-/home/runner/work/ocr-book/ocr-book/tests/0001_3.png
-
-</system-out><system-err>--------------------------------- Captured Err ---------------------------------
-
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139801380992768) ~~~~~~~~~~~~~~~~~~~~~
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
-    reply.run()
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
-    self._result = func(*args, **kwargs)
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
-    msg = Message.from_io(io)
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 432, in from_io
-    header = io.read(9)  # type 1, channel 4, payload 4
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
-    data = self._read(numbytes - len(buf))
-
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_5" time="1.011"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_5() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_5" time="1.072"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_5() -&gt; None:
         """Check that stop_at 5 works."""
         tc.assertTrue(
             fsext.is_file_exists(
@@ -562,31 +621,81 @@ script.py:36: in split_two_waves
     self.__images_found = page.find_images.find_images(
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:174: in find_images
-    thresholdi = cv2ext.threshold_from_gaussian_histogram_white(dilated)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-image = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-pourcentage = 0.2, blur_kernel_size = 31
+image = array([[255, 255, 255, ...,   0,   0,   0],
+       [255, 255, 255, ...,   0,   0,   0],
+       [255, 255, 255, ...,   ...,   0,   0,   0],
+       [  0,   0,   0, ...,   0,   0,   0],
+       [  0,   0,   0, ...,   0,   0,   0]], dtype=uint8)
+param = &lt;page.find_images.FindImageParameters object at 0x7f801dd488e0&gt;
+page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7f801dcfecd0&gt;
 
-    def threshold_from_gaussian_histogram_white(
-        image: np.ndarray, pourcentage: float = 0.2, blur_kernel_size: int = 31
-    ) -&gt; int:
-&gt;       histogram = cv2.calcHist([image], [0], None, [256], [0, 256])
+    @inc_debug
+    def find_images(
+        image: np.ndarray,
+        param: FindImageParameters,
+        page_angle: Optional[Angle],
+        debug: DebugImage,
+    ) -&gt; np.ndarray:
+        __internal_border__ = 20
+        xxx = 7
+    
+        debug.image(image, DebugImage.Level.DEBUG)
+        gray = cv2ext.force_image_to_be_grayscale(image, (xxx, xxx))
+        debug.image(gray, DebugImage.Level.DEBUG)
+        blurimg_bc = cv2ext.erode_and_dilate(gray, (xxx, xxx), xxx)
+        debug.image(blurimg_bc, DebugImage.Level.DEBUG)
+    
+        if page_angle is not None:
+            mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+            image_no_border = cv2ext.apply_mask(image, mask)
+            debug.image(image_no_border, DebugImage.Level.DEBUG)
+            gray2 = cv2ext.force_image_to_be_grayscale(image_no_border, (xxx, xxx))
+            debug.image(gray2, DebugImage.Level.DEBUG)
+            blurimg_bc2 = cv2ext.erode_and_dilate(gray2, (xxx, xxx), xxx, True)
+            debug.image(blurimg_bc2, DebugImage.Level.DEBUG)
+            gray_no_border = blurimg_bc2
+        else:
+            gray_no_border = blurimg_bc
+        gray_bordered = cv2.copyMakeBorder(
+            gray_no_border,
+            __internal_border__,
+            __internal_border__,
+            __internal_border__,
+            __internal_border__,
+            cv2.BORDER_CONSTANT,
+            value=[255],
+        )
+        debug.image(gray_bordered, DebugImage.Level.DEBUG)
+        dilated = cv2.dilate(
+            gray_bordered,
+            cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (xxx, xxx)),
+        )
+        debug.image(dilated, DebugImage.Level.DEBUG)
+        thresholdi = cv2ext.threshold_from_gaussian_histogram_white(dilated)
+        _, threshold = cv2.threshold(
+            dilated, thresholdi, 255, cv2.THRESH_BINARY_INV
+        )
+        debug.image(threshold, DebugImage.Level.DEBUG)
+    
+&gt;       morpho1 = cv2.morphologyEx(
+            threshold,
+            cv2.MORPH_CLOSE,
+            cv2.getStructuringElement(
+                cv2.MORPH_ELLIPSE, param.kernel_morphology_size
+            ),
+        )
 E       Failed: Timeout &gt;1.0s
 
-cv2ext.py:857: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+page/find_images.py:180: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/0001_5.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139801380992768) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140189047998208) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -598,7 +707,7 @@ cv2ext.py:857: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_black_border_not_removed_png" time="1.039"><failure message="Failed: Timeout &gt;1.0s">def test_black_border_not_removed_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_black_border_not_removed_png" time="1.037"><failure message="Failed: Timeout &gt;1.0s">def test_black_border_not_removed_png() -&gt; None:
         """The border on the right is still there."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -663,7 +772,7 @@ page/find_images.py:89: in remove_black_border_in_image
     debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7f58a1d2d3a0&gt;
+self = &lt;debug_image.DebugImage object at 0x7fef09fe3370&gt;
 img = array([[[  0,   0, 255],
         [  0,   0, 255],
         [  0,   0, 255],
@@ -693,7 +802,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140019465221888) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140665456289536) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -705,7 +814,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_2_pages_2_contours_png" time="1.015"><failure message="Failed: Timeout &gt;1.0s">def test_2_pages_2_contours_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_2_pages_2_contours_png" time="1.017"><failure message="Failed: Timeout &gt;1.0s">def test_2_pages_2_contours_png() -&gt; None:
         """There is not one contour for the two pages,
         but one contour for each page.
         """
@@ -906,7 +1015,7 @@ cv2ext.py:778: Failed</failure><system-out>--------------------------------- Cap
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139801380992768) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140189047998208) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -918,7 +1027,7 @@ cv2ext.py:778: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_rotate_png" time="1.237"><failure message="Failed: Timeout &gt;1.0s">def test_image_failed_to_rotate_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_rotate_png" time="1.286"><failure message="Failed: Timeout &gt;1.0s">def test_image_failed_to_rotate_png() -&gt; None:
         """Failed to compute angle to rotate. The image takes the whole page."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -981,7 +1090,7 @@ page/find_images.py:89: in remove_black_border_in_image
     debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7f58a1d2d3a0&gt;
+self = &lt;debug_image.DebugImage object at 0x7fef09fe3370&gt;
 img = array([[[  0,   0, 255],
         [  0,   0, 255],
         [  0,   0, 255],
@@ -1011,7 +1120,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140019465221888) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140665456289536) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -1023,7 +1132,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_png" time="1.000"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_split_line_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_png" time="1.002"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_split_line_png() -&gt; None:
         """Improve choice of the split line between different algorithm."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -1082,61 +1191,41 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:109: in remove_black_border_in_image
-    ) = cv2ext.find_longest_lines_in_border(
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-shape = (3507, 4960), epsilon = 5
-cnt = array([[[1442, 1572]],
+self = &lt;debug_image.DebugImage object at 0x7f801dbf0340&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[255, 255, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
 
-       [[1439, 1575]],
-
-       [[1438, 1575]],
-
-       [[1437, 1576]],
-
-       [[1436, 1576]],..., 1595]],
-
-       [[1442, 1581]],
-
-       [[1445, 1578]],
-
-       [[1445, 1577]],
-
-       [[1442, 1574]]], dtype=int32)
-
-    def find_longest_lines_in_border(
-        shape: Tuple[int, int], epsilon: int, cnt: np.ndarray
-    ) -&gt; Tuple[Tuple[int, int], Tuple[int, int], Tuple[int, int], Tuple[int, int]]:
-        height, width = shape
-        left_top = height
-        left_bottom = 0
-        right_top = height
-        right_bottom = 0
-        top_left = width
-        top_right = 0
-        bottom_left = width
-        bottom_right = 0
-        for pt1, pt2 in compute.iterator_zip_n_n_1(cnt):
-            point1_x, point1_y = pt1[0]
-            point2_x, point2_y = pt2[0]
-            if point1_x &lt;= epsilon and point2_x &lt;= epsilon:
-                left_top = min(left_top, point1_y, point2_y)
-                left_bottom = max(left_bottom, point1_y, point2_y)
-            if point1_y &lt;= epsilon and point2_y &lt;= epsilon:
-                top_left = min(top_left, point1_x, point2_x)
-                top_right = max(top_right, point1_x, point2_x)
-&gt;           if point1_x &gt;= width - 1 - epsilon and point2_x &gt;= width - 1 - epsilon:
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
 E           Failed: Timeout &gt;1.0s
 
-cv2ext.py:664: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/wrong_split_line.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139801380992768) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140189047998208) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -1148,7 +1237,7 @@ cv2ext.py:664: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_crop_data_png" time="1.229"><failure message="Failed: Timeout &gt;1.0s">def test_image_failed_to_crop_data_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_crop_data_png" time="1.247"><failure message="Failed: Timeout &gt;1.0s">def test_image_failed_to_crop_data_png() -&gt; None:
         """Failed to detect edges. The image takes the whole page and is too closed
         to the border of the image.
         """
@@ -1215,7 +1304,7 @@ page/find_images.py:89: in remove_black_border_in_image
     debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7f58a1d2d3a0&gt;
+self = &lt;debug_image.DebugImage object at 0x7fef09fe3370&gt;
 img = array([[[  0,   0, 255],
         [  0,   0, 255],
         [  0,   0, 255],
@@ -1245,7 +1334,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140019465221888) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140665456289536) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -1257,7 +1346,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_png" time="1.107"><failure message="Failed: Timeout &gt;1.0s">def test_crop_too_much_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_png" time="1.129"><failure message="Failed: Timeout &gt;1.0s">def test_crop_too_much_png() -&gt; None:
         """Reduce distance to ignore black area closed to the edge."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -1320,7 +1409,7 @@ page/find_images.py:89: in remove_black_border_in_image
     debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7f25db19e3a0&gt;
+self = &lt;debug_image.DebugImage object at 0x7f801dbf0340&gt;
 img = array([[[  0,   0, 255],
         [  0,   0, 255],
         [  0,   0, 255],
@@ -1350,7 +1439,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139801380992768) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140189047998208) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -1362,7 +1451,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_angle_split_line_png" time="1.226"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_angle_split_line_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_angle_split_line_png" time="1.230"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_angle_split_line_png() -&gt; None:
         """Failed to detect edges. The image takes the whole page and is too closed
         to the border of the image.
         """
@@ -1423,7 +1512,7 @@ page/find_images.py:142: in find_images
     debug.image(image, DebugImage.Level.DEBUG)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7f58a1d2d3a0&gt;
+self = &lt;debug_image.DebugImage object at 0x7fef09fe3370&gt;
 img = array([[[210, 227, 214],
         [210, 227, 214],
         [211, 229, 216],
@@ -1453,7 +1542,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140019465221888) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140665456289536) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -1465,7 +1554,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_few_png" time="1.000"><failure message="Failed: Timeout &gt;1.0s">def test_crop_too_few_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_few_png" time="1.028"><failure message="Failed: Timeout &gt;1.0s">def test_crop_too_few_png() -&gt; None:
         """Improve detection of black area to ignored
         and that are closed to the edge.
         """
@@ -1526,157 +1615,41 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:119: in remove_black_border_in_image
-    cv2ext.insert_border_in_mask(
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-cnt = array([[[4955, 3472]],
+self = &lt;debug_image.DebugImage object at 0x7f801dbf0340&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
 
-       [[4954, 3473]],
-
-       [[4953, 3473]],
-
-       [[4945, 3481]],
-
-       [[4944, 3481]],..., 3505]],
-
-       [[4651, 3506]],
-
-       [[4613, 3506]],
-
-       [[4959, 3506]],
-
-       [[4959, 3472]]], dtype=int32)
-threshold2 = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-mask_border_only = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-epsilon = (5, 3.0°), page_angle = 0.0°
-
-    def insert_border_in_mask(
-        cnt: np.ndarray,
-        threshold2: np.ndarray,
-        mask_border_only: np.ndarray,
-        epsilon: Tuple[int, Angle],
-        page_angle: Angle,
-    ) -&gt; None:
-        __pourcentage_white_allowed__ = 0.01
-        epsilon_border, epsilon_angle = epsilon
-        height, width = get_hw(threshold2)
-        cnt2 = cnt[cnt[:, 0, 0] &gt; epsilon_border]
-        cnt3 = cnt2[cnt2[:, 0, 0] &lt; width - 1 - epsilon_border]
-        cnt4 = cnt3[cnt3[:, 0, 1] &gt; epsilon_border]
-        cnt5 = cnt4[cnt4[:, 0, 1] &lt; height - 1 - epsilon_border]
-        if len(cnt5) == 0:
-            return
-        contour_approximate = cv2.approxPolyDP(cnt5, epsilon_border, True)
-        all_pair = list(compute.iterator_zip_n_n_1(contour_approximate))
-        all_pair_no_single_pixel = list(
-            filter(
-                lambda x: x[0][0][0] != x[1][0][0] or x[0][0][1] != x[1][0][1],
-                all_pair,
-            )
-        )
-        all_angles = list(
-            map(
-                lambda x: (
-                    (x[0][0], x[1][0]),
-                    compute.get_angle_0_180(x[0][0], x[1][0]),
-                    np.linalg.norm(x[0][0] - x[1][0]),
-                ),
-                all_pair_no_single_pixel,
-            )
-        )
-        vertical_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1],
-                    page_angle + Angle.deg(90.0),
-                    epsilon_angle,
-                    Angle.deg(180),
-                ),
-                all_angles,
-            )
-        )
-        horizontal_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1], page_angle, epsilon_angle, Angle.deg(180)
-                ),
-                all_angles,
-            )
-        )
-        vertical_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posx_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                vertical_lines,
-            )
-        )
-        horizontal_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posy_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                horizontal_lines,
-            )
-        )
-        vertical_lines_pos.sort(key=lambda x: x[0])
-        horizontal_lines_pos.sort(key=lambda x: x[0])
-        for posx, angle in vertical_lines_pos:
-            mask = np.zeros((height, width), np.uint8)
-            bottom_point = compute.get_bottom_point_from_alpha_posx(
-                angle, posx, height
-            )
-            if posx &lt; width / 2:
-                pts = np.array(
-                    [
-                        [-1, 0],
-                        [posx - 1, 0],
-                        [bottom_point[0] - 1, bottom_point[1]],
-                        [-1, height - 1],
-                    ]
-                )
-            else:
-                pts = np.array(
-                    [
-                        [width, 0],
-                        [posx + 1, 0],
-                        [bottom_point[0] + 1, bottom_point[1]],
-                        [width, height - 1],
-                    ]
-                )
-            mask = cv2.drawContours(mask, [pts], 0, 255, -1)
-            histogram = cv2.calcHist([threshold2], [0], mask, [2], [0, 256])
-            if __pourcentage_white_allowed__ * histogram[0] &gt; sum(
-                histogram[1:]
-            ) or __pourcentage_white_allowed__ * histogram[-1] &gt; sum(
-                histogram[:-1]
-            ):
-                mask_border_only = cv2.drawContours(
-                    mask_border_only, [pts], 0, (0), -1
-                )
-        for posy, angle in horizontal_lines_pos:
-&gt;           mask = np.zeros((height, width), np.uint8)
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
 E           Failed: Timeout &gt;1.0s
 
-cv2ext.py:788: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/crop_too_few.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139801380992768) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140189047998208) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -1688,7 +1661,7 @@ cv2ext.py:788: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_angle_page_lower_split_line_png" time="1.004"><failure message="Failed: Timeout &gt;1.0s">def test_angle_page_lower_split_line_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_angle_page_lower_split_line_png" time="1.009"><failure message="Failed: Timeout &gt;1.0s">def test_angle_page_lower_split_line_png() -&gt; None:
         """Failed when angle of a page in lower than
         the angle of the split line.
         """
@@ -1755,7 +1728,7 @@ page/find_images.py:89: in remove_black_border_in_image
     debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7f58a1d2d3a0&gt;
+self = &lt;debug_image.DebugImage object at 0x7fef09fe3370&gt;
 img = array([[[  0,   0, 255],
         [  0,   0, 255],
         [  0,   0, 255],
@@ -1785,7 +1758,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140019465221888) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140665456289536) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -1797,7 +1770,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_2_png" time="1.138"><failure message="Failed: Timeout &gt;1.0s">def test_crop_too_much_2_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_2_png" time="1.153"><failure message="Failed: Timeout &gt;1.0s">def test_crop_too_much_2_png() -&gt; None:
         """Reduce distance to ignore black area closed to the edge."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -1860,7 +1833,7 @@ page/find_images.py:89: in remove_black_border_in_image
     debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7f25db19e3a0&gt;
+self = &lt;debug_image.DebugImage object at 0x7f801dbf0340&gt;
 img = array([[[  0,   0, 255],
         [  0,   0, 255],
         [  0,   0, 255],
@@ -1890,7 +1863,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139801380992768) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140189047998208) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -1902,7 +1875,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_2_png" time="1.154"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_split_line_2_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_2_png" time="1.161"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_split_line_2_png() -&gt; None:
         """Improve choice of the split line between different algorithm."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -1965,7 +1938,7 @@ page/find_images.py:89: in remove_black_border_in_image
     debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7f58a1d2d3a0&gt;
+self = &lt;debug_image.DebugImage object at 0x7fef09fe3370&gt;
 img = array([[[  0,   0, 255],
         [  0,   0, 255],
         [  0,   0, 255],
@@ -1995,7 +1968,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140019465221888) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140665456289536) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -2007,7 +1980,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_wave_split_line_png" time="1.131"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_wave_split_line_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_wave_split_line_png" time="1.147"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_wave_split_line_png() -&gt; None:
         """The split line by wave method was wrong."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -2070,7 +2043,7 @@ page/find_images.py:89: in remove_black_border_in_image
     debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7f25db19e3a0&gt;
+self = &lt;debug_image.DebugImage object at 0x7f801dbf0340&gt;
 img = array([[[  0,   0, 255],
         [  0,   0, 255],
         [  0,   0, 255],
@@ -2100,7 +2073,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139801380992768) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140189047998208) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -2112,7 +2085,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_small_wave_png" time="1.184"><failure message="Failed: Timeout &gt;1.0s">def test_small_wave_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_small_wave_png" time="1.180"><failure message="Failed: Timeout &gt;1.0s">def test_small_wave_png() -&gt; None:
         """The wave at the bottom of the image is very small."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -2175,7 +2148,7 @@ page/find_images.py:89: in remove_black_border_in_image
     debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7f58a1d2d3a0&gt;
+self = &lt;debug_image.DebugImage object at 0x7fef09fe3370&gt;
 img = array([[[  0,   0, 255],
         [  0,   0, 255],
         [  0,   0, 255],
@@ -2205,7 +2178,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140019465221888) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140665456289536) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -2217,7 +2190,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_line_algo_png" time="1.060"><failure message="Failed: Timeout &gt;1.0s">def test_no_split_line_line_algo_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_line_algo_png" time="1.044"><failure message="Failed: Timeout &gt;1.0s">def test_no_split_line_line_algo_png() -&gt; None:
         """No line for split line with line detection algo."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -2282,7 +2255,7 @@ page/find_images.py:89: in remove_black_border_in_image
     debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7f25db19e3a0&gt;
+self = &lt;debug_image.DebugImage object at 0x7f801dbf0340&gt;
 img = array([[[  0,   0, 255],
         [  0,   0, 255],
         [  0,   0, 255],
@@ -2312,7 +2285,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139801380992768) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140189047998208) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -2324,7 +2297,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_3_png" time="1.079"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_split_line_3_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_3_png" time="1.065"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_split_line_3_png() -&gt; None:
         """The split line was not the right one."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -2387,7 +2360,7 @@ page/find_images.py:89: in remove_black_border_in_image
     debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7f58a1d2d3a0&gt;
+self = &lt;debug_image.DebugImage object at 0x7fef09fe3370&gt;
 img = array([[[  0,   0, 255],
         [  0,   0, 255],
         [  0,   0, 255],
@@ -2417,7 +2390,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140019465221888) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140665456289536) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -2429,7 +2402,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_failed_split_line_line_algo_png" time="1.016"><failure message="Failed: Timeout &gt;1.0s">def test_failed_split_line_line_algo_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_failed_split_line_line_algo_png" time="1.000"><failure message="Failed: Timeout &gt;1.0s">def test_failed_split_line_line_algo_png() -&gt; None:
         """Failed to compute line for split line with line detection alog."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -2490,27 +2463,783 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
+page/find_images.py:109: in remove_black_border_in_image
+    ) = cv2ext.find_longest_lines_in_border(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+shape = (3507, 4960), epsilon = 5
+cnt = array([[[ 515, 2939]],
+
+       [[ 509, 2945]],
+
+       [[ 508, 2945]],
+
+       ...,
+
+       [[ 518, 2941]],
+
+       [[ 517, 2940]],
+
+       [[ 516, 2940]]], dtype=int32)
+
+    def find_longest_lines_in_border(
+        shape: Tuple[int, int], epsilon: int, cnt: np.ndarray
+    ) -&gt; Tuple[Tuple[int, int], Tuple[int, int], Tuple[int, int], Tuple[int, int]]:
+        height, width = shape
+        left_top = height
+        left_bottom = 0
+        right_top = height
+        right_bottom = 0
+        top_left = width
+        top_right = 0
+        bottom_left = width
+        bottom_right = 0
+        for pt1, pt2 in compute.iterator_zip_n_n_1(cnt):
+            point1_x, point1_y = pt1[0]
+            point2_x, point2_y = pt2[0]
+&gt;           if point1_x &lt;= epsilon and point2_x &lt;= epsilon:
+E           Failed: Timeout &gt;1.0s
+
+cv2ext.py:658: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+/home/runner/work/ocr-book/ocr-book/tests/failed_split_line_line_algo.png
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140189047998208) ~~~~~~~~~~~~~~~~~~~~~
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
+    reply.run()
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
+    self._result = func(*args, **kwargs)
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
+    msg = Message.from_io(io)
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 432, in from_io
+    header = io.read(9)  # type 1, channel 4, payload 4
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
+    data = self._read(numbytes - len(buf))
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_3_png" time="1.086"><failure message="Failed: Timeout &gt;1.0s">def test_crop_too_much_3_png() -&gt; None:
+        """Failed to compute line for split line with line detection alog."""
+&gt;       treat_file(
+            MockDisableSeparatePage(MAX_VAL),
+            get_absolute_from_current_path(__file__, "crop_too_much_3.png"),
+            {
+                ConstString.separation_double_page_angle(): (
+                    "range",
+                    Angle.deg(89.51),
+                    Angle.deg(89.56),
+                ),
+                ConstString.separation_double_page_y(): ("range", 2494, 2499),
+                ConstString.page_rotation(1): (
+                    "range",
+                    Angle.deg(-0.96),
+                    Angle.deg(-0.89),
+                ),
+                ConstString.page_rotation(2): (
+                    "range",
+                    Angle.deg(-0.16),
+                    Angle.deg(-0.14),
+                ),
+                ConstString.image_crop(1, "x1"): ("range", 373, 374),
+                ConstString.image_crop(1, "y1"): ("range", 258, 258),
+                ConstString.image_crop(1, "x2"): ("range", 2385, 2386),
+                ConstString.image_crop(1, "y2"): ("range", 3458, 3459),
+                ConstString.image_crop(2, "x1"): ("range", 167, 172),
+                ConstString.image_crop(2, "y1"): ("range", 228, 228),
+                ConstString.image_crop(2, "x2"): ("range", 2180, 2185),
+                ConstString.image_crop(2, "y2"): ("range", 3417, 3417),
+                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+                ConstString.image_border(1, 1): ("range", 237, 239),
+                ConstString.image_border(1, 2): ("range", 46, 50),
+                ConstString.image_border(1, 3): ("range", 223, 224),
+                ConstString.image_border(1, 4): ("range", 223, 224),
+                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+                ConstString.image_border(2, 1): ("range", 192, 214),
+                ConstString.image_border(2, 2): ("range", 84, 106),
+                ConstString.image_border(2, 3): ("range", 223, 223),
+                ConstString.image_border(2, 4): ("range", 223, 223),
+            },
+        )
+
+tests/test_images.py:843: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+script.py:372: in treat_file
+    sep.treat_file(
+script.py:298: in treat_file
+    image1, image2 = self.split_two_waves(
+tests/mock_separate_page.py:23: in split_two_waves
+    return super().split_two_waves(image, parameters, debug)
+script.py:36: in split_two_waves
+    self.__images_found = page.find_images.find_images(
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:149: in find_images
+    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;debug_image.DebugImage object at 0x7fef09fe3370&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
+
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
+E           Failed: Timeout &gt;1.0s
+
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+/home/runner/work/ocr-book/ocr-book/tests/crop_too_much_3.png
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140665456289536) ~~~~~~~~~~~~~~~~~~~~~
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
+    reply.run()
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
+    self._result = func(*args, **kwargs)
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
+    msg = Message.from_io(io)
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 432, in from_io
+    header = io.read(9)  # type 1, channel 4, payload 4
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
+    data = self._read(numbytes - len(buf))
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_failed_split_line_line_algo_2_png" time="1.116"><failure message="Failed: Timeout &gt;1.0s">def test_failed_split_line_line_algo_2_png() -&gt; None:
+        """Failed to compute line for split line with line detection alog."""
+&gt;       treat_file(
+            MockDisableSeparatePage(MAX_VAL),
+            get_absolute_from_current_path(
+                __file__, "failed_split_line_line_algo_2.png"
+            ),
+            {
+                ConstString.separation_double_page_angle(): (
+                    "range",
+                    Angle.deg(89.97),
+                    Angle.deg(90.05),
+                ),
+                ConstString.separation_double_page_y(): ("range", 2497, 2499),
+                ConstString.page_rotation(1): (
+                    "range",
+                    Angle.deg(-0.01),
+                    Angle.deg(0.01),
+                ),
+                ConstString.page_rotation(2): (
+                    "range",
+                    Angle.deg(0.59),
+                    Angle.deg(0.61),
+                ),
+                ConstString.image_crop(1, "x1"): ("range", 272, 272),
+                ConstString.image_crop(1, "y1"): ("range", 149, 149),
+                ConstString.image_crop(1, "x2"): ("range", 2383, 2383),
+                ConstString.image_crop(1, "y2"): ("range", 3353, 3353),
+                ConstString.image_crop(2, "x1"): ("range", 107, 124),
+                ConstString.image_crop(2, "y1"): ("range", 155, 155),
+                ConstString.image_crop(2, "x2"): ("range", 2230, 2247),
+                ConstString.image_crop(2, "y2"): ("range", 3350, 3350),
+                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+                ConstString.image_border(1, 1): ("range", 137, 139),
+                ConstString.image_border(1, 2): ("range", 144, 146),
+                ConstString.image_border(1, 3): ("range", 174, 174),
+                ConstString.image_border(1, 4): ("range", 174, 174),
+                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+                ConstString.image_border(2, 1): ("range", 135, 146),
+                ConstString.image_border(2, 2): ("range", 145, 157),
+                ConstString.image_border(2, 3): ("range", 168, 168),
+                ConstString.image_border(2, 4): ("range", 168, 168),
+            },
+        )
+
+tests/test_images.py:797: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+script.py:372: in treat_file
+    sep.treat_file(
+script.py:298: in treat_file
+    image1, image2 = self.split_two_waves(
+tests/mock_separate_page.py:23: in split_two_waves
+    return super().split_two_waves(image, parameters, debug)
+script.py:36: in split_two_waves
+    self.__images_found = page.find_images.find_images(
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:149: in find_images
+    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;debug_image.DebugImage object at 0x7f801dbf0340&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
+
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
+E           Failed: Timeout &gt;1.0s
+
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+/home/runner/work/ocr-book/ocr-book/tests/failed_split_line_line_algo_2.png
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140189047998208) ~~~~~~~~~~~~~~~~~~~~~
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
+    reply.run()
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
+    self._result = func(*args, **kwargs)
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
+    msg = Message.from_io(io)
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 432, in from_io
+    header = io.read(9)  # type 1, channel 4, payload 4
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
+    data = self._read(numbytes - len(buf))
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_wave_split_line_2_png" time="1.100"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_wave_split_line_2_png() -&gt; None:
+        """Need to relax tolerance to have the split line by wave algo."""
+&gt;       treat_file(
+            MockDisableSeparatePage(MAX_VAL),
+            get_absolute_from_current_path(
+                __file__, "wrong_wave_split_line_2.png"
+            ),
+            {
+                ConstString.separation_double_page_angle(): (
+                    "range",
+                    Angle.deg(90.77),
+                    Angle.deg(90.78),
+                ),
+                ConstString.separation_double_page_y(): ("range", 2490, 2490),
+                ConstString.page_rotation(1): (
+                    "range",
+                    Angle.deg(0.39),
+                    Angle.deg(0.41),
+                ),
+                ConstString.page_rotation(2): (
+                    "range",
+                    Angle.deg(1.79),
+                    Angle.deg(1.81),
+                ),
+                ConstString.image_crop(1, "x1"): ("range", 224, 224),
+                ConstString.image_crop(1, "y1"): ("range", 147, 147),
+                ConstString.image_crop(1, "x2"): ("range", 2337, 2337),
+                ConstString.image_crop(1, "y2"): ("range", 3355, 3355),
+                ConstString.image_crop(2, "x1"): ("range", 72, 107),
+                ConstString.image_crop(2, "y1"): ("range", 197, 197),
+                ConstString.image_crop(2, "x2"): ("range", 2194, 2229),
+                ConstString.image_crop(2, "y2"): ("range", 3396, 3396),
+                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+                ConstString.image_border(1, 1): ("range", 126, 137),
+                ConstString.image_border(1, 2): ("range", 142, 153),
+                ConstString.image_border(1, 3): ("range", 173, 173),
+                ConstString.image_border(1, 4): ("range", 173, 173),
+                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+                ConstString.image_border(2, 1): ("range", 167, 171),
+                ConstString.image_border(2, 2): ("range", 116, 121),
+                ConstString.image_border(2, 3): ("range", 169, 169),
+                ConstString.image_border(2, 4): ("range", 169, 169),
+            },
+        )
+
+tests/test_images.py:887: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+script.py:372: in treat_file
+    sep.treat_file(
+script.py:298: in treat_file
+    image1, image2 = self.split_two_waves(
+tests/mock_separate_page.py:23: in split_two_waves
+    return super().split_two_waves(image, parameters, debug)
+script.py:36: in split_two_waves
+    self.__images_found = page.find_images.find_images(
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:149: in find_images
+    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;debug_image.DebugImage object at 0x7fef09fe3370&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
+
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
+E           Failed: Timeout &gt;1.0s
+
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+/home/runner/work/ocr-book/ocr-book/tests/wrong_wave_split_line_2.png
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140665456289536) ~~~~~~~~~~~~~~~~~~~~~
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
+    reply.run()
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
+    self._result = func(*args, **kwargs)
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
+    msg = Message.from_io(io)
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 432, in from_io
+    header = io.read(9)  # type 1, channel 4, payload 4
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
+    data = self._read(numbytes - len(buf))
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_wave_split_line_3_png" time="1.063"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_wave_split_line_3_png() -&gt; None:
+        """Need to relax tolerance to have the split line by wave algo."""
+&gt;       treat_file(
+            MockDisableSeparatePage(MAX_VAL),
+            get_absolute_from_current_path(
+                __file__, "wrong_wave_split_line_3.png"
+            ),
+            {
+                ConstString.separation_double_page_angle(): (
+                    "range",
+                    Angle.deg(90.03),
+                    Angle.deg(90.09),
+                ),
+                ConstString.separation_double_page_y(): ("range", 2510, 2514),
+                ConstString.page_rotation(1): (
+                    "range",
+                    Angle.deg(0.04),
+                    Angle.deg(0.11),
+                ),
+                ConstString.page_rotation(2): (
+                    "range",
+                    Angle.deg(0.29),
+                    Angle.deg(0.36),
+                ),
+                ConstString.image_crop(1, "x1"): ("range", 272, 273),
+                ConstString.image_crop(1, "y1"): ("range", 219, 220),
+                ConstString.image_crop(1, "x2"): ("range", 2383, 2383),
+                ConstString.image_crop(1, "y2"): ("range", 3423, 3423),
+                ConstString.image_crop(2, "x1"): ("range", 114, 119),
+                ConstString.image_crop(2, "y1"): ("range", 226, 226),
+                ConstString.image_crop(2, "x2"): ("range", 2235, 2240),
+                ConstString.image_crop(2, "y2"): ("range", 3413, 3414),
+                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+                ConstString.image_border(1, 1): ("range", 190, 202),
+                ConstString.image_border(1, 2): ("range", 81, 93),
+                ConstString.image_border(1, 3): ("range", 174, 175),
+                ConstString.image_border(1, 4): ("range", 174, 175),
+                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+                ConstString.image_border(2, 1): ("range", 190, 207),
+                ConstString.image_border(2, 2): ("range", 92, 110),
+                ConstString.image_border(2, 3): ("range", 168, 169),
+                ConstString.image_border(2, 4): ("range", 168, 169),
+            },
+        )
+
+tests/test_images.py:933: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+script.py:372: in treat_file
+    sep.treat_file(
+script.py:298: in treat_file
+    image1, image2 = self.split_two_waves(
+tests/mock_separate_page.py:23: in split_two_waves
+    return super().split_two_waves(image, parameters, debug)
+script.py:36: in split_two_waves
+    self.__images_found = page.find_images.find_images(
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:149: in find_images
+    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;debug_image.DebugImage object at 0x7f801dbf0340&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[255, 255, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
+
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
+E           Failed: Timeout &gt;1.0s
+
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+/home/runner/work/ocr-book/ocr-book/tests/wrong_wave_split_line_3.png
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140189047998208) ~~~~~~~~~~~~~~~~~~~~~
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
+    reply.run()
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
+    self._result = func(*args, **kwargs)
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
+    msg = Message.from_io(io)
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 432, in from_io
+    header = io.read(9)  # type 1, channel 4, payload 4
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
+    data = self._read(numbytes - len(buf))
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_wave_algo_png" time="1.261"><failure message="Failed: Timeout &gt;1.0s">def test_no_split_line_wave_algo_png() -&gt; None:
+        """Failed to detect wave due to image."""
+&gt;       treat_file(
+            MockDisableSeparatePage(MAX_VAL),
+            get_absolute_from_current_path(
+                __file__, "no_split_line_wave_algo.png"
+            ),
+            {
+                ConstString.separation_double_page_angle(): (
+                    "range",
+                    Angle.deg(89.84),
+                    Angle.deg(89.94),
+                ),
+                ConstString.separation_double_page_y(): ("range", 2475, 2484),
+                ConstString.page_rotation(1): (
+                    "range",
+                    Angle.deg(-0.06),
+                    Angle.deg(0.01),
+                ),
+                ConstString.page_rotation(2): (
+                    "range",
+                    Angle.deg(-0.56),
+                    Angle.deg(-0.49),
+                ),
+                ConstString.image_crop(1, "x1"): ("range", 97, 101),
+                ConstString.image_crop(1, "y1"): ("range", 27, 79),
+                ConstString.image_crop(1, "x2"): ("range", 2477, 2486),
+                ConstString.image_crop(1, "y2"): ("range", 3505, 3505),
+                ConstString.image_crop(2, "x1"): ("range", 163, 171),
+                ConstString.image_crop(2, "y1"): ("range", 266, 266),
+                ConstString.image_crop(2, "x2"): ("range", 2238, 2248),
+                ConstString.image_crop(2, "y2"): ("range", 3381, 3382),
+                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+                ConstString.image_border(1, 1): ("range", 15, 41),
+                ConstString.image_border(1, 2): ("range", 15, 41),
+                ConstString.image_border(1, 3): ("range", 46, 52),
+                ConstString.image_border(1, 4): ("range", 46, 52),
+                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+                ConstString.image_border(2, 1): ("range", 254, 258),
+                ConstString.image_border(2, 2): ("range", 114, 118),
+                ConstString.image_border(2, 3): ("range", 191, 198),
+                ConstString.image_border(2, 4): ("range", 191, 198),
+            },
+        )
+
+tests/test_images.py:979: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+script.py:372: in treat_file
+    sep.treat_file(
+script.py:298: in treat_file
+    image1, image2 = self.split_two_waves(
+tests/mock_separate_page.py:23: in split_two_waves
+    return super().split_two_waves(image, parameters, debug)
+script.py:36: in split_two_waves
+    self.__images_found = page.find_images.find_images(
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:149: in find_images
+    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;debug_image.DebugImage object at 0x7fef09fe3370&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
+
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
+E           Failed: Timeout &gt;1.0s
+
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+/home/runner/work/ocr-book/ocr-book/tests/no_split_line_wave_algo.png
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140665456289536) ~~~~~~~~~~~~~~~~~~~~~
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
+    reply.run()
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
+    self._result = func(*args, **kwargs)
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
+    msg = Message.from_io(io)
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 432, in from_io
+    header = io.read(9)  # type 1, channel 4, payload 4
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
+    data = self._read(numbytes - len(buf))
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_wave_algo_2_png" time="1.092"><failure message="Failed: Timeout &gt;1.0s">def test_no_split_line_wave_algo_2_png() -&gt; None:
+        """Failed to detect wave due to missing wave at the bottom."""
+&gt;       treat_file(
+            MockDisableSeparatePage(MAX_VAL),
+            get_absolute_from_current_path(
+                __file__, "no_split_line_wave_algo_2.png"
+            ),
+            {
+                ConstString.separation_double_page_angle(): (
+                    "range",
+                    Angle.deg(90.47),
+                    Angle.deg(91.22),
+                ),
+                ConstString.separation_double_page_y(): ("range", 2478, 2488),
+                ConstString.page_rotation(1): (
+                    "range",
+                    Angle.deg(1.09),
+                    Angle.deg(1.16),
+                ),
+                ConstString.page_rotation(2): (
+                    "range",
+                    Angle.deg(0.19),
+                    Angle.deg(0.21),
+                ),
+                ConstString.image_crop(1, "x1"): ("range", 266, 266),
+                ConstString.image_crop(1, "y1"): ("range", 209, 210),
+                ConstString.image_crop(1, "x2"): ("range", 2342, 2342),
+                ConstString.image_crop(1, "y2"): ("range", 3413, 3413),
+                ConstString.image_crop(2, "x1"): ("range", 163, 199),
+                ConstString.image_crop(2, "y1"): ("range", 241, 241),
+                ConstString.image_crop(2, "x2"): ("range", 2246, 2282),
+                ConstString.image_crop(2, "y2"): ("range", 3433, 3433),
+                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+                ConstString.image_border(1, 1): ("range", 180, 194),
+                ConstString.image_border(1, 2): ("range", 90, 103),
+                ConstString.image_border(1, 3): ("range", 192, 192),
+                ConstString.image_border(1, 4): ("range", 192, 192),
+                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+                ConstString.image_border(2, 1): ("range", 209, 226),
+                ConstString.image_border(2, 2): ("range", 69, 86),
+                ConstString.image_border(2, 3): ("range", 188, 188),
+                ConstString.image_border(2, 4): ("range", 188, 188),
+            },
+        )
+
+tests/test_images.py:1025: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+script.py:372: in treat_file
+    sep.treat_file(
+script.py:298: in treat_file
+    image1, image2 = self.split_two_waves(
+tests/mock_separate_page.py:23: in split_two_waves
+    return super().split_two_waves(image, parameters, debug)
+script.py:36: in split_two_waves
+    self.__images_found = page.find_images.find_images(
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:149: in find_images
+    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;debug_image.DebugImage object at 0x7f801dbf0340&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[255, 255, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
+
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
+E           Failed: Timeout &gt;1.0s
+
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+/home/runner/work/ocr-book/ocr-book/tests/no_split_line_wave_algo_2.png
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140189047998208) ~~~~~~~~~~~~~~~~~~~~~
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
+    reply.run()
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
+    self._result = func(*args, **kwargs)
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
+    msg = Message.from_io(io)
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 432, in from_io
+    header = io.read(9)  # type 1, channel 4, payload 4
+  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
+    data = self._read(numbytes - len(buf))
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_few_2_png" time="1.016"><failure message="Failed: Timeout &gt;1.0s">def test_crop_too_few_2_png() -&gt; None:
+        """Use different area on the left and the right to detect
+        black noise."""
+&gt;       treat_file(
+            MockDisableSeparatePage(MAX_VAL),
+            get_absolute_from_current_path(__file__, "crop_too_few_2.png"),
+            {
+                ConstString.separation_double_page_angle(): (
+                    "range",
+                    Angle.deg(90.25),
+                    Angle.deg(90.35),
+                ),
+                ConstString.separation_double_page_y(): ("range", 2531, 2534),
+                ConstString.page_rotation(1): (
+                    "range",
+                    Angle.deg(1.19),
+                    Angle.deg(1.21),
+                ),
+                ConstString.page_rotation(2): (
+                    "range",
+                    Angle.deg(-0.11),
+                    Angle.deg(-0.04),
+                ),
+                ConstString.image_crop(1, "x1"): ("range", 287, 287),
+                ConstString.image_crop(1, "y1"): ("range", 165, 165),
+                ConstString.image_crop(1, "x2"): ("range", 2398, 2398),
+                ConstString.image_crop(1, "y2"): ("range", 3368, 3368),
+                ConstString.image_crop(2, "x1"): ("range", 145, 151),
+                ConstString.image_crop(2, "y1"): ("range", 175, 189),
+                ConstString.image_crop(2, "x2"): ("range", 2271, 2275),
+                ConstString.image_crop(2, "y2"): ("range", 3373, 3386),
+                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+                ConstString.image_border(1, 1): ("range", 139, 157),
+                ConstString.image_border(1, 2): ("range", 127, 145),
+                ConstString.image_border(1, 3): ("range", 174, 174),
+                ConstString.image_border(1, 4): ("range", 174, 174),
+                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+                ConstString.image_border(2, 1): ("range", 175, 181),
+                ConstString.image_border(2, 2): ("range", 109, 114),
+                ConstString.image_border(2, 3): ("range", 167, 168),
+                ConstString.image_border(2, 4): ("range", 167, 168),
+            },
+        )
+
+tests/test_images.py:1072: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+script.py:372: in treat_file
+    sep.treat_file(
+script.py:298: in treat_file
+    image1, image2 = self.split_two_waves(
+tests/mock_separate_page.py:23: in split_two_waves
+    return super().split_two_waves(image, parameters, debug)
+script.py:36: in split_two_waves
+    self.__images_found = page.find_images.find_images(
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:149: in find_images
+    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
 page/find_images.py:119: in remove_black_border_in_image
     cv2ext.insert_border_in_mask(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-cnt = array([[[2574, 3463]],
+cnt = array([[[4958, 3467]],
 
-       [[2574, 3472]],
+       [[4957, 3468]],
 
-       [[2573, 3473]],
+       [[4956, 3468]],
 
-       [[2573, 3475]],
+       [[4955, 3469]],
 
-       [[2572, 3476]],..., 3477]],
+       [[4954, 3469]],..., 3505]],
 
-       [[2588, 3475]],
+       [[4531, 3506]],
 
-       [[2587, 3475]],
+       [[4504, 3506]],
 
-       [[2585, 3473]],
+       [[4959, 3506]],
 
-       [[2584, 3473]]], dtype=int32)
+       [[4959, 3467]]], dtype=int32)
 threshold2 = array([[255, 255, 255, ..., 255, 255, 255],
        [255, 255, 255, ..., 255, 255, 255],
        [255, 255, 255, ..., 25..., 255, 255, 255],
@@ -2659,757 +3388,11 @@ E           Failed: Timeout &gt;1.0s
 cv2ext.py:811: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/runner/work/ocr-book/ocr-book/tests/failed_split_line_line_algo.png
-
-</system-out><system-err>--------------------------------- Captured Err ---------------------------------
-
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139801380992768) ~~~~~~~~~~~~~~~~~~~~~
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
-    reply.run()
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
-    self._result = func(*args, **kwargs)
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
-    msg = Message.from_io(io)
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 432, in from_io
-    header = io.read(9)  # type 1, channel 4, payload 4
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
-    data = self._read(numbytes - len(buf))
-
-</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_3_png" time="1.093"><failure message="Failed: Timeout &gt;1.0s">def test_crop_too_much_3_png() -&gt; None:
-        """Failed to compute line for split line with line detection alog."""
-&gt;       treat_file(
-            MockDisableSeparatePage(MAX_VAL),
-            get_absolute_from_current_path(__file__, "crop_too_much_3.png"),
-            {
-                ConstString.separation_double_page_angle(): (
-                    "range",
-                    Angle.deg(89.51),
-                    Angle.deg(89.56),
-                ),
-                ConstString.separation_double_page_y(): ("range", 2494, 2499),
-                ConstString.page_rotation(1): (
-                    "range",
-                    Angle.deg(-0.96),
-                    Angle.deg(-0.89),
-                ),
-                ConstString.page_rotation(2): (
-                    "range",
-                    Angle.deg(-0.16),
-                    Angle.deg(-0.14),
-                ),
-                ConstString.image_crop(1, "x1"): ("range", 373, 374),
-                ConstString.image_crop(1, "y1"): ("range", 258, 258),
-                ConstString.image_crop(1, "x2"): ("range", 2385, 2386),
-                ConstString.image_crop(1, "y2"): ("range", 3458, 3459),
-                ConstString.image_crop(2, "x1"): ("range", 167, 172),
-                ConstString.image_crop(2, "y1"): ("range", 228, 228),
-                ConstString.image_crop(2, "x2"): ("range", 2180, 2185),
-                ConstString.image_crop(2, "y2"): ("range", 3417, 3417),
-                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
-                ConstString.image_border(1, 1): ("range", 237, 239),
-                ConstString.image_border(1, 2): ("range", 46, 50),
-                ConstString.image_border(1, 3): ("range", 223, 224),
-                ConstString.image_border(1, 4): ("range", 223, 224),
-                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
-                ConstString.image_border(2, 1): ("range", 192, 214),
-                ConstString.image_border(2, 2): ("range", 84, 106),
-                ConstString.image_border(2, 3): ("range", 223, 223),
-                ConstString.image_border(2, 4): ("range", 223, 223),
-            },
-        )
-
-tests/test_images.py:843: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-script.py:372: in treat_file
-    sep.treat_file(
-script.py:298: in treat_file
-    image1, image2 = self.split_two_waves(
-tests/mock_separate_page.py:23: in split_two_waves
-    return super().split_two_waves(image, parameters, debug)
-script.py:36: in split_two_waves
-    self.__images_found = page.find_images.find_images(
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:149: in find_images
-    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:89: in remove_black_border_in_image
-    debug.image(
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-self = &lt;debug_image.DebugImage object at 0x7f58a1d2d3a0&gt;
-img = array([[[  0,   0, 255],
-        [  0,   0, 255],
-        [  0,   0, 255],
-        ...,
-        [  0,   0, 255],
-     ...[  0,   0, 255],
-        ...,
-        [  0,   0, 255],
-        [  0,   0, 255],
-        [  0,   0, 255]]], dtype=uint8)
-level = &lt;Level.DEBUG: 1&gt;
-
-    def image(self, img: np.ndarray, level: Level) -&gt; None:
-        if level &gt;= self.__level:
-            name = self.name()
-            self.__next()
-            self.__next_when_dec[0 : self.__sub_level] = [
-                True for x in range(self.__sub_level)
-            ]
-&gt;           if not cv2.imwrite(name, img):
-E           Failed: Timeout &gt;1.0s
-
-debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
-
---------------------------------- Captured Out ---------------------------------
-/home/runner/work/ocr-book/ocr-book/tests/crop_too_much_3.png
-
-</system-out><system-err>--------------------------------- Captured Err ---------------------------------
-
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140019465221888) ~~~~~~~~~~~~~~~~~~~~~
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
-    reply.run()
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
-    self._result = func(*args, **kwargs)
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
-    msg = Message.from_io(io)
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 432, in from_io
-    header = io.read(9)  # type 1, channel 4, payload 4
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
-    data = self._read(numbytes - len(buf))
-
-</system-err></testcase><testcase classname="tests.test_images" name="test_failed_split_line_line_algo_2_png" time="1.098"><failure message="Failed: Timeout &gt;1.0s">def test_failed_split_line_line_algo_2_png() -&gt; None:
-        """Failed to compute line for split line with line detection alog."""
-&gt;       treat_file(
-            MockDisableSeparatePage(MAX_VAL),
-            get_absolute_from_current_path(
-                __file__, "failed_split_line_line_algo_2.png"
-            ),
-            {
-                ConstString.separation_double_page_angle(): (
-                    "range",
-                    Angle.deg(89.97),
-                    Angle.deg(90.05),
-                ),
-                ConstString.separation_double_page_y(): ("range", 2497, 2499),
-                ConstString.page_rotation(1): (
-                    "range",
-                    Angle.deg(-0.01),
-                    Angle.deg(0.01),
-                ),
-                ConstString.page_rotation(2): (
-                    "range",
-                    Angle.deg(0.59),
-                    Angle.deg(0.61),
-                ),
-                ConstString.image_crop(1, "x1"): ("range", 272, 272),
-                ConstString.image_crop(1, "y1"): ("range", 149, 149),
-                ConstString.image_crop(1, "x2"): ("range", 2383, 2383),
-                ConstString.image_crop(1, "y2"): ("range", 3353, 3353),
-                ConstString.image_crop(2, "x1"): ("range", 107, 124),
-                ConstString.image_crop(2, "y1"): ("range", 155, 155),
-                ConstString.image_crop(2, "x2"): ("range", 2230, 2247),
-                ConstString.image_crop(2, "y2"): ("range", 3350, 3350),
-                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
-                ConstString.image_border(1, 1): ("range", 137, 139),
-                ConstString.image_border(1, 2): ("range", 144, 146),
-                ConstString.image_border(1, 3): ("range", 174, 174),
-                ConstString.image_border(1, 4): ("range", 174, 174),
-                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
-                ConstString.image_border(2, 1): ("range", 135, 146),
-                ConstString.image_border(2, 2): ("range", 145, 157),
-                ConstString.image_border(2, 3): ("range", 168, 168),
-                ConstString.image_border(2, 4): ("range", 168, 168),
-            },
-        )
-
-tests/test_images.py:797: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-script.py:372: in treat_file
-    sep.treat_file(
-script.py:298: in treat_file
-    image1, image2 = self.split_two_waves(
-tests/mock_separate_page.py:23: in split_two_waves
-    return super().split_two_waves(image, parameters, debug)
-script.py:36: in split_two_waves
-    self.__images_found = page.find_images.find_images(
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:149: in find_images
-    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:89: in remove_black_border_in_image
-    debug.image(
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-self = &lt;debug_image.DebugImage object at 0x7f25db19e3a0&gt;
-img = array([[[  0,   0, 255],
-        [  0,   0, 255],
-        [  0,   0, 255],
-        ...,
-        [  0,   0, 255],
-     ...[  0,   0, 255],
-        ...,
-        [  0,   0, 255],
-        [  0,   0, 255],
-        [  0,   0, 255]]], dtype=uint8)
-level = &lt;Level.DEBUG: 1&gt;
-
-    def image(self, img: np.ndarray, level: Level) -&gt; None:
-        if level &gt;= self.__level:
-            name = self.name()
-            self.__next()
-            self.__next_when_dec[0 : self.__sub_level] = [
-                True for x in range(self.__sub_level)
-            ]
-&gt;           if not cv2.imwrite(name, img):
-E           Failed: Timeout &gt;1.0s
-
-debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
-
---------------------------------- Captured Out ---------------------------------
-/home/runner/work/ocr-book/ocr-book/tests/failed_split_line_line_algo_2.png
-
-</system-out><system-err>--------------------------------- Captured Err ---------------------------------
-
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139801380992768) ~~~~~~~~~~~~~~~~~~~~~
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
-    reply.run()
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
-    self._result = func(*args, **kwargs)
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
-    msg = Message.from_io(io)
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 432, in from_io
-    header = io.read(9)  # type 1, channel 4, payload 4
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
-    data = self._read(numbytes - len(buf))
-
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_wave_split_line_2_png" time="1.097"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_wave_split_line_2_png() -&gt; None:
-        """Need to relax tolerance to have the split line by wave algo."""
-&gt;       treat_file(
-            MockDisableSeparatePage(MAX_VAL),
-            get_absolute_from_current_path(
-                __file__, "wrong_wave_split_line_2.png"
-            ),
-            {
-                ConstString.separation_double_page_angle(): (
-                    "range",
-                    Angle.deg(90.77),
-                    Angle.deg(90.78),
-                ),
-                ConstString.separation_double_page_y(): ("range", 2490, 2490),
-                ConstString.page_rotation(1): (
-                    "range",
-                    Angle.deg(0.39),
-                    Angle.deg(0.41),
-                ),
-                ConstString.page_rotation(2): (
-                    "range",
-                    Angle.deg(1.79),
-                    Angle.deg(1.81),
-                ),
-                ConstString.image_crop(1, "x1"): ("range", 224, 224),
-                ConstString.image_crop(1, "y1"): ("range", 147, 147),
-                ConstString.image_crop(1, "x2"): ("range", 2337, 2337),
-                ConstString.image_crop(1, "y2"): ("range", 3355, 3355),
-                ConstString.image_crop(2, "x1"): ("range", 72, 107),
-                ConstString.image_crop(2, "y1"): ("range", 197, 197),
-                ConstString.image_crop(2, "x2"): ("range", 2194, 2229),
-                ConstString.image_crop(2, "y2"): ("range", 3396, 3396),
-                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
-                ConstString.image_border(1, 1): ("range", 126, 137),
-                ConstString.image_border(1, 2): ("range", 142, 153),
-                ConstString.image_border(1, 3): ("range", 173, 173),
-                ConstString.image_border(1, 4): ("range", 173, 173),
-                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
-                ConstString.image_border(2, 1): ("range", 167, 171),
-                ConstString.image_border(2, 2): ("range", 116, 121),
-                ConstString.image_border(2, 3): ("range", 169, 169),
-                ConstString.image_border(2, 4): ("range", 169, 169),
-            },
-        )
-
-tests/test_images.py:887: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-script.py:372: in treat_file
-    sep.treat_file(
-script.py:298: in treat_file
-    image1, image2 = self.split_two_waves(
-tests/mock_separate_page.py:23: in split_two_waves
-    return super().split_two_waves(image, parameters, debug)
-script.py:36: in split_two_waves
-    self.__images_found = page.find_images.find_images(
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:149: in find_images
-    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:89: in remove_black_border_in_image
-    debug.image(
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-self = &lt;debug_image.DebugImage object at 0x7f58a1d2d3a0&gt;
-img = array([[[  0,   0, 255],
-        [  0,   0, 255],
-        [  0,   0, 255],
-        ...,
-        [  0,   0, 255],
-     ...[  0,   0, 255],
-        ...,
-        [  0,   0, 255],
-        [  0,   0, 255],
-        [  0,   0, 255]]], dtype=uint8)
-level = &lt;Level.DEBUG: 1&gt;
-
-    def image(self, img: np.ndarray, level: Level) -&gt; None:
-        if level &gt;= self.__level:
-            name = self.name()
-            self.__next()
-            self.__next_when_dec[0 : self.__sub_level] = [
-                True for x in range(self.__sub_level)
-            ]
-&gt;           if not cv2.imwrite(name, img):
-E           Failed: Timeout &gt;1.0s
-
-debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
-
---------------------------------- Captured Out ---------------------------------
-/home/runner/work/ocr-book/ocr-book/tests/wrong_wave_split_line_2.png
-
-</system-out><system-err>--------------------------------- Captured Err ---------------------------------
-
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140019465221888) ~~~~~~~~~~~~~~~~~~~~~
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
-    reply.run()
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
-    self._result = func(*args, **kwargs)
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
-    msg = Message.from_io(io)
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 432, in from_io
-    header = io.read(9)  # type 1, channel 4, payload 4
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
-    data = self._read(numbytes - len(buf))
-
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_wave_split_line_3_png" time="1.042"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_wave_split_line_3_png() -&gt; None:
-        """Need to relax tolerance to have the split line by wave algo."""
-&gt;       treat_file(
-            MockDisableSeparatePage(MAX_VAL),
-            get_absolute_from_current_path(
-                __file__, "wrong_wave_split_line_3.png"
-            ),
-            {
-                ConstString.separation_double_page_angle(): (
-                    "range",
-                    Angle.deg(90.03),
-                    Angle.deg(90.09),
-                ),
-                ConstString.separation_double_page_y(): ("range", 2510, 2514),
-                ConstString.page_rotation(1): (
-                    "range",
-                    Angle.deg(0.04),
-                    Angle.deg(0.11),
-                ),
-                ConstString.page_rotation(2): (
-                    "range",
-                    Angle.deg(0.29),
-                    Angle.deg(0.36),
-                ),
-                ConstString.image_crop(1, "x1"): ("range", 272, 273),
-                ConstString.image_crop(1, "y1"): ("range", 219, 220),
-                ConstString.image_crop(1, "x2"): ("range", 2383, 2383),
-                ConstString.image_crop(1, "y2"): ("range", 3423, 3423),
-                ConstString.image_crop(2, "x1"): ("range", 114, 119),
-                ConstString.image_crop(2, "y1"): ("range", 226, 226),
-                ConstString.image_crop(2, "x2"): ("range", 2235, 2240),
-                ConstString.image_crop(2, "y2"): ("range", 3413, 3414),
-                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
-                ConstString.image_border(1, 1): ("range", 190, 202),
-                ConstString.image_border(1, 2): ("range", 81, 93),
-                ConstString.image_border(1, 3): ("range", 174, 175),
-                ConstString.image_border(1, 4): ("range", 174, 175),
-                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
-                ConstString.image_border(2, 1): ("range", 190, 207),
-                ConstString.image_border(2, 2): ("range", 92, 110),
-                ConstString.image_border(2, 3): ("range", 168, 169),
-                ConstString.image_border(2, 4): ("range", 168, 169),
-            },
-        )
-
-tests/test_images.py:933: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-script.py:372: in treat_file
-    sep.treat_file(
-script.py:298: in treat_file
-    image1, image2 = self.split_two_waves(
-tests/mock_separate_page.py:23: in split_two_waves
-    return super().split_two_waves(image, parameters, debug)
-script.py:36: in split_two_waves
-    self.__images_found = page.find_images.find_images(
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:149: in find_images
-    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:89: in remove_black_border_in_image
-    debug.image(
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-self = &lt;debug_image.DebugImage object at 0x7f25db19e3a0&gt;
-img = array([[[  0,   0, 255],
-        [  0,   0, 255],
-        [  0,   0, 255],
-        ...,
-        [  0,   0, 255],
-     ...[255, 255, 255],
-        ...,
-        [  0,   0, 255],
-        [  0,   0, 255],
-        [  0,   0, 255]]], dtype=uint8)
-level = &lt;Level.DEBUG: 1&gt;
-
-    def image(self, img: np.ndarray, level: Level) -&gt; None:
-        if level &gt;= self.__level:
-            name = self.name()
-            self.__next()
-            self.__next_when_dec[0 : self.__sub_level] = [
-                True for x in range(self.__sub_level)
-            ]
-&gt;           if not cv2.imwrite(name, img):
-E           Failed: Timeout &gt;1.0s
-
-debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
-
---------------------------------- Captured Out ---------------------------------
-/home/runner/work/ocr-book/ocr-book/tests/wrong_wave_split_line_3.png
-
-</system-out><system-err>--------------------------------- Captured Err ---------------------------------
-
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139801380992768) ~~~~~~~~~~~~~~~~~~~~~
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
-    reply.run()
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
-    self._result = func(*args, **kwargs)
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
-    msg = Message.from_io(io)
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 432, in from_io
-    header = io.read(9)  # type 1, channel 4, payload 4
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
-    data = self._read(numbytes - len(buf))
-
-</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_wave_algo_png" time="1.268"><failure message="Failed: Timeout &gt;1.0s">def test_no_split_line_wave_algo_png() -&gt; None:
-        """Failed to detect wave due to image."""
-&gt;       treat_file(
-            MockDisableSeparatePage(MAX_VAL),
-            get_absolute_from_current_path(
-                __file__, "no_split_line_wave_algo.png"
-            ),
-            {
-                ConstString.separation_double_page_angle(): (
-                    "range",
-                    Angle.deg(89.84),
-                    Angle.deg(89.94),
-                ),
-                ConstString.separation_double_page_y(): ("range", 2475, 2484),
-                ConstString.page_rotation(1): (
-                    "range",
-                    Angle.deg(-0.06),
-                    Angle.deg(0.01),
-                ),
-                ConstString.page_rotation(2): (
-                    "range",
-                    Angle.deg(-0.56),
-                    Angle.deg(-0.49),
-                ),
-                ConstString.image_crop(1, "x1"): ("range", 97, 101),
-                ConstString.image_crop(1, "y1"): ("range", 27, 79),
-                ConstString.image_crop(1, "x2"): ("range", 2477, 2486),
-                ConstString.image_crop(1, "y2"): ("range", 3505, 3505),
-                ConstString.image_crop(2, "x1"): ("range", 163, 171),
-                ConstString.image_crop(2, "y1"): ("range", 266, 266),
-                ConstString.image_crop(2, "x2"): ("range", 2238, 2248),
-                ConstString.image_crop(2, "y2"): ("range", 3381, 3382),
-                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
-                ConstString.image_border(1, 1): ("range", 15, 41),
-                ConstString.image_border(1, 2): ("range", 15, 41),
-                ConstString.image_border(1, 3): ("range", 46, 52),
-                ConstString.image_border(1, 4): ("range", 46, 52),
-                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
-                ConstString.image_border(2, 1): ("range", 254, 258),
-                ConstString.image_border(2, 2): ("range", 114, 118),
-                ConstString.image_border(2, 3): ("range", 191, 198),
-                ConstString.image_border(2, 4): ("range", 191, 198),
-            },
-        )
-
-tests/test_images.py:979: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-script.py:372: in treat_file
-    sep.treat_file(
-script.py:298: in treat_file
-    image1, image2 = self.split_two_waves(
-tests/mock_separate_page.py:23: in split_two_waves
-    return super().split_two_waves(image, parameters, debug)
-script.py:36: in split_two_waves
-    self.__images_found = page.find_images.find_images(
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:149: in find_images
-    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:89: in remove_black_border_in_image
-    debug.image(
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-self = &lt;debug_image.DebugImage object at 0x7f58a1d2d3a0&gt;
-img = array([[[  0,   0, 255],
-        [  0,   0, 255],
-        [  0,   0, 255],
-        ...,
-        [  0,   0, 255],
-     ...[  0,   0, 255],
-        ...,
-        [  0,   0, 255],
-        [  0,   0, 255],
-        [  0,   0, 255]]], dtype=uint8)
-level = &lt;Level.DEBUG: 1&gt;
-
-    def image(self, img: np.ndarray, level: Level) -&gt; None:
-        if level &gt;= self.__level:
-            name = self.name()
-            self.__next()
-            self.__next_when_dec[0 : self.__sub_level] = [
-                True for x in range(self.__sub_level)
-            ]
-&gt;           if not cv2.imwrite(name, img):
-E           Failed: Timeout &gt;1.0s
-
-debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
-
---------------------------------- Captured Out ---------------------------------
-/home/runner/work/ocr-book/ocr-book/tests/no_split_line_wave_algo.png
-
-</system-out><system-err>--------------------------------- Captured Err ---------------------------------
-
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140019465221888) ~~~~~~~~~~~~~~~~~~~~~
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
-    reply.run()
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
-    self._result = func(*args, **kwargs)
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
-    msg = Message.from_io(io)
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 432, in from_io
-    header = io.read(9)  # type 1, channel 4, payload 4
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
-    data = self._read(numbytes - len(buf))
-
-</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_wave_algo_2_png" time="1.080"><failure message="Failed: Timeout &gt;1.0s">def test_no_split_line_wave_algo_2_png() -&gt; None:
-        """Failed to detect wave due to missing wave at the bottom."""
-&gt;       treat_file(
-            MockDisableSeparatePage(MAX_VAL),
-            get_absolute_from_current_path(
-                __file__, "no_split_line_wave_algo_2.png"
-            ),
-            {
-                ConstString.separation_double_page_angle(): (
-                    "range",
-                    Angle.deg(90.47),
-                    Angle.deg(91.22),
-                ),
-                ConstString.separation_double_page_y(): ("range", 2478, 2488),
-                ConstString.page_rotation(1): (
-                    "range",
-                    Angle.deg(1.09),
-                    Angle.deg(1.16),
-                ),
-                ConstString.page_rotation(2): (
-                    "range",
-                    Angle.deg(0.19),
-                    Angle.deg(0.21),
-                ),
-                ConstString.image_crop(1, "x1"): ("range", 266, 266),
-                ConstString.image_crop(1, "y1"): ("range", 209, 210),
-                ConstString.image_crop(1, "x2"): ("range", 2342, 2342),
-                ConstString.image_crop(1, "y2"): ("range", 3413, 3413),
-                ConstString.image_crop(2, "x1"): ("range", 163, 199),
-                ConstString.image_crop(2, "y1"): ("range", 241, 241),
-                ConstString.image_crop(2, "x2"): ("range", 2246, 2282),
-                ConstString.image_crop(2, "y2"): ("range", 3433, 3433),
-                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
-                ConstString.image_border(1, 1): ("range", 180, 194),
-                ConstString.image_border(1, 2): ("range", 90, 103),
-                ConstString.image_border(1, 3): ("range", 192, 192),
-                ConstString.image_border(1, 4): ("range", 192, 192),
-                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
-                ConstString.image_border(2, 1): ("range", 209, 226),
-                ConstString.image_border(2, 2): ("range", 69, 86),
-                ConstString.image_border(2, 3): ("range", 188, 188),
-                ConstString.image_border(2, 4): ("range", 188, 188),
-            },
-        )
-
-tests/test_images.py:1025: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-script.py:372: in treat_file
-    sep.treat_file(
-script.py:298: in treat_file
-    image1, image2 = self.split_two_waves(
-tests/mock_separate_page.py:23: in split_two_waves
-    return super().split_two_waves(image, parameters, debug)
-script.py:36: in split_two_waves
-    self.__images_found = page.find_images.find_images(
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:149: in find_images
-    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:89: in remove_black_border_in_image
-    debug.image(
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-self = &lt;debug_image.DebugImage object at 0x7f25db19e3a0&gt;
-img = array([[[  0,   0, 255],
-        [  0,   0, 255],
-        [  0,   0, 255],
-        ...,
-        [  0,   0, 255],
-     ...[255, 255, 255],
-        ...,
-        [  0,   0, 255],
-        [  0,   0, 255],
-        [  0,   0, 255]]], dtype=uint8)
-level = &lt;Level.DEBUG: 1&gt;
-
-    def image(self, img: np.ndarray, level: Level) -&gt; None:
-        if level &gt;= self.__level:
-            name = self.name()
-            self.__next()
-            self.__next_when_dec[0 : self.__sub_level] = [
-                True for x in range(self.__sub_level)
-            ]
-&gt;           if not cv2.imwrite(name, img):
-E           Failed: Timeout &gt;1.0s
-
-debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
-
---------------------------------- Captured Out ---------------------------------
-/home/runner/work/ocr-book/ocr-book/tests/no_split_line_wave_algo_2.png
-
-</system-out><system-err>--------------------------------- Captured Err ---------------------------------
-
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139801380992768) ~~~~~~~~~~~~~~~~~~~~~
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
-    reply.run()
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
-    self._result = func(*args, **kwargs)
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
-    msg = Message.from_io(io)
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 432, in from_io
-    header = io.read(9)  # type 1, channel 4, payload 4
-  File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
-    data = self._read(numbytes - len(buf))
-
-</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_few_2_png" time="1.023"><failure message="Failed: Timeout &gt;1.0s">def test_crop_too_few_2_png() -&gt; None:
-        """Use different area on the left and the right to detect
-        black noise."""
-&gt;       treat_file(
-            MockDisableSeparatePage(MAX_VAL),
-            get_absolute_from_current_path(__file__, "crop_too_few_2.png"),
-            {
-                ConstString.separation_double_page_angle(): (
-                    "range",
-                    Angle.deg(90.25),
-                    Angle.deg(90.35),
-                ),
-                ConstString.separation_double_page_y(): ("range", 2531, 2534),
-                ConstString.page_rotation(1): (
-                    "range",
-                    Angle.deg(1.19),
-                    Angle.deg(1.21),
-                ),
-                ConstString.page_rotation(2): (
-                    "range",
-                    Angle.deg(-0.11),
-                    Angle.deg(-0.04),
-                ),
-                ConstString.image_crop(1, "x1"): ("range", 287, 287),
-                ConstString.image_crop(1, "y1"): ("range", 165, 165),
-                ConstString.image_crop(1, "x2"): ("range", 2398, 2398),
-                ConstString.image_crop(1, "y2"): ("range", 3368, 3368),
-                ConstString.image_crop(2, "x1"): ("range", 145, 151),
-                ConstString.image_crop(2, "y1"): ("range", 175, 189),
-                ConstString.image_crop(2, "x2"): ("range", 2271, 2275),
-                ConstString.image_crop(2, "y2"): ("range", 3373, 3386),
-                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
-                ConstString.image_border(1, 1): ("range", 139, 157),
-                ConstString.image_border(1, 2): ("range", 127, 145),
-                ConstString.image_border(1, 3): ("range", 174, 174),
-                ConstString.image_border(1, 4): ("range", 174, 174),
-                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
-                ConstString.image_border(2, 1): ("range", 175, 181),
-                ConstString.image_border(2, 2): ("range", 109, 114),
-                ConstString.image_border(2, 3): ("range", 167, 168),
-                ConstString.image_border(2, 4): ("range", 167, 168),
-            },
-        )
-
-tests/test_images.py:1072: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-script.py:372: in treat_file
-    sep.treat_file(
-script.py:298: in treat_file
-    image1, image2 = self.split_two_waves(
-tests/mock_separate_page.py:23: in split_two_waves
-    return super().split_two_waves(image, parameters, debug)
-script.py:36: in split_two_waves
-    self.__images_found = page.find_images.find_images(
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:149: in find_images
-    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:89: in remove_black_border_in_image
-    debug.image(
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-self = &lt;debug_image.DebugImage object at 0x7f58a1d2d3a0&gt;
-img = array([[[  0,   0, 255],
-        [  0,   0, 255],
-        [  0,   0, 255],
-        ...,
-        [  0,   0, 255],
-     ...[  0,   0, 255],
-        ...,
-        [  0,   0, 255],
-        [  0,   0, 255],
-        [  0,   0, 255]]], dtype=uint8)
-level = &lt;Level.DEBUG: 1&gt;
-
-    def image(self, img: np.ndarray, level: Level) -&gt; None:
-        if level &gt;= self.__level:
-            name = self.name()
-            self.__next()
-            self.__next_when_dec[0 : self.__sub_level] = [
-                True for x in range(self.__sub_level)
-            ]
-&gt;           if not cv2.imwrite(name, img):
-E           Failed: Timeout &gt;1.0s
-
-debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
-
---------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/crop_too_few_2.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140019465221888) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140665456289536) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -3421,7 +3404,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_failed_detect_rectangle_png" time="1.129"><failure message="Failed: Timeout &gt;1.0s">def test_failed_detect_rectangle_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_failed_detect_rectangle_png" time="1.106"><failure message="Failed: Timeout &gt;1.0s">def test_failed_detect_rectangle_png() -&gt; None:
         """Before, approxPolyDP algo was used to detect shape.
     
         But, due to noise on the edge with background other pages,
@@ -3490,7 +3473,7 @@ page/find_images.py:89: in remove_black_border_in_image
     debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7f25db19e3a0&gt;
+self = &lt;debug_image.DebugImage object at 0x7f801dbf0340&gt;
 img = array([[[  0,   0, 255],
         [  0,   0, 255],
         [  0,   0, 255],
@@ -3520,7 +3503,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139801380992768) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140189047998208) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -3532,7 +3515,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_single_page_png" time="1.042"><failure message="Failed: Timeout &gt;1.0s">def test_single_page_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_single_page_png" time="1.014"><failure message="Failed: Timeout &gt;1.0s">def test_single_page_png() -&gt; None:
         """Detect that the scan is single page."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -3587,36 +3570,48 @@ script.py:36: in split_two_waves
     self.__images_found = page.find_images.find_images(
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:146: in find_images
-    debug.image(blurimg_bc, DebugImage.Level.DEBUG)
+page/find_images.py:145: in find_images
+    blurimg_bc = cv2ext.erode_and_dilate(gray, (xxx, xxx), xxx)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7f58a1d2d3a0&gt;
-img = array([[122, 121, 121, ...,  19,  19,  18],
-       [127, 126, 126, ...,  19,  19,  18],
-       [131, 131, 131, ...,  1...,   4,   4,   4],
-       [156, 156, 156, ...,   4,   4,   4],
-       [156, 156, 156, ...,   4,   4,   4]], dtype=uint8)
-level = &lt;Level.DEBUG: 1&gt;
+image = array([[122, 121, 121, ...,  24,  23,  22],
+       [127, 126, 126, ...,  23,  22,  22],
+       [131, 131, 131, ...,  2...,  12,  13,  13],
+       [158, 158, 157, ...,  12,  13,  13],
+       [158, 158, 157, ...,  12,  13,  13]], dtype=uint8)
+size = (7, 7), iterations = 7, reverse = False
 
-    def image(self, img: np.ndarray, level: Level) -&gt; None:
-        if level &gt;= self.__level:
-            name = self.name()
-            self.__next()
-            self.__next_when_dec[0 : self.__sub_level] = [
-                True for x in range(self.__sub_level)
-            ]
-&gt;           if not cv2.imwrite(name, img):
-E           Failed: Timeout &gt;1.0s
+    def erode_and_dilate(
+        image: np.ndarray,
+        size: Tuple[int, int],
+        iterations: int,
+        reverse: bool = False,
+    ) -&gt; np.ndarray:
+        start = int(reverse)
+        img = image
+        for i in range(2):
+            if (i + start) % 2 == 0:
+                img = cv2.erode(
+                    img,
+                    cv2.getStructuringElement(cv2.MORPH_ELLIPSE, size),
+                    iterations=iterations,
+                )
+            else:
+&gt;               img = cv2.dilate(
+                    img,
+                    cv2.getStructuringElement(cv2.MORPH_ELLIPSE, size),
+                    iterations=iterations,
+                )
+E               Failed: Timeout &gt;1.0s
 
-debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+cv2ext.py:846: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/single_page.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140019465221888) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140665456289536) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -3628,7 +3623,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_wave_algo_3_png" time="1.008"><failure message="Failed: Timeout &gt;1.0s">def test_no_split_line_wave_algo_3_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_wave_algo_3_png" time="1.031"><failure message="Failed: Timeout &gt;1.0s">def test_no_split_line_wave_algo_3_png() -&gt; None:
         """Failed to detect wave due to missing wave at the bottom."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -3685,11 +3680,11 @@ script.py:36: in split_two_waves
     self.__images_found = page.find_images.find_images(
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:155: in find_images
-    debug.image(blurimg_bc2, DebugImage.Level.DEBUG)
+page/find_images.py:168: in find_images
+    debug.image(gray_bordered, DebugImage.Level.DEBUG)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7f25db19e3a0&gt;
+self = &lt;debug_image.DebugImage object at 0x7f801dbf0340&gt;
 img = array([[255, 255, 255, ..., 255, 255, 255],
        [255, 255, 255, ..., 255, 255, 255],
        [255, 255, 255, ..., 25..., 255, 255, 255],
@@ -3714,7 +3709,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139801380992768) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140189047998208) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -3726,7 +3721,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_4_png" time="1.006"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_split_line_4_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_4_png" time="1.024"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_split_line_4_png() -&gt; None:
         """Detect wrong split line with line algo."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -3783,38 +3778,81 @@ script.py:36: in split_two_waves
     self.__images_found = page.find_images.find_images(
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:178: in find_images
-    debug.image(threshold, DebugImage.Level.DEBUG)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7f58a1d2d3a0&gt;
-img = array([[0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       ...,
-       [0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0]], dtype=uint8)
-level = &lt;Level.DEBUG: 1&gt;
+image = array([[255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 25..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
+param = &lt;page.find_images.FindImageParameters object at 0x7fef09e32940&gt;
+page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7fef09fe3370&gt;
 
-    def image(self, img: np.ndarray, level: Level) -&gt; None:
-        if level &gt;= self.__level:
-            name = self.name()
-            self.__next()
-            self.__next_when_dec[0 : self.__sub_level] = [
-                True for x in range(self.__sub_level)
-            ]
-&gt;           if not cv2.imwrite(name, img):
-E           Failed: Timeout &gt;1.0s
+    @inc_debug
+    def find_images(
+        image: np.ndarray,
+        param: FindImageParameters,
+        page_angle: Optional[Angle],
+        debug: DebugImage,
+    ) -&gt; np.ndarray:
+        __internal_border__ = 20
+        xxx = 7
+    
+        debug.image(image, DebugImage.Level.DEBUG)
+        gray = cv2ext.force_image_to_be_grayscale(image, (xxx, xxx))
+        debug.image(gray, DebugImage.Level.DEBUG)
+        blurimg_bc = cv2ext.erode_and_dilate(gray, (xxx, xxx), xxx)
+        debug.image(blurimg_bc, DebugImage.Level.DEBUG)
+    
+        if page_angle is not None:
+            mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+            image_no_border = cv2ext.apply_mask(image, mask)
+            debug.image(image_no_border, DebugImage.Level.DEBUG)
+            gray2 = cv2ext.force_image_to_be_grayscale(image_no_border, (xxx, xxx))
+            debug.image(gray2, DebugImage.Level.DEBUG)
+            blurimg_bc2 = cv2ext.erode_and_dilate(gray2, (xxx, xxx), xxx, True)
+            debug.image(blurimg_bc2, DebugImage.Level.DEBUG)
+            gray_no_border = blurimg_bc2
+        else:
+            gray_no_border = blurimg_bc
+        gray_bordered = cv2.copyMakeBorder(
+            gray_no_border,
+            __internal_border__,
+            __internal_border__,
+            __internal_border__,
+            __internal_border__,
+            cv2.BORDER_CONSTANT,
+            value=[255],
+        )
+        debug.image(gray_bordered, DebugImage.Level.DEBUG)
+        dilated = cv2.dilate(
+            gray_bordered,
+            cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (xxx, xxx)),
+        )
+        debug.image(dilated, DebugImage.Level.DEBUG)
+        thresholdi = cv2ext.threshold_from_gaussian_histogram_white(dilated)
+        _, threshold = cv2.threshold(
+            dilated, thresholdi, 255, cv2.THRESH_BINARY_INV
+        )
+        debug.image(threshold, DebugImage.Level.DEBUG)
+    
+&gt;       morpho1 = cv2.morphologyEx(
+            threshold,
+            cv2.MORPH_CLOSE,
+            cv2.getStructuringElement(
+                cv2.MORPH_ELLIPSE, param.kernel_morphology_size
+            ),
+        )
+E       Failed: Timeout &gt;1.0s
 
-debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+page/find_images.py:180: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/wrong_split_line_4.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140019465221888) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140665456289536) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
@@ -3826,7 +3864,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_failed_split_line_line_algo_3_png" time="1.023"><failure message="Failed: Timeout &gt;1.0s">def test_failed_split_line_line_algo_3_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_failed_split_line_line_algo_3_png" time="1.012"><failure message="Failed: Timeout &gt;1.0s">def test_failed_split_line_line_algo_3_png() -&gt; None:
         """get_rectangle_from_contour_hough_lines fails
         because fewer than 4 lines are detected."""
 &gt;       treat_file(
@@ -3884,38 +3922,81 @@ script.py:36: in split_two_waves
     self.__images_found = page.find_images.find_images(
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:187: in find_images
-    debug.image(morpho1, DebugImage.Level.DEBUG)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7f25db19e3a0&gt;
-img = array([[0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       ...,
-       [0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0]], dtype=uint8)
-level = &lt;Level.DEBUG: 1&gt;
+image = array([[255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 25..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
+param = &lt;page.find_images.FindImageParameters object at 0x7f801dd488e0&gt;
+page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7f801dbf0340&gt;
 
-    def image(self, img: np.ndarray, level: Level) -&gt; None:
-        if level &gt;= self.__level:
-            name = self.name()
-            self.__next()
-            self.__next_when_dec[0 : self.__sub_level] = [
-                True for x in range(self.__sub_level)
-            ]
-&gt;           if not cv2.imwrite(name, img):
-E           Failed: Timeout &gt;1.0s
+    @inc_debug
+    def find_images(
+        image: np.ndarray,
+        param: FindImageParameters,
+        page_angle: Optional[Angle],
+        debug: DebugImage,
+    ) -&gt; np.ndarray:
+        __internal_border__ = 20
+        xxx = 7
+    
+        debug.image(image, DebugImage.Level.DEBUG)
+        gray = cv2ext.force_image_to_be_grayscale(image, (xxx, xxx))
+        debug.image(gray, DebugImage.Level.DEBUG)
+        blurimg_bc = cv2ext.erode_and_dilate(gray, (xxx, xxx), xxx)
+        debug.image(blurimg_bc, DebugImage.Level.DEBUG)
+    
+        if page_angle is not None:
+            mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+            image_no_border = cv2ext.apply_mask(image, mask)
+            debug.image(image_no_border, DebugImage.Level.DEBUG)
+            gray2 = cv2ext.force_image_to_be_grayscale(image_no_border, (xxx, xxx))
+            debug.image(gray2, DebugImage.Level.DEBUG)
+            blurimg_bc2 = cv2ext.erode_and_dilate(gray2, (xxx, xxx), xxx, True)
+            debug.image(blurimg_bc2, DebugImage.Level.DEBUG)
+            gray_no_border = blurimg_bc2
+        else:
+            gray_no_border = blurimg_bc
+        gray_bordered = cv2.copyMakeBorder(
+            gray_no_border,
+            __internal_border__,
+            __internal_border__,
+            __internal_border__,
+            __internal_border__,
+            cv2.BORDER_CONSTANT,
+            value=[255],
+        )
+        debug.image(gray_bordered, DebugImage.Level.DEBUG)
+        dilated = cv2.dilate(
+            gray_bordered,
+            cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (xxx, xxx)),
+        )
+        debug.image(dilated, DebugImage.Level.DEBUG)
+        thresholdi = cv2ext.threshold_from_gaussian_histogram_white(dilated)
+        _, threshold = cv2.threshold(
+            dilated, thresholdi, 255, cv2.THRESH_BINARY_INV
+        )
+        debug.image(threshold, DebugImage.Level.DEBUG)
+    
+&gt;       morpho1 = cv2.morphologyEx(
+            threshold,
+            cv2.MORPH_CLOSE,
+            cv2.getStructuringElement(
+                cv2.MORPH_ELLIPSE, param.kernel_morphology_size
+            ),
+        )
+E       Failed: Timeout &gt;1.0s
 
-debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+page/find_images.py:180: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/failed_split_line_line_algo_3.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139801380992768) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140189047998208) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/execnet/gateway_base.py", line 220, in run
