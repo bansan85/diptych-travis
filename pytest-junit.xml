@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="35" skipped="0" tests="36" time="21.790" timestamp="2020-12-21T21:52:19.253296" hostname="fv-az92-196"><testcase classname="tests.test_features" name="test_disabled_enable_debug" time="1.039"><failure message="Failed: Timeout &gt;1.0s">def test_disabled_enable_debug() -&gt; None:
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="35" skipped="0" tests="36" time="22.709" timestamp="2020-12-21T21:57:50.525898" hostname="fv-az67-942"><testcase classname="tests.test_features" name="test_disabled_enable_debug" time="1.005"><failure message="Failed: Timeout &gt;1.0s">def test_disabled_enable_debug() -&gt; None:
         """Check that enable_debug=False works."""
         tc.assertTrue(
             fsext.is_file_exists(
@@ -25,89 +25,32 @@ script.py:36: in split_two_waves
     self.__images_found = page.find_images.find_images(
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
+page/find_images.py:152: in find_images
+    gray2 = cv2ext.force_image_to_be_grayscale(image_no_border, (xxx, xxx))
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-image = array([[255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   ...,   0,   0,   0],
-       [  0,   0,   0, ...,   0,   0,   0],
-       [  0,   0,   0, ...,   0,   0,   0]], dtype=uint8)
-param = &lt;page.find_images.FindImageParameters object at 0x7fe83f78e0d0&gt;
-page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7fe83f79e370&gt;
+image = array([[255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 25..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
+blur_kernel_size = (7, 7)
 
-    @inc_debug
-    def find_images(
-        image: np.ndarray,
-        param: FindImageParameters,
-        page_angle: Optional[Angle],
-        debug: DebugImage,
+    def force_image_to_be_grayscale(
+        image: np.ndarray, blur_kernel_size: Tuple[int, int]
     ) -&gt; np.ndarray:
-        __internal_border__ = 20
-        xxx = 7
-    
-        debug.image(image, DebugImage.Level.DEBUG)
-        gray = cv2ext.force_image_to_be_grayscale(image, (xxx, xxx))
-        debug.image(gray, DebugImage.Level.DEBUG)
-        blurimg_bc = cv2ext.erode_and_dilate(gray, (xxx, xxx), xxx)
-        debug.image(blurimg_bc, DebugImage.Level.DEBUG)
-    
-        if page_angle is not None:
-            mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
-            image_no_border = cv2ext.apply_mask(image, mask)
-            debug.image(image_no_border, DebugImage.Level.DEBUG)
-            gray2 = cv2ext.force_image_to_be_grayscale(image_no_border, (xxx, xxx))
-            debug.image(gray2, DebugImage.Level.DEBUG)
-            blurimg_bc2 = cv2ext.erode_and_dilate(gray2, (xxx, xxx), xxx, True)
-            debug.image(blurimg_bc2, DebugImage.Level.DEBUG)
-            gray_no_border = blurimg_bc2
-        else:
-            gray_no_border = blurimg_bc
-        gray_bordered = cv2.copyMakeBorder(
-            gray_no_border,
-            __internal_border__,
-            __internal_border__,
-            __internal_border__,
-            __internal_border__,
-            cv2.BORDER_CONSTANT,
-            value=[255],
-        )
-        debug.image(gray_bordered, DebugImage.Level.DEBUG)
-        dilated = cv2.dilate(
-            gray_bordered,
-            cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (xxx, xxx)),
-        )
-        debug.image(dilated, DebugImage.Level.DEBUG)
-        thresholdi = cv2ext.threshold_from_gaussian_histogram_white(dilated)
-        _, threshold = cv2.threshold(
-            dilated, thresholdi, 255, cv2.THRESH_BINARY_INV
-        )
-        debug.image(threshold, DebugImage.Level.DEBUG)
-    
-        morpho1 = cv2.morphologyEx(
-            threshold,
-            cv2.MORPH_CLOSE,
-            cv2.getStructuringElement(
-                cv2.MORPH_ELLIPSE, param.kernel_morphology_size
-            ),
-        )
-        debug.image(morpho1, DebugImage.Level.DEBUG)
-&gt;       morpho2 = cv2.morphologyEx(
-            morpho1,
-            cv2.MORPH_OPEN,
-            cv2.getStructuringElement(
-                cv2.MORPH_ELLIPSE, param.kernel_morphology_size
-            ),
-        )
-E       Failed: Timeout &gt;1.0s
+        if number_channels(image) == 1:
+&gt;           one_channel_image = image.copy()
+E           Failed: Timeout &gt;1.0s
 
-page/find_images.py:188: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+cv2ext.py:511: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/0001_debug.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140636115760896) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139797971138304) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -119,14 +62,14 @@ page/find_images.py:188: Failed</failure><system-out>---------------------------
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_0" time="0.046"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_0" time="0.050"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/0001_0.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_2" time="1.009"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_2() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_2" time="1.081"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_2() -&gt; None:
         """Check that stop_at 2 works."""
         tc.assertTrue(
             fsext.is_file_exists(
@@ -156,94 +99,48 @@ script.py:36: in split_two_waves
     self.__images_found = page.find_images.find_images(
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
+page/find_images.py:154: in find_images
+    blurimg_bc2 = cv2ext.erode_and_dilate(gray2, (xxx, xxx), xxx, True)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-image = array([[255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   ...,   0,   0,   0],
-       [  0,   0,   0, ...,   0,   0,   0],
-       [  0,   0,   0, ...,   0,   0,   0]], dtype=uint8)
-param = &lt;page.find_images.FindImageParameters object at 0x7feae592c640&gt;
-page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7feadab3b910&gt;
+image = array([[255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 25..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
+size = (7, 7), iterations = 7, reverse = True
 
-    @inc_debug
-    def find_images(
+    def erode_and_dilate(
         image: np.ndarray,
-        param: FindImageParameters,
-        page_angle: Optional[Angle],
-        debug: DebugImage,
+        size: Tuple[int, int],
+        iterations: int,
+        reverse: bool = False,
     ) -&gt; np.ndarray:
-        __internal_border__ = 20
-        xxx = 7
-    
-        debug.image(image, DebugImage.Level.DEBUG)
-        gray = cv2ext.force_image_to_be_grayscale(image, (xxx, xxx))
-        debug.image(gray, DebugImage.Level.DEBUG)
-        blurimg_bc = cv2ext.erode_and_dilate(gray, (xxx, xxx), xxx)
-        debug.image(blurimg_bc, DebugImage.Level.DEBUG)
-    
-        if page_angle is not None:
-            mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
-            image_no_border = cv2ext.apply_mask(image, mask)
-            debug.image(image_no_border, DebugImage.Level.DEBUG)
-            gray2 = cv2ext.force_image_to_be_grayscale(image_no_border, (xxx, xxx))
-            debug.image(gray2, DebugImage.Level.DEBUG)
-            blurimg_bc2 = cv2ext.erode_and_dilate(gray2, (xxx, xxx), xxx, True)
-            debug.image(blurimg_bc2, DebugImage.Level.DEBUG)
-            gray_no_border = blurimg_bc2
-        else:
-            gray_no_border = blurimg_bc
-        gray_bordered = cv2.copyMakeBorder(
-            gray_no_border,
-            __internal_border__,
-            __internal_border__,
-            __internal_border__,
-            __internal_border__,
-            cv2.BORDER_CONSTANT,
-            value=[255],
-        )
-        debug.image(gray_bordered, DebugImage.Level.DEBUG)
-        dilated = cv2.dilate(
-            gray_bordered,
-            cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (xxx, xxx)),
-        )
-        debug.image(dilated, DebugImage.Level.DEBUG)
-        thresholdi = cv2ext.threshold_from_gaussian_histogram_white(dilated)
-        _, threshold = cv2.threshold(
-            dilated, thresholdi, 255, cv2.THRESH_BINARY_INV
-        )
-        debug.image(threshold, DebugImage.Level.DEBUG)
-    
-        morpho1 = cv2.morphologyEx(
-            threshold,
-            cv2.MORPH_CLOSE,
-            cv2.getStructuringElement(
-                cv2.MORPH_ELLIPSE, param.kernel_morphology_size
-            ),
-        )
-        debug.image(morpho1, DebugImage.Level.DEBUG)
-        morpho2 = cv2.morphologyEx(
-            morpho1,
-            cv2.MORPH_OPEN,
-            cv2.getStructuringElement(
-                cv2.MORPH_ELLIPSE, param.kernel_morphology_size
-            ),
-        )
-        debug.image(morpho2, DebugImage.Level.DEBUG)
-    
-&gt;       contours, _ = cv2.findContours(
-            morpho2, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
-        )
-E       Failed: Timeout &gt;1.0s
+        start = int(reverse)
+        img = image
+        for i in range(2):
+            if (i + start) % 2 == 0:
+                img = cv2.erode(
+                    img,
+                    cv2.getStructuringElement(cv2.MORPH_ELLIPSE, size),
+                    iterations=iterations,
+                )
+            else:
+&gt;               img = cv2.dilate(
+                    img,
+                    cv2.getStructuringElement(cv2.MORPH_ELLIPSE, size),
+                    iterations=iterations,
+                )
+E               Failed: Timeout &gt;1.0s
 
-page/find_images.py:197: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+cv2ext.py:846: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/0001_2.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140647492572928) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140009764665088) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -255,7 +152,7 @@ page/find_images.py:197: Failed</failure><system-out>---------------------------
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_1" time="1.005"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_1() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_1" time="1.053"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_1() -&gt; None:
         """Check that stop_at 1 works."""
         tc.assertTrue(
             fsext.is_file_exists(
@@ -292,8 +189,8 @@ image = array([[255, 255, 255, ...,   0,   0,   0],
        [255, 255, 255, ...,   ...,   0,   0,   0],
        [  0,   0,   0, ...,   0,   0,   0],
        [  0,   0,   0, ...,   0,   0,   0]], dtype=uint8)
-param = &lt;page.find_images.FindImageParameters object at 0x7fe83f78e0d0&gt;
-page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7fe83f75e400&gt;
+param = &lt;page.find_images.FindImageParameters object at 0x7f250f497be0&gt;
+page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7f250f46ff10&gt;
 
     @inc_debug
     def find_images(
@@ -343,31 +240,23 @@ page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7fe83f75e400&
         )
         debug.image(threshold, DebugImage.Level.DEBUG)
     
-        morpho1 = cv2.morphologyEx(
+&gt;       morpho1 = cv2.morphologyEx(
             threshold,
             cv2.MORPH_CLOSE,
             cv2.getStructuringElement(
                 cv2.MORPH_ELLIPSE, param.kernel_morphology_size
             ),
         )
-        debug.image(morpho1, DebugImage.Level.DEBUG)
-&gt;       morpho2 = cv2.morphologyEx(
-            morpho1,
-            cv2.MORPH_OPEN,
-            cv2.getStructuringElement(
-                cv2.MORPH_ELLIPSE, param.kernel_morphology_size
-            ),
-        )
 E       Failed: Timeout &gt;1.0s
 
-page/find_images.py:188: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+page/find_images.py:180: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/0001_1.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140636115760896) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139797971138304) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -379,7 +268,7 @@ page/find_images.py:188: Failed</failure><system-out>---------------------------
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_4" time="1.000"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_4() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_4" time="1.002"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_4() -&gt; None:
         """Check that stop_at 4 works."""
         tc.assertTrue(
             fsext.is_file_exists(
@@ -409,56 +298,72 @@ script.py:36: in split_two_waves
     self.__images_found = page.find_images.find_images(
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:200: in find_images
-    cv2ext.remove_border_in_contours(contours, __internal_border__, image)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-contours = [array([[[  56, 3474]],
-
-       [[  55, 3475]],
-
-       [[  54, 3475]],
-
-       [[  53, 3476]],
-
-       [[  52, 3476]]...   27]],
-
-       [[2543,   27]],
-
-       [[2542,   26]],
-
-       [[2541,   26]],
-
-       [[2540,   25]]], dtype=int32)]
-border_size = 20
 image = array([[255, 255, 255, ...,   0,   0,   0],
        [255, 255, 255, ...,   0,   0,   0],
        [255, 255, 255, ...,   ...,   0,   0,   0],
        [  0,   0,   0, ...,   0,   0,   0],
        [  0,   0,   0, ...,   0,   0,   0]], dtype=uint8)
+param = &lt;page.find_images.FindImageParameters object at 0x7f566a04dee0&gt;
+page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7f565f259fd0&gt;
 
-    def remove_border_in_contours(
-        contours: List[np.ndarray], border_size: int, image: np.ndarray
-    ) -&gt; None:
-        height, width = get_hw(image)
-        for cnt in contours:
-            for contour in cnt:
-                contour[0, 0] = compute.clamp(
-                    contour[0, 0] - border_size, 0, width - 1
-                )
-                contour[0, 1] = compute.clamp(
-&gt;                   contour[0, 1] - border_size, 0, height - 1
-                )
-E               Failed: Timeout &gt;1.0s
+    @inc_debug
+    def find_images(
+        image: np.ndarray,
+        param: FindImageParameters,
+        page_angle: Optional[Angle],
+        debug: DebugImage,
+    ) -&gt; np.ndarray:
+        __internal_border__ = 20
+        xxx = 7
+    
+        debug.image(image, DebugImage.Level.DEBUG)
+        gray = cv2ext.force_image_to_be_grayscale(image, (xxx, xxx))
+        debug.image(gray, DebugImage.Level.DEBUG)
+        blurimg_bc = cv2ext.erode_and_dilate(gray, (xxx, xxx), xxx)
+        debug.image(blurimg_bc, DebugImage.Level.DEBUG)
+    
+        if page_angle is not None:
+            mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+            image_no_border = cv2ext.apply_mask(image, mask)
+            debug.image(image_no_border, DebugImage.Level.DEBUG)
+            gray2 = cv2ext.force_image_to_be_grayscale(image_no_border, (xxx, xxx))
+            debug.image(gray2, DebugImage.Level.DEBUG)
+            blurimg_bc2 = cv2ext.erode_and_dilate(gray2, (xxx, xxx), xxx, True)
+            debug.image(blurimg_bc2, DebugImage.Level.DEBUG)
+            gray_no_border = blurimg_bc2
+        else:
+            gray_no_border = blurimg_bc
+        gray_bordered = cv2.copyMakeBorder(
+            gray_no_border,
+            __internal_border__,
+            __internal_border__,
+            __internal_border__,
+            __internal_border__,
+            cv2.BORDER_CONSTANT,
+            value=[255],
+        )
+        debug.image(gray_bordered, DebugImage.Level.DEBUG)
+        dilated = cv2.dilate(
+            gray_bordered,
+            cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (xxx, xxx)),
+        )
+        debug.image(dilated, DebugImage.Level.DEBUG)
+        thresholdi = cv2ext.threshold_from_gaussian_histogram_white(dilated)
+&gt;       _, threshold = cv2.threshold(
+            dilated, thresholdi, 255, cv2.THRESH_BINARY_INV
+        )
+E       Failed: Timeout &gt;1.0s
 
-cv2ext.py:555: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+page/find_images.py:175: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/0001_4.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140647492572928) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140009764665088) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -470,7 +375,7 @@ cv2ext.py:555: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_3" time="1.004"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_3() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_3" time="1.073"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_3() -&gt; None:
         """Check that stop_at 3 works."""
         tc.assertTrue(
             fsext.is_file_exists(
@@ -500,8 +405,6 @@ script.py:36: in split_two_waves
     self.__images_found = page.find_images.find_images(
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:202: in find_images
-    cv2ext.convertion_en_couleur(image), contours, -1, (0, 0, 255), 3
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 image = array([[255, 255, 255, ...,   0,   0,   0],
@@ -509,21 +412,74 @@ image = array([[255, 255, 255, ...,   0,   0,   0],
        [255, 255, 255, ...,   ...,   0,   0,   0],
        [  0,   0,   0, ...,   0,   0,   0],
        [  0,   0,   0, ...,   0,   0,   0]], dtype=uint8)
+param = &lt;page.find_images.FindImageParameters object at 0x7f250f497be0&gt;
+page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7f250f29b940&gt;
 
-    def convertion_en_couleur(image: np.ndarray) -&gt; np.ndarray:
-        # Already a 8 bit image.
-        if image.ndim == 2:
-&gt;           return cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
-E           Failed: Timeout &gt;1.0s
+    @inc_debug
+    def find_images(
+        image: np.ndarray,
+        param: FindImageParameters,
+        page_angle: Optional[Angle],
+        debug: DebugImage,
+    ) -&gt; np.ndarray:
+        __internal_border__ = 20
+        xxx = 7
+    
+        debug.image(image, DebugImage.Level.DEBUG)
+        gray = cv2ext.force_image_to_be_grayscale(image, (xxx, xxx))
+        debug.image(gray, DebugImage.Level.DEBUG)
+        blurimg_bc = cv2ext.erode_and_dilate(gray, (xxx, xxx), xxx)
+        debug.image(blurimg_bc, DebugImage.Level.DEBUG)
+    
+        if page_angle is not None:
+            mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+            image_no_border = cv2ext.apply_mask(image, mask)
+            debug.image(image_no_border, DebugImage.Level.DEBUG)
+            gray2 = cv2ext.force_image_to_be_grayscale(image_no_border, (xxx, xxx))
+            debug.image(gray2, DebugImage.Level.DEBUG)
+            blurimg_bc2 = cv2ext.erode_and_dilate(gray2, (xxx, xxx), xxx, True)
+            debug.image(blurimg_bc2, DebugImage.Level.DEBUG)
+            gray_no_border = blurimg_bc2
+        else:
+            gray_no_border = blurimg_bc
+        gray_bordered = cv2.copyMakeBorder(
+            gray_no_border,
+            __internal_border__,
+            __internal_border__,
+            __internal_border__,
+            __internal_border__,
+            cv2.BORDER_CONSTANT,
+            value=[255],
+        )
+        debug.image(gray_bordered, DebugImage.Level.DEBUG)
+        dilated = cv2.dilate(
+            gray_bordered,
+            cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (xxx, xxx)),
+        )
+        debug.image(dilated, DebugImage.Level.DEBUG)
+        thresholdi = cv2ext.threshold_from_gaussian_histogram_white(dilated)
+        _, threshold = cv2.threshold(
+            dilated, thresholdi, 255, cv2.THRESH_BINARY_INV
+        )
+        debug.image(threshold, DebugImage.Level.DEBUG)
+    
+&gt;       morpho1 = cv2.morphologyEx(
+            threshold,
+            cv2.MORPH_CLOSE,
+            cv2.getStructuringElement(
+                cv2.MORPH_ELLIPSE, param.kernel_morphology_size
+            ),
+        )
+E       Failed: Timeout &gt;1.0s
 
-cv2ext.py:604: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+page/find_images.py:180: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/0001_3.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140636115760896) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139797971138304) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -594,147 +550,58 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:119: in remove_black_border_in_image
-    cv2ext.insert_border_in_mask(
+page/find_images.py:109: in remove_black_border_in_image
+    ) = cv2ext.find_longest_lines_in_border(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-cnt = array([[[2472,    0]],
+shape = (3507, 4960), epsilon = 5
+cnt = array([[[3333,  653]],
 
-       [[2472,    6]],
+       [[3332,  654]],
 
-       [[2473,    7]],
+       [[3332,  655]],
 
-       [[2473,    8]],
+       [[3334,  657]],
 
-       [[2482,   17]],...,    8]],
+       [[3334,  691]],...,  655]],
 
-       [[2629,    8]],
+       [[3342,  655]],
 
-       [[2630,    7]],
+       [[3341,  654]],
 
-       [[2637,    7]],
+       [[3340,  654]],
 
-       [[2637,    0]]], dtype=int32)
-threshold2 = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-mask_border_only = array([[255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   ...,   0,   0,   0],
-       [255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   0,   0,   0]], dtype=uint8)
-epsilon = (5, 3.0°), page_angle = 0.0°
+       [[3339,  653]]], dtype=int32)
 
-    def insert_border_in_mask(
-        cnt: np.ndarray,
-        threshold2: np.ndarray,
-        mask_border_only: np.ndarray,
-        epsilon: Tuple[int, Angle],
-        page_angle: Angle,
-    ) -&gt; None:
-        __pourcentage_white_allowed__ = 0.01
-        epsilon_border, epsilon_angle = epsilon
-        height, width = get_hw(threshold2)
-        cnt2 = cnt[cnt[:, 0, 0] &gt; epsilon_border]
-        cnt3 = cnt2[cnt2[:, 0, 0] &lt; width - 1 - epsilon_border]
-        cnt4 = cnt3[cnt3[:, 0, 1] &gt; epsilon_border]
-        cnt5 = cnt4[cnt4[:, 0, 1] &lt; height - 1 - epsilon_border]
-        if len(cnt5) == 0:
-            return
-        contour_approximate = cv2.approxPolyDP(cnt5, epsilon_border, True)
-        all_pair = list(compute.iterator_zip_n_n_1(contour_approximate))
-        all_pair_no_single_pixel = list(
-            filter(
-                lambda x: x[0][0][0] != x[1][0][0] or x[0][0][1] != x[1][0][1],
-                all_pair,
-            )
-        )
-        all_angles = list(
-            map(
-                lambda x: (
-                    (x[0][0], x[1][0]),
-                    compute.get_angle_0_180(x[0][0], x[1][0]),
-                    np.linalg.norm(x[0][0] - x[1][0]),
-                ),
-                all_pair_no_single_pixel,
-            )
-        )
-        vertical_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1],
-                    page_angle + Angle.deg(90.0),
-                    epsilon_angle,
-                    Angle.deg(180),
-                ),
-                all_angles,
-            )
-        )
-        horizontal_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1], page_angle, epsilon_angle, Angle.deg(180)
-                ),
-                all_angles,
-            )
-        )
-        vertical_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posx_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                vertical_lines,
-            )
-        )
-        horizontal_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posy_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                horizontal_lines,
-            )
-        )
-        vertical_lines_pos.sort(key=lambda x: x[0])
-        horizontal_lines_pos.sort(key=lambda x: x[0])
-        for posx, angle in vertical_lines_pos:
-            mask = np.zeros((height, width), np.uint8)
-            bottom_point = compute.get_bottom_point_from_alpha_posx(
-                angle, posx, height
-            )
-            if posx &lt; width / 2:
-                pts = np.array(
-                    [
-                        [-1, 0],
-                        [posx - 1, 0],
-                        [bottom_point[0] - 1, bottom_point[1]],
-                        [-1, height - 1],
-                    ]
-                )
-            else:
-                pts = np.array(
-                    [
-                        [width, 0],
-                        [posx + 1, 0],
-                        [bottom_point[0] + 1, bottom_point[1]],
-                        [width, height - 1],
-                    ]
-                )
-            mask = cv2.drawContours(mask, [pts], 0, 255, -1)
-&gt;           histogram = cv2.calcHist([threshold2], [0], mask, [2], [0, 256])
+    def find_longest_lines_in_border(
+        shape: Tuple[int, int], epsilon: int, cnt: np.ndarray
+    ) -&gt; Tuple[Tuple[int, int], Tuple[int, int], Tuple[int, int], Tuple[int, int]]:
+        height, width = shape
+        left_top = height
+        left_bottom = 0
+        right_top = height
+        right_bottom = 0
+        top_left = width
+        top_right = 0
+        bottom_left = width
+        bottom_right = 0
+        for pt1, pt2 in compute.iterator_zip_n_n_1(cnt):
+            point1_x, point1_y = pt1[0]
+            point2_x, point2_y = pt2[0]
+            if point1_x &lt;= epsilon and point2_x &lt;= epsilon:
+                left_top = min(left_top, point1_y, point2_y)
+                left_bottom = max(left_bottom, point1_y, point2_y)
+&gt;           if point1_y &lt;= epsilon and point2_y &lt;= epsilon:
 E           Failed: Timeout &gt;1.0s
 
-cv2ext.py:778: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+cv2ext.py:661: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/0001.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140647492572928) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140009764665088) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -746,7 +613,7 @@ cv2ext.py:778: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_5" time="1.013"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_5() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_5" time="1.005"><failure message="Failed: Timeout &gt;1.0s">def test_mock_stop_at_5() -&gt; None:
         """Check that stop_at 5 works."""
         tc.assertTrue(
             fsext.is_file_exists(
@@ -772,54 +639,76 @@ script.py:298: in treat_file
     image1, image2 = self.split_two_waves(
 tests/mock_separate_page.py:23: in split_two_waves
     return super().split_two_waves(image, parameters, debug)
-script.py:55: in split_two_waves
-    ) = page.split.found_split_line_with_line(
+script.py:36: in split_two_waves
+    self.__images_found = page.find_images.find_images(
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/split.py:552: in found_split_line_with_line
-    valid_lines = __found_candidates_split_line_with_line(
-page/split.py:339: in __found_candidates_split_line_with_line
-    erode_dilate = cv2ext.erode_and_dilate(blurimg, (xxx, xxx), 2)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-image = array([[203, 213, 224, ...,   0,   0,   0],
-       [193, 198, 203, ...,   0,   0,   0],
-       [156, 161, 167, ...,   ...,   0,   0,   0],
+image = array([[255, 255, 255, ...,   0,   0,   0],
+       [255, 255, 255, ...,   0,   0,   0],
+       [255, 255, 255, ...,   ...,   0,   0,   0],
        [  0,   0,   0, ...,   0,   0,   0],
        [  0,   0,   0, ...,   0,   0,   0]], dtype=uint8)
-size = (7, 7), iterations = 2, reverse = False
+param = &lt;page.find_images.FindImageParameters object at 0x7f250f497be0&gt;
+page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7f250f3dd5b0&gt;
 
-    def erode_and_dilate(
+    @inc_debug
+    def find_images(
         image: np.ndarray,
-        size: Tuple[int, int],
-        iterations: int,
-        reverse: bool = False,
+        param: FindImageParameters,
+        page_angle: Optional[Angle],
+        debug: DebugImage,
     ) -&gt; np.ndarray:
-        start = int(reverse)
-        img = image
-        for i in range(2):
-            if (i + start) % 2 == 0:
-                img = cv2.erode(
-                    img,
-                    cv2.getStructuringElement(cv2.MORPH_ELLIPSE, size),
-                    iterations=iterations,
-                )
-            else:
-&gt;               img = cv2.dilate(
-                    img,
-                    cv2.getStructuringElement(cv2.MORPH_ELLIPSE, size),
-                    iterations=iterations,
-                )
-E               Failed: Timeout &gt;1.0s
+        __internal_border__ = 20
+        xxx = 7
+    
+        debug.image(image, DebugImage.Level.DEBUG)
+        gray = cv2ext.force_image_to_be_grayscale(image, (xxx, xxx))
+        debug.image(gray, DebugImage.Level.DEBUG)
+        blurimg_bc = cv2ext.erode_and_dilate(gray, (xxx, xxx), xxx)
+        debug.image(blurimg_bc, DebugImage.Level.DEBUG)
+    
+        if page_angle is not None:
+            mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+            image_no_border = cv2ext.apply_mask(image, mask)
+            debug.image(image_no_border, DebugImage.Level.DEBUG)
+            gray2 = cv2ext.force_image_to_be_grayscale(image_no_border, (xxx, xxx))
+            debug.image(gray2, DebugImage.Level.DEBUG)
+            blurimg_bc2 = cv2ext.erode_and_dilate(gray2, (xxx, xxx), xxx, True)
+            debug.image(blurimg_bc2, DebugImage.Level.DEBUG)
+            gray_no_border = blurimg_bc2
+        else:
+            gray_no_border = blurimg_bc
+        gray_bordered = cv2.copyMakeBorder(
+            gray_no_border,
+            __internal_border__,
+            __internal_border__,
+            __internal_border__,
+            __internal_border__,
+            cv2.BORDER_CONSTANT,
+            value=[255],
+        )
+        debug.image(gray_bordered, DebugImage.Level.DEBUG)
+        dilated = cv2.dilate(
+            gray_bordered,
+            cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (xxx, xxx)),
+        )
+        debug.image(dilated, DebugImage.Level.DEBUG)
+        thresholdi = cv2ext.threshold_from_gaussian_histogram_white(dilated)
+&gt;       _, threshold = cv2.threshold(
+            dilated, thresholdi, 255, cv2.THRESH_BINARY_INV
+        )
+E       Failed: Timeout &gt;1.0s
 
-cv2ext.py:846: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+page/find_images.py:175: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/0001_5.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140636115760896) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139797971138304) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -831,7 +720,7 @@ cv2ext.py:846: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_black_border_not_removed_png" time="1.000"><failure message="Failed: Timeout &gt;1.0s">def test_black_border_not_removed_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_black_border_not_removed_png" time="1.005"><failure message="Failed: Timeout &gt;1.0s">def test_black_border_not_removed_png() -&gt; None:
         """The border on the right is still there."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -896,33 +785,33 @@ page/find_images.py:119: in remove_black_border_in_image
     cv2ext.insert_border_in_mask(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-cnt = array([[[2442,    0]],
+cnt = array([[[2457, 3453]],
 
-       [[2442,    7]],
+       [[2457, 3455]],
 
-       [[2443,    8]],
+       [[2456, 3456]],
 
-       [[2444,    8]],
+       [[2456, 3458]],
 
-       [[2452,   16]],...,    8]],
+       [[2455, 3459]],..., 3459]],
 
-       [[2503,    8]],
+       [[2459, 3457]],
 
-       [[2504,    7]],
+       [[2459, 3456]],
 
-       [[2506,    7]],
+       [[2458, 3455]],
 
-       [[2506,    0]]], dtype=int32)
+       [[2458, 3454]]], dtype=int32)
 threshold2 = array([[255, 255, 255, ..., 255, 255, 255],
        [255, 255, 255, ..., 255, 255, 255],
        [255, 255, 255, ..., 25..., 255, 255, 255],
        [255, 255, 255, ..., 255, 255, 255],
        [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-mask_border_only = array([[255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   ...,   0,   0,   0],
-       [255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   0,   0,   0]], dtype=uint8)
+mask_border_only = array([[255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 25..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
 epsilon = (5, 3.0°), page_angle = 0.0°
 
     def insert_border_in_mask(
@@ -1065,7 +954,7 @@ cv2ext.py:811: Failed</failure><system-out>--------------------------------- Cap
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140647492572928) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140009764665088) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -1077,7 +966,7 @@ cv2ext.py:811: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_2_pages_2_contours_png" time="1.001"><failure message="Failed: Timeout &gt;1.0s">def test_2_pages_2_contours_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_2_pages_2_contours_png" time="1.000"><failure message="Failed: Timeout &gt;1.0s">def test_2_pages_2_contours_png() -&gt; None:
         """There is not one contour for the two pages,
         but one contour for each page.
         """
@@ -1138,147 +1027,53 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:119: in remove_black_border_in_image
-    cv2ext.insert_border_in_mask(
+page/find_images.py:109: in remove_black_border_in_image
+    ) = cv2ext.find_longest_lines_in_border(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-cnt = array([[[   0,    0]],
+shape = (3507, 4960), epsilon = 5
+cnt = array([[[2728,  950]],
 
-       [[   0, 3506]],
+       [[2728,  951]],
 
-       [[ 694, 3506]],
+       [[2729,  952]],
 
-       [[ 629, 3506]],
+       [[2729,  966]],
 
-       [[ 628, 3505]],...,   10]],
+       [[2721,  974]],...,  952]],
 
-       [[ 123,    9]],
+       [[2733,  952]],
 
-       [[ 158,    9]],
+       [[2732,  951]],
 
-       [[ 156,    7]],
+       [[2731,  951]],
 
-       [[ 156,    0]]], dtype=int32)
-threshold2 = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-mask_border_only = array([[  0,   0,   0, ..., 255, 255, 255],
-       [  0,   0,   0, ..., 255, 255, 255],
-       [  0,   0,   0, ..., 25..., 255, 255, 255],
-       [  0,   0,   0, ..., 255, 255, 255],
-       [  0,   0,   0, ..., 255, 255, 255]], dtype=uint8)
-epsilon = (5, 3.0°), page_angle = 0.0°
+       [[2730,  950]]], dtype=int32)
 
-    def insert_border_in_mask(
-        cnt: np.ndarray,
-        threshold2: np.ndarray,
-        mask_border_only: np.ndarray,
-        epsilon: Tuple[int, Angle],
-        page_angle: Angle,
-    ) -&gt; None:
-        __pourcentage_white_allowed__ = 0.01
-        epsilon_border, epsilon_angle = epsilon
-        height, width = get_hw(threshold2)
-        cnt2 = cnt[cnt[:, 0, 0] &gt; epsilon_border]
-        cnt3 = cnt2[cnt2[:, 0, 0] &lt; width - 1 - epsilon_border]
-        cnt4 = cnt3[cnt3[:, 0, 1] &gt; epsilon_border]
-        cnt5 = cnt4[cnt4[:, 0, 1] &lt; height - 1 - epsilon_border]
-        if len(cnt5) == 0:
-            return
-        contour_approximate = cv2.approxPolyDP(cnt5, epsilon_border, True)
-        all_pair = list(compute.iterator_zip_n_n_1(contour_approximate))
-        all_pair_no_single_pixel = list(
-            filter(
-                lambda x: x[0][0][0] != x[1][0][0] or x[0][0][1] != x[1][0][1],
-                all_pair,
-            )
-        )
-        all_angles = list(
-            map(
-                lambda x: (
-                    (x[0][0], x[1][0]),
-                    compute.get_angle_0_180(x[0][0], x[1][0]),
-                    np.linalg.norm(x[0][0] - x[1][0]),
-                ),
-                all_pair_no_single_pixel,
-            )
-        )
-        vertical_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1],
-                    page_angle + Angle.deg(90.0),
-                    epsilon_angle,
-                    Angle.deg(180),
-                ),
-                all_angles,
-            )
-        )
-        horizontal_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1], page_angle, epsilon_angle, Angle.deg(180)
-                ),
-                all_angles,
-            )
-        )
-        vertical_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posx_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                vertical_lines,
-            )
-        )
-        horizontal_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posy_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                horizontal_lines,
-            )
-        )
-        vertical_lines_pos.sort(key=lambda x: x[0])
-        horizontal_lines_pos.sort(key=lambda x: x[0])
-        for posx, angle in vertical_lines_pos:
-            mask = np.zeros((height, width), np.uint8)
-            bottom_point = compute.get_bottom_point_from_alpha_posx(
-                angle, posx, height
-            )
-            if posx &lt; width / 2:
-                pts = np.array(
-                    [
-                        [-1, 0],
-                        [posx - 1, 0],
-                        [bottom_point[0] - 1, bottom_point[1]],
-                        [-1, height - 1],
-                    ]
-                )
-            else:
-                pts = np.array(
-                    [
-                        [width, 0],
-                        [posx + 1, 0],
-                        [bottom_point[0] + 1, bottom_point[1]],
-                        [width, height - 1],
-                    ]
-                )
-            mask = cv2.drawContours(mask, [pts], 0, 255, -1)
-&gt;           histogram = cv2.calcHist([threshold2], [0], mask, [2], [0, 256])
+    def find_longest_lines_in_border(
+        shape: Tuple[int, int], epsilon: int, cnt: np.ndarray
+    ) -&gt; Tuple[Tuple[int, int], Tuple[int, int], Tuple[int, int], Tuple[int, int]]:
+        height, width = shape
+        left_top = height
+        left_bottom = 0
+        right_top = height
+        right_bottom = 0
+        top_left = width
+        top_right = 0
+        bottom_left = width
+        bottom_right = 0
+        for pt1, pt2 in compute.iterator_zip_n_n_1(cnt):
+&gt;           point1_x, point1_y = pt1[0]
 E           Failed: Timeout &gt;1.0s
 
-cv2ext.py:778: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+cv2ext.py:656: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/2-pages-2-contours.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140636115760896) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139797971138304) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -1290,7 +1085,7 @@ cv2ext.py:778: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_rotate_png" time="1.061"><failure message="Failed: Timeout &gt;1.0s">def test_image_failed_to_rotate_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_rotate_png" time="1.161"><failure message="Failed: Timeout &gt;1.0s">def test_image_failed_to_rotate_png() -&gt; None:
         """Failed to compute angle to rotate. The image takes the whole page."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -1353,7 +1148,7 @@ page/find_images.py:89: in remove_black_border_in_image
     debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7feae5940640&gt;
+self = &lt;debug_image.DebugImage object at 0x7f566a1272e0&gt;
 img = array([[[  0,   0, 255],
         [  0,   0, 255],
         [  0,   0, 255],
@@ -1383,7 +1178,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140647492572928) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140009764665088) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -1395,7 +1190,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_png" time="1.068"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_split_line_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_png" time="1.000"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_split_line_png() -&gt; None:
         """Improve choice of the split line between different algorithm."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -1450,36 +1245,65 @@ script.py:36: in split_two_waves
     self.__images_found = page.find_images.find_images(
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:151: in find_images
-    debug.image(image_no_border, DebugImage.Level.DEBUG)
+page/find_images.py:149: in find_images
+    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:109: in remove_black_border_in_image
+    ) = cv2ext.find_longest_lines_in_border(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7fe83f75e040&gt;
-img = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-level = &lt;Level.DEBUG: 1&gt;
+shape = (3507, 4960), epsilon = 5
+cnt = array([[[3926,  439]],
 
-    def image(self, img: np.ndarray, level: Level) -&gt; None:
-        if level &gt;= self.__level:
-            name = self.name()
-            self.__next()
-            self.__next_when_dec[0 : self.__sub_level] = [
-                True for x in range(self.__sub_level)
-            ]
-&gt;           if not cv2.imwrite(name, img):
+       [[3930,  443]],
+
+       [[3930,  441]],
+
+       [[3929,  441]],
+
+       [[3928,  440]],
+
+       [[3927,  440]]], dtype=int32)
+
+    def find_longest_lines_in_border(
+        shape: Tuple[int, int], epsilon: int, cnt: np.ndarray
+    ) -&gt; Tuple[Tuple[int, int], Tuple[int, int], Tuple[int, int], Tuple[int, int]]:
+        height, width = shape
+        left_top = height
+        left_bottom = 0
+        right_top = height
+        right_bottom = 0
+        top_left = width
+        top_right = 0
+        bottom_left = width
+        bottom_right = 0
+        for pt1, pt2 in compute.iterator_zip_n_n_1(cnt):
+            point1_x, point1_y = pt1[0]
+            point2_x, point2_y = pt2[0]
+            if point1_x &lt;= epsilon and point2_x &lt;= epsilon:
+                left_top = min(left_top, point1_y, point2_y)
+                left_bottom = max(left_bottom, point1_y, point2_y)
+            if point1_y &lt;= epsilon and point2_y &lt;= epsilon:
+                top_left = min(top_left, point1_x, point2_x)
+                top_right = max(top_right, point1_x, point2_x)
+            if point1_x &gt;= width - 1 - epsilon and point2_x &gt;= width - 1 - epsilon:
+                right_top = min(right_top, point1_y, point2_y)
+                right_bottom = max(right_bottom, point1_y, point2_y)
+            if (
+&gt;               point1_y &gt;= height - 1 - epsilon
+                and point2_y &gt;= height - 1 - epsilon
+            ):
 E           Failed: Timeout &gt;1.0s
 
-debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+cv2ext.py:668: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/wrong_split_line.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140636115760896) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139797971138304) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -1491,7 +1315,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_crop_data_png" time="1.008"><failure message="Failed: Timeout &gt;1.0s">def test_image_failed_to_crop_data_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_crop_data_png" time="1.180"><failure message="Failed: Timeout &gt;1.0s">def test_image_failed_to_crop_data_png() -&gt; None:
         """Failed to detect edges. The image takes the whole page and is too closed
         to the border of the image.
         """
@@ -1558,7 +1382,7 @@ page/find_images.py:89: in remove_black_border_in_image
     debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7feae5940640&gt;
+self = &lt;debug_image.DebugImage object at 0x7f566a1272e0&gt;
 img = array([[[  0,   0, 255],
         [  0,   0, 255],
         [  0,   0, 255],
@@ -1588,7 +1412,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140647492572928) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140009764665088) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -1600,7 +1424,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_png" time="1.000"><failure message="Failed: Timeout &gt;1.0s">def test_crop_too_much_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_png" time="1.147"><failure message="Failed: Timeout &gt;1.0s">def test_crop_too_much_png() -&gt; None:
         """Reduce distance to ignore black area closed to the edge."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -1659,120 +1483,41 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:119: in remove_black_border_in_image
-    cv2ext.insert_border_in_mask(
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-cnt = array([[[ 479,    0]],
+self = &lt;debug_image.DebugImage object at 0x7f25109bffa0&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
 
-       [[ 479,    4]],
-
-       [[ 480,    4]],
-
-       ...,
-
-       [[4894, 3506]],
-
-       [[4959, 3506]],
-
-       [[4959,    0]]], dtype=int32)
-threshold2 = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-mask_border_only = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-epsilon = (5, 3.0°), page_angle = 0.0°
-
-    def insert_border_in_mask(
-        cnt: np.ndarray,
-        threshold2: np.ndarray,
-        mask_border_only: np.ndarray,
-        epsilon: Tuple[int, Angle],
-        page_angle: Angle,
-    ) -&gt; None:
-        __pourcentage_white_allowed__ = 0.01
-        epsilon_border, epsilon_angle = epsilon
-        height, width = get_hw(threshold2)
-        cnt2 = cnt[cnt[:, 0, 0] &gt; epsilon_border]
-        cnt3 = cnt2[cnt2[:, 0, 0] &lt; width - 1 - epsilon_border]
-        cnt4 = cnt3[cnt3[:, 0, 1] &gt; epsilon_border]
-        cnt5 = cnt4[cnt4[:, 0, 1] &lt; height - 1 - epsilon_border]
-        if len(cnt5) == 0:
-            return
-        contour_approximate = cv2.approxPolyDP(cnt5, epsilon_border, True)
-        all_pair = list(compute.iterator_zip_n_n_1(contour_approximate))
-        all_pair_no_single_pixel = list(
-            filter(
-                lambda x: x[0][0][0] != x[1][0][0] or x[0][0][1] != x[1][0][1],
-                all_pair,
-            )
-        )
-        all_angles = list(
-            map(
-                lambda x: (
-                    (x[0][0], x[1][0]),
-                    compute.get_angle_0_180(x[0][0], x[1][0]),
-                    np.linalg.norm(x[0][0] - x[1][0]),
-                ),
-                all_pair_no_single_pixel,
-            )
-        )
-        vertical_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1],
-                    page_angle + Angle.deg(90.0),
-                    epsilon_angle,
-                    Angle.deg(180),
-                ),
-                all_angles,
-            )
-        )
-        horizontal_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1], page_angle, epsilon_angle, Angle.deg(180)
-                ),
-                all_angles,
-            )
-        )
-        vertical_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posx_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                vertical_lines,
-            )
-        )
-        horizontal_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posy_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                horizontal_lines,
-            )
-        )
-        vertical_lines_pos.sort(key=lambda x: x[0])
-        horizontal_lines_pos.sort(key=lambda x: x[0])
-        for posx, angle in vertical_lines_pos:
-&gt;           mask = np.zeros((height, width), np.uint8)
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
 E           Failed: Timeout &gt;1.0s
 
-cv2ext.py:755: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/crop_too_much.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140636115760896) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139797971138304) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -1784,7 +1529,7 @@ cv2ext.py:755: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_angle_split_line_png" time="1.024"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_angle_split_line_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_angle_split_line_png" time="1.232"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_angle_split_line_png() -&gt; None:
         """Failed to detect edges. The image takes the whole page and is too closed
         to the border of the image.
         """
@@ -1845,7 +1590,7 @@ page/find_images.py:142: in find_images
     debug.image(image, DebugImage.Level.DEBUG)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7feae5940640&gt;
+self = &lt;debug_image.DebugImage object at 0x7f566a1272e0&gt;
 img = array([[[210, 227, 214],
         [210, 227, 214],
         [211, 229, 216],
@@ -1875,7 +1620,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140647492572928) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140009764665088) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -1948,147 +1693,51 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:119: in remove_black_border_in_image
-    cv2ext.insert_border_in_mask(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-cnt = array([[[   0,    0]],
+gray_bordered = array([[0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       ...,
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0]], dtype=uint8)
+page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7f25109bffa0&gt;
 
-       [[   0, 3506]],
-
-       [[  44, 3506]],
-
-       [[  44, 3505]],
-
-       [[  43, 3504]],...,    5]],
-
-       [[2098,    1]],
-
-       [[2099,    1]],
-
-       [[2100,    0]],
-
-       [[2101,    0]]], dtype=int32)
-threshold2 = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-mask_border_only = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-epsilon = (5, 3.0°), page_angle = 0.0°
-
-    def insert_border_in_mask(
-        cnt: np.ndarray,
-        threshold2: np.ndarray,
-        mask_border_only: np.ndarray,
-        epsilon: Tuple[int, Angle],
-        page_angle: Angle,
-    ) -&gt; None:
-        __pourcentage_white_allowed__ = 0.01
-        epsilon_border, epsilon_angle = epsilon
-        height, width = get_hw(threshold2)
-        cnt2 = cnt[cnt[:, 0, 0] &gt; epsilon_border]
-        cnt3 = cnt2[cnt2[:, 0, 0] &lt; width - 1 - epsilon_border]
-        cnt4 = cnt3[cnt3[:, 0, 1] &gt; epsilon_border]
-        cnt5 = cnt4[cnt4[:, 0, 1] &lt; height - 1 - epsilon_border]
-        if len(cnt5) == 0:
-            return
-        contour_approximate = cv2.approxPolyDP(cnt5, epsilon_border, True)
-        all_pair = list(compute.iterator_zip_n_n_1(contour_approximate))
-        all_pair_no_single_pixel = list(
-            filter(
-                lambda x: x[0][0][0] != x[1][0][0] or x[0][0][1] != x[1][0][1],
-                all_pair,
-            )
+    @inc_debug
+    def remove_black_border_in_image(
+        gray_bordered: np.ndarray, page_angle: Angle, debug: DebugImage
+    ) -&gt; np.ndarray:
+        thresholdi = cv2ext.threshold_from_gaussian_histogram_black(gray_bordered)
+        _, threshold = cv2.threshold(
+            gray_bordered, thresholdi, 255, cv2.THRESH_BINARY_INV
         )
-        all_angles = list(
-            map(
-                lambda x: (
-                    (x[0][0], x[1][0]),
-                    compute.get_angle_0_180(x[0][0], x[1][0]),
-                    np.linalg.norm(x[0][0] - x[1][0]),
-                ),
-                all_pair_no_single_pixel,
-            )
+        debug.image(threshold, DebugImage.Level.DEBUG)
+        contours, _ = cv2.findContours(
+            threshold, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE
         )
-        vertical_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1],
-                    page_angle + Angle.deg(90.0),
-                    epsilon_angle,
-                    Angle.deg(180),
-                ),
-                all_angles,
-            )
+        debug.image(
+            cv2.drawContours(
+                cv2ext.convertion_en_couleur(gray_bordered),
+                contours,
+                -1,
+                (0, 0, 255),
+                3,
+            ),
+            DebugImage.Level.DEBUG,
         )
-        horizontal_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1], page_angle, epsilon_angle, Angle.deg(180)
-                ),
-                all_angles,
-            )
-        )
-        vertical_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posx_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                vertical_lines,
-            )
-        )
-        horizontal_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posy_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                horizontal_lines,
-            )
-        )
-        vertical_lines_pos.sort(key=lambda x: x[0])
-        horizontal_lines_pos.sort(key=lambda x: x[0])
-        for posx, angle in vertical_lines_pos:
-            mask = np.zeros((height, width), np.uint8)
-            bottom_point = compute.get_bottom_point_from_alpha_posx(
-                angle, posx, height
-            )
-            if posx &lt; width / 2:
-                pts = np.array(
-                    [
-                        [-1, 0],
-                        [posx - 1, 0],
-                        [bottom_point[0] - 1, bottom_point[1]],
-                        [-1, height - 1],
-                    ]
-                )
-            else:
-                pts = np.array(
-                    [
-                        [width, 0],
-                        [posx + 1, 0],
-                        [bottom_point[0] + 1, bottom_point[1]],
-                        [width, height - 1],
-                    ]
-                )
-            mask = cv2.drawContours(mask, [pts], 0, 255, -1)
-&gt;           histogram = cv2.calcHist([threshold2], [0], mask, [2], [0, 256])
-E           Failed: Timeout &gt;1.0s
+        __epsilon__ = 5
+&gt;       mask_border_only = 255 * np.ones(shape=gray_bordered.shape, dtype=np.uint8)
+E       Failed: Timeout &gt;1.0s
 
-cv2ext.py:778: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+page/find_images.py:100: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/crop_too_few.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140636115760896) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139797971138304) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -2100,7 +1749,7 @@ cv2ext.py:778: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_angle_page_lower_split_line_png" time="1.017"><failure message="Failed: Timeout &gt;1.0s">def test_angle_page_lower_split_line_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_angle_page_lower_split_line_png" time="1.008"><failure message="Failed: Timeout &gt;1.0s">def test_angle_page_lower_split_line_png() -&gt; None:
         """Failed when angle of a page in lower than
         the angle of the split line.
         """
@@ -2163,17 +1812,22 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:128: in remove_black_border_in_image
-    debug.image(mask_border_only, DebugImage.Level.INFO)
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7feae5940640&gt;
-img = array([[255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-level = &lt;Level.INFO: 2&gt;
+self = &lt;debug_image.DebugImage object at 0x7f566a1272e0&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
 
     def image(self, img: np.ndarray, level: Level) -&gt; None:
         if level &gt;= self.__level:
@@ -2192,7 +1846,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140647492572928) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140009764665088) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -2204,7 +1858,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_2_png" time="1.000"><failure message="Failed: Timeout &gt;1.0s">def test_crop_too_much_2_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_2_png" time="1.088"><failure message="Failed: Timeout &gt;1.0s">def test_crop_too_much_2_png() -&gt; None:
         """Reduce distance to ignore black area closed to the edge."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -2263,55 +1917,41 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:109: in remove_black_border_in_image
-    ) = cv2ext.find_longest_lines_in_border(
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-shape = (3507, 4960), epsilon = 5
-cnt = array([[[4959, 3438]],
+self = &lt;debug_image.DebugImage object at 0x7f25109bffa0&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
 
-       [[4959, 3442]],
-
-       [[4958, 3443]],
-
-       [[4958, 3445]],
-
-       [[4957, 3446]],..., 3505]],
-
-       [[4841, 3505]],
-
-       [[4840, 3506]],
-
-       [[4819, 3506]],
-
-       [[4959, 3506]]], dtype=int32)
-
-    def find_longest_lines_in_border(
-        shape: Tuple[int, int], epsilon: int, cnt: np.ndarray
-    ) -&gt; Tuple[Tuple[int, int], Tuple[int, int], Tuple[int, int], Tuple[int, int]]:
-        height, width = shape
-        left_top = height
-        left_bottom = 0
-        right_top = height
-        right_bottom = 0
-        top_left = width
-        top_right = 0
-        bottom_left = width
-        bottom_right = 0
-        for pt1, pt2 in compute.iterator_zip_n_n_1(cnt):
-            point1_x, point1_y = pt1[0]
-            point2_x, point2_y = pt2[0]
-&gt;           if point1_x &lt;= epsilon and point2_x &lt;= epsilon:
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
 E           Failed: Timeout &gt;1.0s
 
-cv2ext.py:658: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/crop_too_much_2.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140636115760896) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139797971138304) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -2323,7 +1963,7 @@ cv2ext.py:658: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_2_png" time="1.010"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_split_line_2_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_2_png" time="1.185"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_split_line_2_png() -&gt; None:
         """Improve choice of the split line between different algorithm."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -2382,180 +2022,41 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:119: in remove_black_border_in_image
-    cv2ext.insert_border_in_mask(
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-cnt = array([[[2425, 3430]],
+self = &lt;debug_image.DebugImage object at 0x7f566a1272e0&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
 
-       [[2425, 3445]],
-
-       [[2424, 3446]],
-
-       [[2424, 3453]],
-
-       [[2423, 3454]],..., 3436]],
-
-       [[2428, 3435]],
-
-       [[2426, 3433]],
-
-       [[2426, 3432]],
-
-       [[2425, 3431]]], dtype=int32)
-threshold2 = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-mask_border_only = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-epsilon = (5, 3.0°), page_angle = 0.0°
-
-    def insert_border_in_mask(
-        cnt: np.ndarray,
-        threshold2: np.ndarray,
-        mask_border_only: np.ndarray,
-        epsilon: Tuple[int, Angle],
-        page_angle: Angle,
-    ) -&gt; None:
-        __pourcentage_white_allowed__ = 0.01
-        epsilon_border, epsilon_angle = epsilon
-        height, width = get_hw(threshold2)
-        cnt2 = cnt[cnt[:, 0, 0] &gt; epsilon_border]
-        cnt3 = cnt2[cnt2[:, 0, 0] &lt; width - 1 - epsilon_border]
-        cnt4 = cnt3[cnt3[:, 0, 1] &gt; epsilon_border]
-        cnt5 = cnt4[cnt4[:, 0, 1] &lt; height - 1 - epsilon_border]
-        if len(cnt5) == 0:
-            return
-        contour_approximate = cv2.approxPolyDP(cnt5, epsilon_border, True)
-        all_pair = list(compute.iterator_zip_n_n_1(contour_approximate))
-        all_pair_no_single_pixel = list(
-            filter(
-                lambda x: x[0][0][0] != x[1][0][0] or x[0][0][1] != x[1][0][1],
-                all_pair,
-            )
-        )
-        all_angles = list(
-            map(
-                lambda x: (
-                    (x[0][0], x[1][0]),
-                    compute.get_angle_0_180(x[0][0], x[1][0]),
-                    np.linalg.norm(x[0][0] - x[1][0]),
-                ),
-                all_pair_no_single_pixel,
-            )
-        )
-        vertical_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1],
-                    page_angle + Angle.deg(90.0),
-                    epsilon_angle,
-                    Angle.deg(180),
-                ),
-                all_angles,
-            )
-        )
-        horizontal_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1], page_angle, epsilon_angle, Angle.deg(180)
-                ),
-                all_angles,
-            )
-        )
-        vertical_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posx_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                vertical_lines,
-            )
-        )
-        horizontal_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posy_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                horizontal_lines,
-            )
-        )
-        vertical_lines_pos.sort(key=lambda x: x[0])
-        horizontal_lines_pos.sort(key=lambda x: x[0])
-        for posx, angle in vertical_lines_pos:
-            mask = np.zeros((height, width), np.uint8)
-            bottom_point = compute.get_bottom_point_from_alpha_posx(
-                angle, posx, height
-            )
-            if posx &lt; width / 2:
-                pts = np.array(
-                    [
-                        [-1, 0],
-                        [posx - 1, 0],
-                        [bottom_point[0] - 1, bottom_point[1]],
-                        [-1, height - 1],
-                    ]
-                )
-            else:
-                pts = np.array(
-                    [
-                        [width, 0],
-                        [posx + 1, 0],
-                        [bottom_point[0] + 1, bottom_point[1]],
-                        [width, height - 1],
-                    ]
-                )
-            mask = cv2.drawContours(mask, [pts], 0, 255, -1)
-            histogram = cv2.calcHist([threshold2], [0], mask, [2], [0, 256])
-            if __pourcentage_white_allowed__ * histogram[0] &gt; sum(
-                histogram[1:]
-            ) or __pourcentage_white_allowed__ * histogram[-1] &gt; sum(
-                histogram[:-1]
-            ):
-                mask_border_only = cv2.drawContours(
-                    mask_border_only, [pts], 0, (0), -1
-                )
-        for posy, angle in horizontal_lines_pos:
-            mask = np.zeros((height, width), np.uint8)
-            bottom_point = compute.get_right_point_from_alpha_posy(
-                angle, posy, width
-            )
-            if posy &lt; height / 2:
-                pts = np.array(
-                    [
-                        [0, -1],
-                        [0, posy - 1],
-                        [bottom_point[0], bottom_point[1] - 1],
-                        [width - 1, -1],
-                    ]
-                )
-            else:
-                pts = np.array(
-                    [
-                        [0, height],
-                        [0, posy + 1],
-                        [bottom_point[0], bottom_point[1] + 1],
-                        [width - 1, height],
-                    ]
-                )
-            mask = cv2.drawContours(mask, [pts], 0, 255, -1)
-&gt;           histogram = cv2.calcHist([threshold2], [0], mask, [2], [0, 256])
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
 E           Failed: Timeout &gt;1.0s
 
-cv2ext.py:811: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/wrong_split_line_2.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140647492572928) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140009764665088) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -2567,7 +2068,7 @@ cv2ext.py:811: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_wave_split_line_png" time="1.000"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_wave_split_line_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_wave_split_line_png" time="1.101"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_wave_split_line_png() -&gt; None:
         """The split line by wave method was wrong."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -2626,49 +2127,41 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:109: in remove_black_border_in_image
-    ) = cv2ext.find_longest_lines_in_border(
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-shape = (3507, 4960), epsilon = 5
-cnt = array([[[3057,  876]],
+self = &lt;debug_image.DebugImage object at 0x7f25109bffa0&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
 
-       [[3057,  914]],
-
-       [[3079,  914]],
-
-       ...,
-
-       [[3062,  877]],
-
-       [[3061,  877]],
-
-       [[3060,  876]]], dtype=int32)
-
-    def find_longest_lines_in_border(
-        shape: Tuple[int, int], epsilon: int, cnt: np.ndarray
-    ) -&gt; Tuple[Tuple[int, int], Tuple[int, int], Tuple[int, int], Tuple[int, int]]:
-        height, width = shape
-        left_top = height
-        left_bottom = 0
-        right_top = height
-        right_bottom = 0
-        top_left = width
-        top_right = 0
-        bottom_left = width
-        bottom_right = 0
-        for pt1, pt2 in compute.iterator_zip_n_n_1(cnt):
-&gt;           point1_x, point1_y = pt1[0]
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
 E           Failed: Timeout &gt;1.0s
 
-cv2ext.py:656: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/wrong_wave_split_line.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140636115760896) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139797971138304) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -2680,7 +2173,7 @@ cv2ext.py:656: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_small_wave_png" time="1.004"><failure message="Failed: Timeout &gt;1.0s">def test_small_wave_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_small_wave_png" time="1.193"><failure message="Failed: Timeout &gt;1.0s">def test_small_wave_png() -&gt; None:
         """The wave at the bottom of the image is very small."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -2739,124 +2232,41 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:119: in remove_black_border_in_image
-    cv2ext.insert_border_in_mask(
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-cnt = array([[[2464, 3493]],
+self = &lt;debug_image.DebugImage object at 0x7f566a1272e0&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
 
-       [[2456, 3501]],
-
-       [[2455, 3501]],
-
-       [[2451, 3505]],
-
-       [[2450, 3505]],..., 3506]],
-
-       [[2464, 3499]],
-
-       [[2465, 3498]],
-
-       [[2465, 3497]],
-
-       [[2464, 3496]]], dtype=int32)
-threshold2 = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-mask_border_only = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-epsilon = (5, 3.0°), page_angle = 0.0°
-
-    def insert_border_in_mask(
-        cnt: np.ndarray,
-        threshold2: np.ndarray,
-        mask_border_only: np.ndarray,
-        epsilon: Tuple[int, Angle],
-        page_angle: Angle,
-    ) -&gt; None:
-        __pourcentage_white_allowed__ = 0.01
-        epsilon_border, epsilon_angle = epsilon
-        height, width = get_hw(threshold2)
-        cnt2 = cnt[cnt[:, 0, 0] &gt; epsilon_border]
-        cnt3 = cnt2[cnt2[:, 0, 0] &lt; width - 1 - epsilon_border]
-        cnt4 = cnt3[cnt3[:, 0, 1] &gt; epsilon_border]
-        cnt5 = cnt4[cnt4[:, 0, 1] &lt; height - 1 - epsilon_border]
-        if len(cnt5) == 0:
-            return
-        contour_approximate = cv2.approxPolyDP(cnt5, epsilon_border, True)
-        all_pair = list(compute.iterator_zip_n_n_1(contour_approximate))
-        all_pair_no_single_pixel = list(
-            filter(
-                lambda x: x[0][0][0] != x[1][0][0] or x[0][0][1] != x[1][0][1],
-                all_pair,
-            )
-        )
-        all_angles = list(
-            map(
-                lambda x: (
-                    (x[0][0], x[1][0]),
-                    compute.get_angle_0_180(x[0][0], x[1][0]),
-                    np.linalg.norm(x[0][0] - x[1][0]),
-                ),
-                all_pair_no_single_pixel,
-            )
-        )
-        vertical_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1],
-                    page_angle + Angle.deg(90.0),
-                    epsilon_angle,
-                    Angle.deg(180),
-                ),
-                all_angles,
-            )
-        )
-        horizontal_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1], page_angle, epsilon_angle, Angle.deg(180)
-                ),
-                all_angles,
-            )
-        )
-        vertical_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posx_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                vertical_lines,
-            )
-        )
-        horizontal_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posy_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                horizontal_lines,
-            )
-        )
-        vertical_lines_pos.sort(key=lambda x: x[0])
-        horizontal_lines_pos.sort(key=lambda x: x[0])
-        for posx, angle in vertical_lines_pos:
-&gt;           mask = np.zeros((height, width), np.uint8)
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
 E           Failed: Timeout &gt;1.0s
 
-cv2ext.py:755: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/small_wave.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140647492572928) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140009764665088) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -2868,7 +2278,7 @@ cv2ext.py:755: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_line_algo_png" time="1.000"><failure message="Failed: Timeout &gt;1.0s">def test_no_split_line_line_algo_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_line_algo_png" time="1.002"><failure message="Failed: Timeout &gt;1.0s">def test_no_split_line_line_algo_png() -&gt; None:
         """No line for split line with line detection algo."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -2929,54 +2339,39 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:109: in remove_black_border_in_image
-    ) = cv2ext.find_longest_lines_in_border(
+page/find_images.py:100: in remove_black_border_in_image
+    mask_border_only = 255 * np.ones(shape=gray_bordered.shape, dtype=np.uint8)
+/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/numpy/core/numeric.py:204: in ones
+    multiarray.copyto(a, 1, casting='unsafe')
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-shape = (3507, 4960), epsilon = 5
-cnt = array([[[4393,  258]],
+args = (array([[1, 1, 1, ..., 1, 1, 1],
+       [1, 1, 1, ..., 1, 1, 1],
+       [1, 1, 1, ..., 1, 1, 1],
+       ...,
+       [1, 1, 1, ..., 1, 1, 1],
+       [1, 1, 1, ..., 1, 1, 1],
+       [1, 1, 1, ..., 1, 1, 1]], dtype=uint8), 1)
+kwargs = {'casting': 'unsafe'}
+relevant_args = (array([[1, 1, 1, ..., 1, 1, 1],
+       [1, 1, 1, ..., 1, 1, 1],
+       [1, 1, 1, ..., 1, 1, 1],
+       ...,
+       [1, 1, 1, ..., 1, 1, 1],
+       [1, 1, 1, ..., 1, 1, 1],
+       [1, 1, 1, ..., 1, 1, 1]], dtype=uint8), 1, None)
 
-       [[4393,  299]],
+&gt;   ???
+E   Failed: Timeout &gt;1.0s
 
-       [[4392,  300]],
-
-       [[4399,  300]],
-
-       [[4401,  298]],...,  262]],
-
-       [[4403,  262]],
-
-       [[4402,  261]],
-
-       [[4401,  261]],
-
-       [[4398,  258]]], dtype=int32)
-
-    def find_longest_lines_in_border(
-        shape: Tuple[int, int], epsilon: int, cnt: np.ndarray
-    ) -&gt; Tuple[Tuple[int, int], Tuple[int, int], Tuple[int, int], Tuple[int, int]]:
-        height, width = shape
-        left_top = height
-        left_bottom = 0
-        right_top = height
-        right_bottom = 0
-        top_left = width
-        top_right = 0
-        bottom_left = width
-        bottom_right = 0
-        for pt1, pt2 in compute.iterator_zip_n_n_1(cnt):
-            point1_x, point1_y = pt1[0]
-&gt;           point2_x, point2_y = pt2[0]
-E           Failed: Timeout &gt;1.0s
-
-cv2ext.py:657: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+&lt;__array_function__ internals&gt;:5: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/no_split_line_line_algo.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140636115760896) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139797971138304) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -2988,7 +2383,7 @@ cv2ext.py:657: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_3_png" time="1.011"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_split_line_3_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_3_png" time="1.070"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_split_line_3_png() -&gt; None:
         """The split line was not the right one."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -3047,180 +2442,41 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:119: in remove_black_border_in_image
-    cv2ext.insert_border_in_mask(
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-cnt = array([[[2401,    0]],
+self = &lt;debug_image.DebugImage object at 0x7f566a1272e0&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
 
-       [[2401,    6]],
-
-       [[2405,    6]],
-
-       [[2406,    7]],
-
-       [[2409,    7]],..., 3470]],
-
-       [[4871, 3471]],
-
-       [[4871, 3506]],
-
-       [[4959, 3506]],
-
-       [[4959,    0]]], dtype=int32)
-threshold2 = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-mask_border_only = array([[255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   ...,   0,   0,   0],
-       [255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   0,   0,   0]], dtype=uint8)
-epsilon = (5, 3.0°), page_angle = 0.0°
-
-    def insert_border_in_mask(
-        cnt: np.ndarray,
-        threshold2: np.ndarray,
-        mask_border_only: np.ndarray,
-        epsilon: Tuple[int, Angle],
-        page_angle: Angle,
-    ) -&gt; None:
-        __pourcentage_white_allowed__ = 0.01
-        epsilon_border, epsilon_angle = epsilon
-        height, width = get_hw(threshold2)
-        cnt2 = cnt[cnt[:, 0, 0] &gt; epsilon_border]
-        cnt3 = cnt2[cnt2[:, 0, 0] &lt; width - 1 - epsilon_border]
-        cnt4 = cnt3[cnt3[:, 0, 1] &gt; epsilon_border]
-        cnt5 = cnt4[cnt4[:, 0, 1] &lt; height - 1 - epsilon_border]
-        if len(cnt5) == 0:
-            return
-        contour_approximate = cv2.approxPolyDP(cnt5, epsilon_border, True)
-        all_pair = list(compute.iterator_zip_n_n_1(contour_approximate))
-        all_pair_no_single_pixel = list(
-            filter(
-                lambda x: x[0][0][0] != x[1][0][0] or x[0][0][1] != x[1][0][1],
-                all_pair,
-            )
-        )
-        all_angles = list(
-            map(
-                lambda x: (
-                    (x[0][0], x[1][0]),
-                    compute.get_angle_0_180(x[0][0], x[1][0]),
-                    np.linalg.norm(x[0][0] - x[1][0]),
-                ),
-                all_pair_no_single_pixel,
-            )
-        )
-        vertical_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1],
-                    page_angle + Angle.deg(90.0),
-                    epsilon_angle,
-                    Angle.deg(180),
-                ),
-                all_angles,
-            )
-        )
-        horizontal_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1], page_angle, epsilon_angle, Angle.deg(180)
-                ),
-                all_angles,
-            )
-        )
-        vertical_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posx_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                vertical_lines,
-            )
-        )
-        horizontal_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posy_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                horizontal_lines,
-            )
-        )
-        vertical_lines_pos.sort(key=lambda x: x[0])
-        horizontal_lines_pos.sort(key=lambda x: x[0])
-        for posx, angle in vertical_lines_pos:
-            mask = np.zeros((height, width), np.uint8)
-            bottom_point = compute.get_bottom_point_from_alpha_posx(
-                angle, posx, height
-            )
-            if posx &lt; width / 2:
-                pts = np.array(
-                    [
-                        [-1, 0],
-                        [posx - 1, 0],
-                        [bottom_point[0] - 1, bottom_point[1]],
-                        [-1, height - 1],
-                    ]
-                )
-            else:
-                pts = np.array(
-                    [
-                        [width, 0],
-                        [posx + 1, 0],
-                        [bottom_point[0] + 1, bottom_point[1]],
-                        [width, height - 1],
-                    ]
-                )
-            mask = cv2.drawContours(mask, [pts], 0, 255, -1)
-            histogram = cv2.calcHist([threshold2], [0], mask, [2], [0, 256])
-            if __pourcentage_white_allowed__ * histogram[0] &gt; sum(
-                histogram[1:]
-            ) or __pourcentage_white_allowed__ * histogram[-1] &gt; sum(
-                histogram[:-1]
-            ):
-                mask_border_only = cv2.drawContours(
-                    mask_border_only, [pts], 0, (0), -1
-                )
-        for posy, angle in horizontal_lines_pos:
-            mask = np.zeros((height, width), np.uint8)
-            bottom_point = compute.get_right_point_from_alpha_posy(
-                angle, posy, width
-            )
-            if posy &lt; height / 2:
-                pts = np.array(
-                    [
-                        [0, -1],
-                        [0, posy - 1],
-                        [bottom_point[0], bottom_point[1] - 1],
-                        [width - 1, -1],
-                    ]
-                )
-            else:
-                pts = np.array(
-                    [
-                        [0, height],
-                        [0, posy + 1],
-                        [bottom_point[0], bottom_point[1] + 1],
-                        [width - 1, height],
-                    ]
-                )
-            mask = cv2.drawContours(mask, [pts], 0, 255, -1)
-&gt;           histogram = cv2.calcHist([threshold2], [0], mask, [2], [0, 256])
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
 E           Failed: Timeout &gt;1.0s
 
-cv2ext.py:811: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/wrong_split_line_3.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140647492572928) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140009764665088) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -3232,7 +2488,7 @@ cv2ext.py:811: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_failed_split_line_line_algo_png" time="1.001"><failure message="Failed: Timeout &gt;1.0s">def test_failed_split_line_line_algo_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_failed_split_line_line_algo_png" time="1.006"><failure message="Failed: Timeout &gt;1.0s">def test_failed_split_line_line_algo_png() -&gt; None:
         """Failed to compute line for split line with line detection alog."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -3293,373 +2549,27 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:128: in remove_black_border_in_image
-    debug.image(mask_border_only, DebugImage.Level.INFO)
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-self = &lt;debug_image.DebugImage object at 0x7fe83f75e040&gt;
-img = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-level = &lt;Level.INFO: 2&gt;
-
-    def image(self, img: np.ndarray, level: Level) -&gt; None:
-        if level &gt;= self.__level:
-            name = self.name()
-            self.__next()
-            self.__next_when_dec[0 : self.__sub_level] = [
-                True for x in range(self.__sub_level)
-            ]
-&gt;           if not cv2.imwrite(name, img):
-E           Failed: Timeout &gt;1.0s
-
-debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
-
---------------------------------- Captured Out ---------------------------------
-/home/runner/work/ocr-book/ocr-book/tests/failed_split_line_line_algo.png
-
-</system-out><system-err>--------------------------------- Captured Err ---------------------------------
-
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140636115760896) ~~~~~~~~~~~~~~~~~~~~~
-  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
-    reply.run()
-  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
-    self._result = func(*args, **kwargs)
-  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
-    msg = Message.from_io(io)
-  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 432, in from_io
-    header = io.read(9)  # type 1, channel 4, payload 4
-  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
-    data = self._read(numbytes - len(buf))
-
-</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_3_png" time="1.005"><failure message="Failed: Timeout &gt;1.0s">def test_crop_too_much_3_png() -&gt; None:
-        """Failed to compute line for split line with line detection alog."""
-&gt;       treat_file(
-            MockDisableSeparatePage(MAX_VAL),
-            get_absolute_from_current_path(__file__, "crop_too_much_3.png"),
-            {
-                ConstString.separation_double_page_angle(): (
-                    "range",
-                    Angle.deg(89.51),
-                    Angle.deg(89.56),
-                ),
-                ConstString.separation_double_page_y(): ("range", 2494, 2499),
-                ConstString.page_rotation(1): (
-                    "range",
-                    Angle.deg(-0.96),
-                    Angle.deg(-0.89),
-                ),
-                ConstString.page_rotation(2): (
-                    "range",
-                    Angle.deg(-0.16),
-                    Angle.deg(-0.14),
-                ),
-                ConstString.image_crop(1, "x1"): ("range", 373, 374),
-                ConstString.image_crop(1, "y1"): ("range", 258, 258),
-                ConstString.image_crop(1, "x2"): ("range", 2385, 2386),
-                ConstString.image_crop(1, "y2"): ("range", 3458, 3459),
-                ConstString.image_crop(2, "x1"): ("range", 167, 172),
-                ConstString.image_crop(2, "y1"): ("range", 228, 228),
-                ConstString.image_crop(2, "x2"): ("range", 2180, 2185),
-                ConstString.image_crop(2, "y2"): ("range", 3417, 3417),
-                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
-                ConstString.image_border(1, 1): ("range", 237, 239),
-                ConstString.image_border(1, 2): ("range", 46, 50),
-                ConstString.image_border(1, 3): ("range", 223, 224),
-                ConstString.image_border(1, 4): ("range", 223, 224),
-                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
-                ConstString.image_border(2, 1): ("range", 192, 214),
-                ConstString.image_border(2, 2): ("range", 84, 106),
-                ConstString.image_border(2, 3): ("range", 223, 223),
-                ConstString.image_border(2, 4): ("range", 223, 223),
-            },
-        )
-
-tests/test_images.py:843: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-script.py:372: in treat_file
-    sep.treat_file(
-script.py:298: in treat_file
-    image1, image2 = self.split_two_waves(
-tests/mock_separate_page.py:23: in split_two_waves
-    return super().split_two_waves(image, parameters, debug)
-script.py:36: in split_two_waves
-    self.__images_found = page.find_images.find_images(
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:149: in find_images
-    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
 page/find_images.py:119: in remove_black_border_in_image
     cv2ext.insert_border_in_mask(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-cnt = array([[[   0,    0]],
+cnt = array([[[3402,    0]],
 
-       [[   0, 3506]],
+       [[3403,    0]],
 
-       [[  64, 3506]],
+       [[3404,    1]],
 
-       [[  64, 3475]],
+       [[3405,    1]],
 
-       [[  63, 3474]],...,   78]],
+       [[3406,    2]],...,   18]],
 
-       [[4957,   90]],
+       [[4957,   19]],
 
-       [[4958,   89]],
+       [[4958,   19]],
 
-       [[4959,   89]],
+       [[4959,   18]],
 
        [[4959,    0]]], dtype=int32)
-threshold2 = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-mask_border_only = array([[  0,   0,   0, ..., 255, 255, 255],
-       [  0,   0,   0, ..., 255, 255, 255],
-       [  0,   0,   0, ..., 25..., 255, 255, 255],
-       [  0,   0,   0, ..., 255, 255, 255],
-       [  0,   0,   0, ..., 255, 255, 255]], dtype=uint8)
-epsilon = (5, 3.0°), page_angle = 0.0°
-
-    def insert_border_in_mask(
-        cnt: np.ndarray,
-        threshold2: np.ndarray,
-        mask_border_only: np.ndarray,
-        epsilon: Tuple[int, Angle],
-        page_angle: Angle,
-    ) -&gt; None:
-        __pourcentage_white_allowed__ = 0.01
-        epsilon_border, epsilon_angle = epsilon
-        height, width = get_hw(threshold2)
-        cnt2 = cnt[cnt[:, 0, 0] &gt; epsilon_border]
-        cnt3 = cnt2[cnt2[:, 0, 0] &lt; width - 1 - epsilon_border]
-        cnt4 = cnt3[cnt3[:, 0, 1] &gt; epsilon_border]
-        cnt5 = cnt4[cnt4[:, 0, 1] &lt; height - 1 - epsilon_border]
-        if len(cnt5) == 0:
-            return
-        contour_approximate = cv2.approxPolyDP(cnt5, epsilon_border, True)
-        all_pair = list(compute.iterator_zip_n_n_1(contour_approximate))
-        all_pair_no_single_pixel = list(
-            filter(
-                lambda x: x[0][0][0] != x[1][0][0] or x[0][0][1] != x[1][0][1],
-                all_pair,
-            )
-        )
-        all_angles = list(
-            map(
-                lambda x: (
-                    (x[0][0], x[1][0]),
-                    compute.get_angle_0_180(x[0][0], x[1][0]),
-                    np.linalg.norm(x[0][0] - x[1][0]),
-                ),
-                all_pair_no_single_pixel,
-            )
-        )
-        vertical_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1],
-                    page_angle + Angle.deg(90.0),
-                    epsilon_angle,
-                    Angle.deg(180),
-                ),
-                all_angles,
-            )
-        )
-        horizontal_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1], page_angle, epsilon_angle, Angle.deg(180)
-                ),
-                all_angles,
-            )
-        )
-        vertical_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posx_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                vertical_lines,
-            )
-        )
-        horizontal_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posy_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                horizontal_lines,
-            )
-        )
-        vertical_lines_pos.sort(key=lambda x: x[0])
-        horizontal_lines_pos.sort(key=lambda x: x[0])
-        for posx, angle in vertical_lines_pos:
-            mask = np.zeros((height, width), np.uint8)
-            bottom_point = compute.get_bottom_point_from_alpha_posx(
-                angle, posx, height
-            )
-            if posx &lt; width / 2:
-                pts = np.array(
-                    [
-                        [-1, 0],
-                        [posx - 1, 0],
-                        [bottom_point[0] - 1, bottom_point[1]],
-                        [-1, height - 1],
-                    ]
-                )
-            else:
-                pts = np.array(
-                    [
-                        [width, 0],
-                        [posx + 1, 0],
-                        [bottom_point[0] + 1, bottom_point[1]],
-                        [width, height - 1],
-                    ]
-                )
-            mask = cv2.drawContours(mask, [pts], 0, 255, -1)
-            histogram = cv2.calcHist([threshold2], [0], mask, [2], [0, 256])
-            if __pourcentage_white_allowed__ * histogram[0] &gt; sum(
-                histogram[1:]
-            ) or __pourcentage_white_allowed__ * histogram[-1] &gt; sum(
-                histogram[:-1]
-            ):
-                mask_border_only = cv2.drawContours(
-                    mask_border_only, [pts], 0, (0), -1
-                )
-        for posy, angle in horizontal_lines_pos:
-            mask = np.zeros((height, width), np.uint8)
-            bottom_point = compute.get_right_point_from_alpha_posy(
-                angle, posy, width
-            )
-            if posy &lt; height / 2:
-                pts = np.array(
-                    [
-                        [0, -1],
-                        [0, posy - 1],
-                        [bottom_point[0], bottom_point[1] - 1],
-                        [width - 1, -1],
-                    ]
-                )
-            else:
-                pts = np.array(
-                    [
-                        [0, height],
-                        [0, posy + 1],
-                        [bottom_point[0], bottom_point[1] + 1],
-                        [width - 1, height],
-                    ]
-                )
-            mask = cv2.drawContours(mask, [pts], 0, 255, -1)
-&gt;           histogram = cv2.calcHist([threshold2], [0], mask, [2], [0, 256])
-E           Failed: Timeout &gt;1.0s
-
-cv2ext.py:811: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
-
---------------------------------- Captured Out ---------------------------------
-/home/runner/work/ocr-book/ocr-book/tests/crop_too_much_3.png
-
-</system-out><system-err>--------------------------------- Captured Err ---------------------------------
-
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140647492572928) ~~~~~~~~~~~~~~~~~~~~~
-  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
-    reply.run()
-  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
-    self._result = func(*args, **kwargs)
-  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
-    msg = Message.from_io(io)
-  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 432, in from_io
-    header = io.read(9)  # type 1, channel 4, payload 4
-  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
-    data = self._read(numbytes - len(buf))
-
-</system-err></testcase><testcase classname="tests.test_images" name="test_failed_split_line_line_algo_2_png" time="1.005"><failure message="Failed: Timeout &gt;1.0s">def test_failed_split_line_line_algo_2_png() -&gt; None:
-        """Failed to compute line for split line with line detection alog."""
-&gt;       treat_file(
-            MockDisableSeparatePage(MAX_VAL),
-            get_absolute_from_current_path(
-                __file__, "failed_split_line_line_algo_2.png"
-            ),
-            {
-                ConstString.separation_double_page_angle(): (
-                    "range",
-                    Angle.deg(89.97),
-                    Angle.deg(90.05),
-                ),
-                ConstString.separation_double_page_y(): ("range", 2497, 2499),
-                ConstString.page_rotation(1): (
-                    "range",
-                    Angle.deg(-0.01),
-                    Angle.deg(0.01),
-                ),
-                ConstString.page_rotation(2): (
-                    "range",
-                    Angle.deg(0.59),
-                    Angle.deg(0.61),
-                ),
-                ConstString.image_crop(1, "x1"): ("range", 272, 272),
-                ConstString.image_crop(1, "y1"): ("range", 149, 149),
-                ConstString.image_crop(1, "x2"): ("range", 2383, 2383),
-                ConstString.image_crop(1, "y2"): ("range", 3353, 3353),
-                ConstString.image_crop(2, "x1"): ("range", 107, 124),
-                ConstString.image_crop(2, "y1"): ("range", 155, 155),
-                ConstString.image_crop(2, "x2"): ("range", 2230, 2247),
-                ConstString.image_crop(2, "y2"): ("range", 3350, 3350),
-                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
-                ConstString.image_border(1, 1): ("range", 137, 139),
-                ConstString.image_border(1, 2): ("range", 144, 146),
-                ConstString.image_border(1, 3): ("range", 174, 174),
-                ConstString.image_border(1, 4): ("range", 174, 174),
-                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
-                ConstString.image_border(2, 1): ("range", 135, 146),
-                ConstString.image_border(2, 2): ("range", 145, 157),
-                ConstString.image_border(2, 3): ("range", 168, 168),
-                ConstString.image_border(2, 4): ("range", 168, 168),
-            },
-        )
-
-tests/test_images.py:797: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-script.py:372: in treat_file
-    sep.treat_file(
-script.py:298: in treat_file
-    image1, image2 = self.split_two_waves(
-tests/mock_separate_page.py:23: in split_two_waves
-    return super().split_two_waves(image, parameters, debug)
-script.py:36: in split_two_waves
-    self.__images_found = page.find_images.find_images(
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:149: in find_images
-    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:119: in remove_black_border_in_image
-    cv2ext.insert_border_in_mask(
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-cnt = array([[[4959,  823]],
-
-       [[4959,  871]],
-
-       [[4958,  872]],
-
-       [[4958,  886]],
-
-       [[4959,  887]],..., 3503]],
-
-       [[4886, 3505]],
-
-       [[4885, 3505]],
-
-       [[4884, 3506]],
-
-       [[4959, 3506]]], dtype=int32)
 threshold2 = array([[255, 255, 255, ..., 255, 255, 255],
        [255, 255, 255, ..., 255, 255, 255],
        [255, 255, 255, ..., 25..., 255, 255, 255],
@@ -3769,17 +2679,50 @@ epsilon = (5, 3.0°), page_angle = 0.0°
                     ]
                 )
             mask = cv2.drawContours(mask, [pts], 0, 255, -1)
+            histogram = cv2.calcHist([threshold2], [0], mask, [2], [0, 256])
+            if __pourcentage_white_allowed__ * histogram[0] &gt; sum(
+                histogram[1:]
+            ) or __pourcentage_white_allowed__ * histogram[-1] &gt; sum(
+                histogram[:-1]
+            ):
+                mask_border_only = cv2.drawContours(
+                    mask_border_only, [pts], 0, (0), -1
+                )
+        for posy, angle in horizontal_lines_pos:
+            mask = np.zeros((height, width), np.uint8)
+            bottom_point = compute.get_right_point_from_alpha_posy(
+                angle, posy, width
+            )
+            if posy &lt; height / 2:
+                pts = np.array(
+                    [
+                        [0, -1],
+                        [0, posy - 1],
+                        [bottom_point[0], bottom_point[1] - 1],
+                        [width - 1, -1],
+                    ]
+                )
+            else:
+                pts = np.array(
+                    [
+                        [0, height],
+                        [0, posy + 1],
+                        [bottom_point[0], bottom_point[1] + 1],
+                        [width - 1, height],
+                    ]
+                )
+            mask = cv2.drawContours(mask, [pts], 0, 255, -1)
 &gt;           histogram = cv2.calcHist([threshold2], [0], mask, [2], [0, 256])
 E           Failed: Timeout &gt;1.0s
 
-cv2ext.py:778: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+cv2ext.py:811: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/runner/work/ocr-book/ocr-book/tests/failed_split_line_line_algo_2.png
+/home/runner/work/ocr-book/ocr-book/tests/failed_split_line_line_algo.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140636115760896) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139797971138304) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -3791,7 +2734,219 @@ cv2ext.py:778: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_wave_split_line_2_png" time="1.009"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_wave_split_line_2_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_3_png" time="1.057"><failure message="Failed: Timeout &gt;1.0s">def test_crop_too_much_3_png() -&gt; None:
+        """Failed to compute line for split line with line detection alog."""
+&gt;       treat_file(
+            MockDisableSeparatePage(MAX_VAL),
+            get_absolute_from_current_path(__file__, "crop_too_much_3.png"),
+            {
+                ConstString.separation_double_page_angle(): (
+                    "range",
+                    Angle.deg(89.51),
+                    Angle.deg(89.56),
+                ),
+                ConstString.separation_double_page_y(): ("range", 2494, 2499),
+                ConstString.page_rotation(1): (
+                    "range",
+                    Angle.deg(-0.96),
+                    Angle.deg(-0.89),
+                ),
+                ConstString.page_rotation(2): (
+                    "range",
+                    Angle.deg(-0.16),
+                    Angle.deg(-0.14),
+                ),
+                ConstString.image_crop(1, "x1"): ("range", 373, 374),
+                ConstString.image_crop(1, "y1"): ("range", 258, 258),
+                ConstString.image_crop(1, "x2"): ("range", 2385, 2386),
+                ConstString.image_crop(1, "y2"): ("range", 3458, 3459),
+                ConstString.image_crop(2, "x1"): ("range", 167, 172),
+                ConstString.image_crop(2, "y1"): ("range", 228, 228),
+                ConstString.image_crop(2, "x2"): ("range", 2180, 2185),
+                ConstString.image_crop(2, "y2"): ("range", 3417, 3417),
+                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+                ConstString.image_border(1, 1): ("range", 237, 239),
+                ConstString.image_border(1, 2): ("range", 46, 50),
+                ConstString.image_border(1, 3): ("range", 223, 224),
+                ConstString.image_border(1, 4): ("range", 223, 224),
+                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+                ConstString.image_border(2, 1): ("range", 192, 214),
+                ConstString.image_border(2, 2): ("range", 84, 106),
+                ConstString.image_border(2, 3): ("range", 223, 223),
+                ConstString.image_border(2, 4): ("range", 223, 223),
+            },
+        )
+
+tests/test_images.py:843: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+script.py:372: in treat_file
+    sep.treat_file(
+script.py:298: in treat_file
+    image1, image2 = self.split_two_waves(
+tests/mock_separate_page.py:23: in split_two_waves
+    return super().split_two_waves(image, parameters, debug)
+script.py:36: in split_two_waves
+    self.__images_found = page.find_images.find_images(
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:149: in find_images
+    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;debug_image.DebugImage object at 0x7f566a1272e0&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
+
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
+E           Failed: Timeout &gt;1.0s
+
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+/home/runner/work/ocr-book/ocr-book/tests/crop_too_much_3.png
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140009764665088) ~~~~~~~~~~~~~~~~~~~~~
+  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
+    reply.run()
+  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
+    self._result = func(*args, **kwargs)
+  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
+    msg = Message.from_io(io)
+  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 432, in from_io
+    header = io.read(9)  # type 1, channel 4, payload 4
+  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
+    data = self._read(numbytes - len(buf))
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_failed_split_line_line_algo_2_png" time="1.049"><failure message="Failed: Timeout &gt;1.0s">def test_failed_split_line_line_algo_2_png() -&gt; None:
+        """Failed to compute line for split line with line detection alog."""
+&gt;       treat_file(
+            MockDisableSeparatePage(MAX_VAL),
+            get_absolute_from_current_path(
+                __file__, "failed_split_line_line_algo_2.png"
+            ),
+            {
+                ConstString.separation_double_page_angle(): (
+                    "range",
+                    Angle.deg(89.97),
+                    Angle.deg(90.05),
+                ),
+                ConstString.separation_double_page_y(): ("range", 2497, 2499),
+                ConstString.page_rotation(1): (
+                    "range",
+                    Angle.deg(-0.01),
+                    Angle.deg(0.01),
+                ),
+                ConstString.page_rotation(2): (
+                    "range",
+                    Angle.deg(0.59),
+                    Angle.deg(0.61),
+                ),
+                ConstString.image_crop(1, "x1"): ("range", 272, 272),
+                ConstString.image_crop(1, "y1"): ("range", 149, 149),
+                ConstString.image_crop(1, "x2"): ("range", 2383, 2383),
+                ConstString.image_crop(1, "y2"): ("range", 3353, 3353),
+                ConstString.image_crop(2, "x1"): ("range", 107, 124),
+                ConstString.image_crop(2, "y1"): ("range", 155, 155),
+                ConstString.image_crop(2, "x2"): ("range", 2230, 2247),
+                ConstString.image_crop(2, "y2"): ("range", 3350, 3350),
+                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+                ConstString.image_border(1, 1): ("range", 137, 139),
+                ConstString.image_border(1, 2): ("range", 144, 146),
+                ConstString.image_border(1, 3): ("range", 174, 174),
+                ConstString.image_border(1, 4): ("range", 174, 174),
+                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+                ConstString.image_border(2, 1): ("range", 135, 146),
+                ConstString.image_border(2, 2): ("range", 145, 157),
+                ConstString.image_border(2, 3): ("range", 168, 168),
+                ConstString.image_border(2, 4): ("range", 168, 168),
+            },
+        )
+
+tests/test_images.py:797: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+script.py:372: in treat_file
+    sep.treat_file(
+script.py:298: in treat_file
+    image1, image2 = self.split_two_waves(
+tests/mock_separate_page.py:23: in split_two_waves
+    return super().split_two_waves(image, parameters, debug)
+script.py:36: in split_two_waves
+    self.__images_found = page.find_images.find_images(
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:149: in find_images
+    mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;debug_image.DebugImage object at 0x7f25109bffa0&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
+
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
+E           Failed: Timeout &gt;1.0s
+
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+/home/runner/work/ocr-book/ocr-book/tests/failed_split_line_line_algo_2.png
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139797971138304) ~~~~~~~~~~~~~~~~~~~~~
+  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
+    reply.run()
+  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
+    self._result = func(*args, **kwargs)
+  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
+    msg = Message.from_io(io)
+  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 432, in from_io
+    header = io.read(9)  # type 1, channel 4, payload 4
+  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
+    data = self._read(numbytes - len(buf))
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_wave_split_line_2_png" time="1.034"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_wave_split_line_2_png() -&gt; None:
         """Need to relax tolerance to have the split line by wave algo."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -3852,180 +3007,41 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:119: in remove_black_border_in_image
-    cv2ext.insert_border_in_mask(
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-cnt = array([[[1335,    0]],
+self = &lt;debug_image.DebugImage object at 0x7f566a1272e0&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
 
-       [[1335,    4]],
-
-       [[1336,    4]],
-
-       [[1337,    3]],
-
-       [[1338,    4]],..., 3489]],
-
-       [[4886, 3490]],
-
-       [[4886, 3506]],
-
-       [[4959, 3506]],
-
-       [[4959,    0]]], dtype=int32)
-threshold2 = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-mask_border_only = array([[255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   ...,   0,   0,   0],
-       [255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   0,   0,   0]], dtype=uint8)
-epsilon = (5, 3.0°), page_angle = 0.0°
-
-    def insert_border_in_mask(
-        cnt: np.ndarray,
-        threshold2: np.ndarray,
-        mask_border_only: np.ndarray,
-        epsilon: Tuple[int, Angle],
-        page_angle: Angle,
-    ) -&gt; None:
-        __pourcentage_white_allowed__ = 0.01
-        epsilon_border, epsilon_angle = epsilon
-        height, width = get_hw(threshold2)
-        cnt2 = cnt[cnt[:, 0, 0] &gt; epsilon_border]
-        cnt3 = cnt2[cnt2[:, 0, 0] &lt; width - 1 - epsilon_border]
-        cnt4 = cnt3[cnt3[:, 0, 1] &gt; epsilon_border]
-        cnt5 = cnt4[cnt4[:, 0, 1] &lt; height - 1 - epsilon_border]
-        if len(cnt5) == 0:
-            return
-        contour_approximate = cv2.approxPolyDP(cnt5, epsilon_border, True)
-        all_pair = list(compute.iterator_zip_n_n_1(contour_approximate))
-        all_pair_no_single_pixel = list(
-            filter(
-                lambda x: x[0][0][0] != x[1][0][0] or x[0][0][1] != x[1][0][1],
-                all_pair,
-            )
-        )
-        all_angles = list(
-            map(
-                lambda x: (
-                    (x[0][0], x[1][0]),
-                    compute.get_angle_0_180(x[0][0], x[1][0]),
-                    np.linalg.norm(x[0][0] - x[1][0]),
-                ),
-                all_pair_no_single_pixel,
-            )
-        )
-        vertical_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1],
-                    page_angle + Angle.deg(90.0),
-                    epsilon_angle,
-                    Angle.deg(180),
-                ),
-                all_angles,
-            )
-        )
-        horizontal_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1], page_angle, epsilon_angle, Angle.deg(180)
-                ),
-                all_angles,
-            )
-        )
-        vertical_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posx_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                vertical_lines,
-            )
-        )
-        horizontal_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posy_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                horizontal_lines,
-            )
-        )
-        vertical_lines_pos.sort(key=lambda x: x[0])
-        horizontal_lines_pos.sort(key=lambda x: x[0])
-        for posx, angle in vertical_lines_pos:
-            mask = np.zeros((height, width), np.uint8)
-            bottom_point = compute.get_bottom_point_from_alpha_posx(
-                angle, posx, height
-            )
-            if posx &lt; width / 2:
-                pts = np.array(
-                    [
-                        [-1, 0],
-                        [posx - 1, 0],
-                        [bottom_point[0] - 1, bottom_point[1]],
-                        [-1, height - 1],
-                    ]
-                )
-            else:
-                pts = np.array(
-                    [
-                        [width, 0],
-                        [posx + 1, 0],
-                        [bottom_point[0] + 1, bottom_point[1]],
-                        [width, height - 1],
-                    ]
-                )
-            mask = cv2.drawContours(mask, [pts], 0, 255, -1)
-            histogram = cv2.calcHist([threshold2], [0], mask, [2], [0, 256])
-            if __pourcentage_white_allowed__ * histogram[0] &gt; sum(
-                histogram[1:]
-            ) or __pourcentage_white_allowed__ * histogram[-1] &gt; sum(
-                histogram[:-1]
-            ):
-                mask_border_only = cv2.drawContours(
-                    mask_border_only, [pts], 0, (0), -1
-                )
-        for posy, angle in horizontal_lines_pos:
-            mask = np.zeros((height, width), np.uint8)
-            bottom_point = compute.get_right_point_from_alpha_posy(
-                angle, posy, width
-            )
-            if posy &lt; height / 2:
-                pts = np.array(
-                    [
-                        [0, -1],
-                        [0, posy - 1],
-                        [bottom_point[0], bottom_point[1] - 1],
-                        [width - 1, -1],
-                    ]
-                )
-            else:
-                pts = np.array(
-                    [
-                        [0, height],
-                        [0, posy + 1],
-                        [bottom_point[0], bottom_point[1] + 1],
-                        [width - 1, height],
-                    ]
-                )
-            mask = cv2.drawContours(mask, [pts], 0, 255, -1)
-&gt;           histogram = cv2.calcHist([threshold2], [0], mask, [2], [0, 256])
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
 E           Failed: Timeout &gt;1.0s
 
-cv2ext.py:811: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/wrong_wave_split_line_2.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140647492572928) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140009764665088) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -4098,147 +3114,41 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:119: in remove_black_border_in_image
-    cv2ext.insert_border_in_mask(
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-cnt = array([[[   0,    0]],
+self = &lt;debug_image.DebugImage object at 0x7f25109bffa0&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[255, 255, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
 
-       [[   0,  151]],
-
-       [[   0,   99]],
-
-       [[   1,   98]],
-
-       [[   1,   83]],..., 3505]],
-
-       [[4899, 3505]],
-
-       [[4899, 3506]],
-
-       [[4959, 3506]],
-
-       [[4959,    0]]], dtype=int32)
-threshold2 = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [  0,   0,   0, ..., 255, 255, 255],
-       [  0,   0,   0, ..., 255, 255, 255]], dtype=uint8)
-mask_border_only = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-epsilon = (5, 3.0°), page_angle = 0.0°
-
-    def insert_border_in_mask(
-        cnt: np.ndarray,
-        threshold2: np.ndarray,
-        mask_border_only: np.ndarray,
-        epsilon: Tuple[int, Angle],
-        page_angle: Angle,
-    ) -&gt; None:
-        __pourcentage_white_allowed__ = 0.01
-        epsilon_border, epsilon_angle = epsilon
-        height, width = get_hw(threshold2)
-        cnt2 = cnt[cnt[:, 0, 0] &gt; epsilon_border]
-        cnt3 = cnt2[cnt2[:, 0, 0] &lt; width - 1 - epsilon_border]
-        cnt4 = cnt3[cnt3[:, 0, 1] &gt; epsilon_border]
-        cnt5 = cnt4[cnt4[:, 0, 1] &lt; height - 1 - epsilon_border]
-        if len(cnt5) == 0:
-            return
-        contour_approximate = cv2.approxPolyDP(cnt5, epsilon_border, True)
-        all_pair = list(compute.iterator_zip_n_n_1(contour_approximate))
-        all_pair_no_single_pixel = list(
-            filter(
-                lambda x: x[0][0][0] != x[1][0][0] or x[0][0][1] != x[1][0][1],
-                all_pair,
-            )
-        )
-        all_angles = list(
-            map(
-                lambda x: (
-                    (x[0][0], x[1][0]),
-                    compute.get_angle_0_180(x[0][0], x[1][0]),
-                    np.linalg.norm(x[0][0] - x[1][0]),
-                ),
-                all_pair_no_single_pixel,
-            )
-        )
-        vertical_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1],
-                    page_angle + Angle.deg(90.0),
-                    epsilon_angle,
-                    Angle.deg(180),
-                ),
-                all_angles,
-            )
-        )
-        horizontal_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1], page_angle, epsilon_angle, Angle.deg(180)
-                ),
-                all_angles,
-            )
-        )
-        vertical_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posx_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                vertical_lines,
-            )
-        )
-        horizontal_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posy_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                horizontal_lines,
-            )
-        )
-        vertical_lines_pos.sort(key=lambda x: x[0])
-        horizontal_lines_pos.sort(key=lambda x: x[0])
-        for posx, angle in vertical_lines_pos:
-            mask = np.zeros((height, width), np.uint8)
-            bottom_point = compute.get_bottom_point_from_alpha_posx(
-                angle, posx, height
-            )
-            if posx &lt; width / 2:
-                pts = np.array(
-                    [
-                        [-1, 0],
-                        [posx - 1, 0],
-                        [bottom_point[0] - 1, bottom_point[1]],
-                        [-1, height - 1],
-                    ]
-                )
-            else:
-                pts = np.array(
-                    [
-                        [width, 0],
-                        [posx + 1, 0],
-                        [bottom_point[0] + 1, bottom_point[1]],
-                        [width, height - 1],
-                    ]
-                )
-            mask = cv2.drawContours(mask, [pts], 0, 255, -1)
-&gt;           histogram = cv2.calcHist([threshold2], [0], mask, [2], [0, 256])
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
 E           Failed: Timeout &gt;1.0s
 
-cv2ext.py:778: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/wrong_wave_split_line_3.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140636115760896) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139797971138304) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -4250,7 +3160,7 @@ cv2ext.py:778: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_wave_algo_png" time="1.041"><failure message="Failed: Timeout &gt;1.0s">def test_no_split_line_wave_algo_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_wave_algo_png" time="1.176"><failure message="Failed: Timeout &gt;1.0s">def test_no_split_line_wave_algo_png() -&gt; None:
         """Failed to detect wave due to image."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -4315,7 +3225,7 @@ page/find_images.py:89: in remove_black_border_in_image
     debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7feae5940640&gt;
+self = &lt;debug_image.DebugImage object at 0x7f566a1272e0&gt;
 img = array([[[  0,   0, 255],
         [  0,   0, 255],
         [  0,   0, 255],
@@ -4345,7 +3255,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140647492572928) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140009764665088) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -4357,7 +3267,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_wave_algo_2_png" time="1.005"><failure message="Failed: Timeout &gt;1.0s">def test_no_split_line_wave_algo_2_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_wave_algo_2_png" time="1.000"><failure message="Failed: Timeout &gt;1.0s">def test_no_split_line_wave_algo_2_png() -&gt; None:
         """Failed to detect wave due to missing wave at the bottom."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -4418,180 +3328,61 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:119: in remove_black_border_in_image
-    cv2ext.insert_border_in_mask(
+page/find_images.py:109: in remove_black_border_in_image
+    ) = cv2ext.find_longest_lines_in_border(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-cnt = array([[[ 298,    0]],
+shape = (3507, 4960), epsilon = 5
+cnt = array([[[ 484, 2176]],
 
-       [[ 298,    5]],
+       [[ 484, 2177]],
 
-       [[ 392,    5]],
+       [[ 485, 2177]],
 
-       [[ 393,    6]],
+       [[ 486, 2178]],
 
-       [[ 453,    6]],..., 3505]],
+       [[ 487, 2178]],..., 2178]],
 
-       [[4922, 3505]],
+       [[ 490, 2178]],
 
-       [[4922, 3506]],
+       [[ 489, 2177]],
 
-       [[4959, 3506]],
+       [[ 488, 2177]],
 
-       [[4959,    0]]], dtype=int32)
-threshold2 = array([[255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 255, 255, 255],
-       [255, 255, 255, ..., 25..., 255, 255, 255],
-       [  0,   0,   0, ..., 255, 255, 255],
-       [  0,   0,   0, ..., 255, 255, 255]], dtype=uint8)
-mask_border_only = array([[255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   ...,   0,   0,   0],
-       [255, 255, 255, ...,   0,   0,   0],
-       [255, 255, 255, ...,   0,   0,   0]], dtype=uint8)
-epsilon = (5, 3.0°), page_angle = 0.0°
+       [[ 487, 2176]]], dtype=int32)
 
-    def insert_border_in_mask(
-        cnt: np.ndarray,
-        threshold2: np.ndarray,
-        mask_border_only: np.ndarray,
-        epsilon: Tuple[int, Angle],
-        page_angle: Angle,
-    ) -&gt; None:
-        __pourcentage_white_allowed__ = 0.01
-        epsilon_border, epsilon_angle = epsilon
-        height, width = get_hw(threshold2)
-        cnt2 = cnt[cnt[:, 0, 0] &gt; epsilon_border]
-        cnt3 = cnt2[cnt2[:, 0, 0] &lt; width - 1 - epsilon_border]
-        cnt4 = cnt3[cnt3[:, 0, 1] &gt; epsilon_border]
-        cnt5 = cnt4[cnt4[:, 0, 1] &lt; height - 1 - epsilon_border]
-        if len(cnt5) == 0:
-            return
-        contour_approximate = cv2.approxPolyDP(cnt5, epsilon_border, True)
-        all_pair = list(compute.iterator_zip_n_n_1(contour_approximate))
-        all_pair_no_single_pixel = list(
-            filter(
-                lambda x: x[0][0][0] != x[1][0][0] or x[0][0][1] != x[1][0][1],
-                all_pair,
-            )
-        )
-        all_angles = list(
-            map(
-                lambda x: (
-                    (x[0][0], x[1][0]),
-                    compute.get_angle_0_180(x[0][0], x[1][0]),
-                    np.linalg.norm(x[0][0] - x[1][0]),
-                ),
-                all_pair_no_single_pixel,
-            )
-        )
-        vertical_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1],
-                    page_angle + Angle.deg(90.0),
-                    epsilon_angle,
-                    Angle.deg(180),
-                ),
-                all_angles,
-            )
-        )
-        horizontal_lines = list(
-            filter(
-                lambda x: compute.is_angle_closed_to(
-                    x[1], page_angle, epsilon_angle, Angle.deg(180)
-                ),
-                all_angles,
-            )
-        )
-        vertical_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posx_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                vertical_lines,
-            )
-        )
-        horizontal_lines_pos = list(
-            map(
-                lambda x: (
-                    compute.get_angle_0_180_posy_safe(x[0][0], x[0][1])[1],
-                    x[1],
-                ),
-                horizontal_lines,
-            )
-        )
-        vertical_lines_pos.sort(key=lambda x: x[0])
-        horizontal_lines_pos.sort(key=lambda x: x[0])
-        for posx, angle in vertical_lines_pos:
-            mask = np.zeros((height, width), np.uint8)
-            bottom_point = compute.get_bottom_point_from_alpha_posx(
-                angle, posx, height
-            )
-            if posx &lt; width / 2:
-                pts = np.array(
-                    [
-                        [-1, 0],
-                        [posx - 1, 0],
-                        [bottom_point[0] - 1, bottom_point[1]],
-                        [-1, height - 1],
-                    ]
-                )
-            else:
-                pts = np.array(
-                    [
-                        [width, 0],
-                        [posx + 1, 0],
-                        [bottom_point[0] + 1, bottom_point[1]],
-                        [width, height - 1],
-                    ]
-                )
-            mask = cv2.drawContours(mask, [pts], 0, 255, -1)
-            histogram = cv2.calcHist([threshold2], [0], mask, [2], [0, 256])
-            if __pourcentage_white_allowed__ * histogram[0] &gt; sum(
-                histogram[1:]
-            ) or __pourcentage_white_allowed__ * histogram[-1] &gt; sum(
-                histogram[:-1]
-            ):
-                mask_border_only = cv2.drawContours(
-                    mask_border_only, [pts], 0, (0), -1
-                )
-        for posy, angle in horizontal_lines_pos:
-            mask = np.zeros((height, width), np.uint8)
-            bottom_point = compute.get_right_point_from_alpha_posy(
-                angle, posy, width
-            )
-            if posy &lt; height / 2:
-                pts = np.array(
-                    [
-                        [0, -1],
-                        [0, posy - 1],
-                        [bottom_point[0], bottom_point[1] - 1],
-                        [width - 1, -1],
-                    ]
-                )
-            else:
-                pts = np.array(
-                    [
-                        [0, height],
-                        [0, posy + 1],
-                        [bottom_point[0], bottom_point[1] + 1],
-                        [width - 1, height],
-                    ]
-                )
-            mask = cv2.drawContours(mask, [pts], 0, 255, -1)
-&gt;           histogram = cv2.calcHist([threshold2], [0], mask, [2], [0, 256])
+    def find_longest_lines_in_border(
+        shape: Tuple[int, int], epsilon: int, cnt: np.ndarray
+    ) -&gt; Tuple[Tuple[int, int], Tuple[int, int], Tuple[int, int], Tuple[int, int]]:
+        height, width = shape
+        left_top = height
+        left_bottom = 0
+        right_top = height
+        right_bottom = 0
+        top_left = width
+        top_right = 0
+        bottom_left = width
+        bottom_right = 0
+        for pt1, pt2 in compute.iterator_zip_n_n_1(cnt):
+            point1_x, point1_y = pt1[0]
+            point2_x, point2_y = pt2[0]
+            if point1_x &lt;= epsilon and point2_x &lt;= epsilon:
+                left_top = min(left_top, point1_y, point2_y)
+                left_bottom = max(left_bottom, point1_y, point2_y)
+            if point1_y &lt;= epsilon and point2_y &lt;= epsilon:
+                top_left = min(top_left, point1_x, point2_x)
+                top_right = max(top_right, point1_x, point2_x)
+&gt;           if point1_x &gt;= width - 1 - epsilon and point2_x &gt;= width - 1 - epsilon:
 E           Failed: Timeout &gt;1.0s
 
-cv2ext.py:811: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+cv2ext.py:664: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/no_split_line_wave_algo_2.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140636115760896) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139797971138304) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -4603,7 +3394,7 @@ cv2ext.py:811: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_few_2_png" time="1.004"><failure message="Failed: Timeout &gt;1.0s">def test_crop_too_few_2_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_few_2_png" time="1.012"><failure message="Failed: Timeout &gt;1.0s">def test_crop_too_few_2_png() -&gt; None:
         """Use different area on the left and the right to detect
         black noise."""
 &gt;       treat_file(
@@ -4667,33 +3458,33 @@ page/find_images.py:119: in remove_black_border_in_image
     cv2ext.insert_border_in_mask(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-cnt = array([[[   0,    0]],
+cnt = array([[[2443,    0]],
 
-       [[   0, 3506]],
+       [[2443,    4]],
 
-       [[  33, 3506]],
+       [[2444,    3]],
 
-       [[  27, 3500]],
+       [[2445,    3]],
 
-       [[  27, 3216]],...,   13]],
+       [[2446,    4]],...,   39]],
 
-       [[ 105,   10]],
+       [[4951,   39]],
 
-       [[ 106,    9]],
+       [[4959,   47]],
 
-       [[ 104,    7]],
+       [[4959,   50]],
 
-       [[ 104,    0]]], dtype=int32)
+       [[4959,    0]]], dtype=int32)
 threshold2 = array([[255, 255, 255, ..., 255, 255, 255],
        [255, 255, 255, ..., 255, 255, 255],
        [255, 255, 255, ..., 25..., 255, 255, 255],
        [255, 255, 255, ..., 255, 255, 255],
        [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
-mask_border_only = array([[  0,   0,   0, ...,   0,   0,   0],
-       [  0,   0,   0, ...,   0,   0,   0],
-       [  0,   0,   0, ...,   ..., 255, 255, 255],
-       [  0,   0,   0, ..., 255, 255, 255],
-       [  0,   0,   0, ..., 255, 255, 255]], dtype=uint8)
+mask_border_only = array([[255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 25..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
 epsilon = (5, 3.0°), page_angle = 0.0°
 
     def insert_border_in_mask(
@@ -4836,7 +3627,7 @@ cv2ext.py:811: Failed</failure><system-out>--------------------------------- Cap
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140647492572928) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140009764665088) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -4848,7 +3639,7 @@ cv2ext.py:811: Failed</failure><system-out>--------------------------------- Cap
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_failed_detect_rectangle_png" time="1.064"><failure message="Failed: Timeout &gt;1.0s">def test_failed_detect_rectangle_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_failed_detect_rectangle_png" time="1.029"><failure message="Failed: Timeout &gt;1.0s">def test_failed_detect_rectangle_png() -&gt; None:
         """Before, approxPolyDP algo was used to detect shape.
     
         But, due to noise on the edge with background other pages,
@@ -4913,19 +3704,22 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:128: in remove_black_border_in_image
-    debug.image(mask_border_only, DebugImage.Level.INFO)
+page/find_images.py:89: in remove_black_border_in_image
+    debug.image(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7fe83f75e040&gt;
-img = array([[0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       ...,
-       [0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0]], dtype=uint8)
-level = &lt;Level.INFO: 2&gt;
+self = &lt;debug_image.DebugImage object at 0x7f25109bffa0&gt;
+img = array([[[  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255],
+        ...,
+        [  0,   0, 255],
+     ...[255, 255, 255],
+        ...,
+        [  0,   0, 255],
+        [  0,   0, 255],
+        [  0,   0, 255]]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
 
     def image(self, img: np.ndarray, level: Level) -&gt; None:
         if level &gt;= self.__level:
@@ -4944,7 +3738,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140636115760896) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139797971138304) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -4956,7 +3750,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_single_page_png" time="1.045"><failure message="Failed: Timeout &gt;1.0s">def test_single_page_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_single_page_png" time="1.009"><failure message="Failed: Timeout &gt;1.0s">def test_single_page_png() -&gt; None:
         """Detect that the scan is single page."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -5015,41 +3809,31 @@ page/find_images.py:149: in find_images
     mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:89: in remove_black_border_in_image
-    debug.image(
+page/find_images.py:81: in remove_black_border_in_image
+    thresholdi = cv2ext.threshold_from_gaussian_histogram_black(gray_bordered)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7feae5940640&gt;
-img = array([[[122, 122, 122],
-        [121, 121, 121],
-        [121, 121, 121],
-        ...,
-        [ 19,  19,  19],
-     ...[156, 156, 156],
-        ...,
-        [  4,   4,   4],
-        [  4,   4,   4],
-        [  4,   4,   4]]], dtype=uint8)
-level = &lt;Level.DEBUG: 1&gt;
+image = array([[122, 121, 121, ...,  19,  19,  18],
+       [127, 126, 126, ...,  19,  19,  18],
+       [131, 131, 131, ...,  1...,   4,   4,   4],
+       [156, 156, 156, ...,   4,   4,   4],
+       [156, 156, 156, ...,   4,   4,   4]], dtype=uint8)
+blur_kernel_size = 31
 
-    def image(self, img: np.ndarray, level: Level) -&gt; None:
-        if level &gt;= self.__level:
-            name = self.name()
-            self.__next()
-            self.__next_when_dec[0 : self.__sub_level] = [
-                True for x in range(self.__sub_level)
-            ]
-&gt;           if not cv2.imwrite(name, img):
-E           Failed: Timeout &gt;1.0s
+    def threshold_from_gaussian_histogram_black(
+        image: np.ndarray, blur_kernel_size: int = 31
+    ) -&gt; int:
+&gt;       histogram = cv2.calcHist([image], [0], None, [256], [0, 256])
+E       Failed: Timeout &gt;1.0s
 
-debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+cv2ext.py:883: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/single_page.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140647492572928) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140009764665088) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -5061,7 +3845,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_wave_algo_3_png" time="1.008"><failure message="Failed: Timeout &gt;1.0s">def test_no_split_line_wave_algo_3_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_wave_algo_3_png" time="1.001"><failure message="Failed: Timeout &gt;1.0s">def test_no_split_line_wave_algo_3_png() -&gt; None:
         """Failed to detect wave due to missing wave at the bottom."""
 &gt;       treat_file(
             MockDisableSeparatePage(MAX_VAL),
@@ -5118,20 +3902,113 @@ script.py:36: in split_two_waves
     self.__images_found = page.find_images.find_images(
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
+page/find_images.py:155: in find_images
+    debug.image(blurimg_bc2, DebugImage.Level.DEBUG)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-image = array([[[255, 255, 255],
-        [255, 255, 255],
-        [255, 255, 255],
-        ...,
-        [255, 255, 255],
-     ...[255, 255, 255],
-        ...,
-        [255, 255, 255],
-        [255, 255, 255],
-        [255, 255, 255]]], dtype=uint8)
-param = &lt;page.find_images.FindImageParameters object at 0x7fe83f78e0d0&gt;
-page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7fe83f75e040&gt;
+self = &lt;debug_image.DebugImage object at 0x7f25109bffa0&gt;
+img = array([[255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 25..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
+level = &lt;Level.DEBUG: 1&gt;
+
+    def image(self, img: np.ndarray, level: Level) -&gt; None:
+        if level &gt;= self.__level:
+            name = self.name()
+            self.__next()
+            self.__next_when_dec[0 : self.__sub_level] = [
+                True for x in range(self.__sub_level)
+            ]
+&gt;           if not cv2.imwrite(name, img):
+E           Failed: Timeout &gt;1.0s
+
+debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+/home/runner/work/ocr-book/ocr-book/tests/no_split_line_wave_algo_3.png
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139797971138304) ~~~~~~~~~~~~~~~~~~~~~
+  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
+    reply.run()
+  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
+    self._result = func(*args, **kwargs)
+  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
+    msg = Message.from_io(io)
+  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 432, in from_io
+    header = io.read(9)  # type 1, channel 4, payload 4
+  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
+    data = self._read(numbytes - len(buf))
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_4_png" time="1.016"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_split_line_4_png() -&gt; None:
+        """Detect wrong split line with line algo."""
+&gt;       treat_file(
+            MockDisableSeparatePage(MAX_VAL),
+            get_absolute_from_current_path(
+                __file__, "wrong_split_line_4.png"
+            ),
+            {
+                ConstString.separation_double_page_angle(): (
+                    "range",
+                    Angle.deg(91.04),
+                    Angle.deg(91.06),
+                ),
+                ConstString.separation_double_page_y(): ("range", 60, 60),
+                ConstString.page_rotation(1): (
+                    "range",
+                    Angle.deg(1.04),
+                    Angle.deg(1.06),
+                ),
+                ConstString.page_rotation(2): (
+                    "range",
+                    Angle.deg(1.14),
+                    Angle.deg(1.16),
+                ),
+                ConstString.image_crop(1, "x1"): ("range", 0, 0),
+                ConstString.image_crop(1, "y1"): ("range", 0, 0),
+                ConstString.image_crop(1, "x2"): ("range", 0, 0),
+                ConstString.image_crop(1, "y2"): ("range", 0, 0),
+                ConstString.image_crop(2, "x1"): ("range", 292, 292),
+                ConstString.image_crop(2, "y1"): ("range", 330, 330),
+                ConstString.image_crop(2, "x2"): ("range", 2314, 2314),
+                ConstString.image_crop(2, "y2"): ("range", 3218, 3218),
+                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+                ConstString.image_border(1, 1): ("range", 0, 0),
+                ConstString.image_border(1, 2): ("range", 0, 0),
+                ConstString.image_border(1, 3): ("range", 0, 0),
+                ConstString.image_border(1, 4): ("range", 0, 0),
+                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+                ConstString.image_border(2, 1): ("range", 322, 322),
+                ConstString.image_border(2, 2): ("range", 277, 277),
+                ConstString.image_border(2, 3): ("range", 219, 219),
+                ConstString.image_border(2, 4): ("range", 219, 219),
+            },
+        )
+
+tests/test_images.py:1256: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+script.py:372: in treat_file
+    sep.treat_file(
+script.py:298: in treat_file
+    image1, image2 = self.split_two_waves(
+tests/mock_separate_page.py:23: in split_two_waves
+    return super().split_two_waves(image, parameters, debug)
+script.py:36: in split_two_waves
+    self.__images_found = page.find_images.find_images(
+debug_image.py:97: in wrapper
+    return function_to_decorate(*args)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+image = array([[255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 25..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
+param = &lt;page.find_images.FindImageParameters object at 0x7f566a04dee0&gt;
+page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7f566a1272e0&gt;
 
     @inc_debug
     def find_images(
@@ -5193,111 +4070,11 @@ E       Failed: Timeout &gt;1.0s
 page/find_images.py:180: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/runner/work/ocr-book/ocr-book/tests/no_split_line_wave_algo_3.png
-
-</system-out><system-err>--------------------------------- Captured Err ---------------------------------
-
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140636115760896) ~~~~~~~~~~~~~~~~~~~~~
-  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
-    reply.run()
-  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
-    self._result = func(*args, **kwargs)
-  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 967, in _thread_receiver
-    msg = Message.from_io(io)
-  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 432, in from_io
-    header = io.read(9)  # type 1, channel 4, payload 4
-  File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
-    data = self._read(numbytes - len(buf))
-
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_4_png" time="1.015"><failure message="Failed: Timeout &gt;1.0s">def test_wrong_split_line_4_png() -&gt; None:
-        """Detect wrong split line with line algo."""
-&gt;       treat_file(
-            MockDisableSeparatePage(MAX_VAL),
-            get_absolute_from_current_path(
-                __file__, "wrong_split_line_4.png"
-            ),
-            {
-                ConstString.separation_double_page_angle(): (
-                    "range",
-                    Angle.deg(91.04),
-                    Angle.deg(91.06),
-                ),
-                ConstString.separation_double_page_y(): ("range", 60, 60),
-                ConstString.page_rotation(1): (
-                    "range",
-                    Angle.deg(1.04),
-                    Angle.deg(1.06),
-                ),
-                ConstString.page_rotation(2): (
-                    "range",
-                    Angle.deg(1.14),
-                    Angle.deg(1.16),
-                ),
-                ConstString.image_crop(1, "x1"): ("range", 0, 0),
-                ConstString.image_crop(1, "y1"): ("range", 0, 0),
-                ConstString.image_crop(1, "x2"): ("range", 0, 0),
-                ConstString.image_crop(1, "y2"): ("range", 0, 0),
-                ConstString.image_crop(2, "x1"): ("range", 292, 292),
-                ConstString.image_crop(2, "y1"): ("range", 330, 330),
-                ConstString.image_crop(2, "x2"): ("range", 2314, 2314),
-                ConstString.image_crop(2, "y2"): ("range", 3218, 3218),
-                ConstString.image_dpi(1): ("difference", 300, 0.0000001),
-                ConstString.image_border(1, 1): ("range", 0, 0),
-                ConstString.image_border(1, 2): ("range", 0, 0),
-                ConstString.image_border(1, 3): ("range", 0, 0),
-                ConstString.image_border(1, 4): ("range", 0, 0),
-                ConstString.image_dpi(2): ("difference", 300, 0.0000001),
-                ConstString.image_border(2, 1): ("range", 322, 322),
-                ConstString.image_border(2, 2): ("range", 277, 277),
-                ConstString.image_border(2, 3): ("range", 219, 219),
-                ConstString.image_border(2, 4): ("range", 219, 219),
-            },
-        )
-
-tests/test_images.py:1256: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-script.py:372: in treat_file
-    sep.treat_file(
-script.py:298: in treat_file
-    image1, image2 = self.split_two_waves(
-tests/mock_separate_page.py:23: in split_two_waves
-    return super().split_two_waves(image, parameters, debug)
-script.py:36: in split_two_waves
-    self.__images_found = page.find_images.find_images(
-debug_image.py:97: in wrapper
-    return function_to_decorate(*args)
-page/find_images.py:195: in find_images
-    debug.image(morpho2, DebugImage.Level.DEBUG)
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-self = &lt;debug_image.DebugImage object at 0x7feae5940640&gt;
-img = array([[0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       ...,
-       [0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0],
-       [0, 0, 0, ..., 0, 0, 0]], dtype=uint8)
-level = &lt;Level.DEBUG: 1&gt;
-
-    def image(self, img: np.ndarray, level: Level) -&gt; None:
-        if level &gt;= self.__level:
-            name = self.name()
-            self.__next()
-            self.__next_when_dec[0 : self.__sub_level] = [
-                True for x in range(self.__sub_level)
-            ]
-&gt;           if not cv2.imwrite(name, img):
-E           Failed: Timeout &gt;1.0s
-
-debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
-
---------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/wrong_split_line_4.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140647492572928) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140009764665088) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
@@ -5309,7 +4086,7 @@ debug_image.py:71: Failed</failure><system-out>---------------------------------
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 400, in read
     data = self._read(numbytes - len(buf))
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_failed_split_line_line_algo_3_png" time="1.060"><failure message="Failed: Timeout &gt;1.0s">def test_failed_split_line_line_algo_3_png() -&gt; None:
+</system-err></testcase><testcase classname="tests.test_images" name="test_failed_split_line_line_algo_3_png" time="1.038"><failure message="Failed: Timeout &gt;1.0s">def test_failed_split_line_line_algo_3_png() -&gt; None:
         """get_rectangle_from_contour_hough_lines fails
         because fewer than 4 lines are detected."""
 &gt;       treat_file(
@@ -5367,41 +4144,89 @@ script.py:36: in split_two_waves
     self.__images_found = page.find_images.find_images(
 debug_image.py:97: in wrapper
     return function_to_decorate(*args)
-page/find_images.py:204: in find_images
-    debug.image(debug_image_contours, DebugImage.Level.DEBUG)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;debug_image.DebugImage object at 0x7fe83f75e040&gt;
-img = array([[[255, 255, 255],
-        [255, 255, 255],
-        [255, 255, 255],
-        ...,
-        [255, 255, 255],
-     ...[255, 255, 255],
-        ...,
-        [255, 255, 255],
-        [255, 255, 255],
-        [255, 255, 255]]], dtype=uint8)
-level = &lt;Level.DEBUG: 1&gt;
+image = array([[255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 25..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255]], dtype=uint8)
+param = &lt;page.find_images.FindImageParameters object at 0x7f250f497be0&gt;
+page_angle = 0.0°, debug = &lt;debug_image.DebugImage object at 0x7f25109bffa0&gt;
 
-    def image(self, img: np.ndarray, level: Level) -&gt; None:
-        if level &gt;= self.__level:
-            name = self.name()
-            self.__next()
-            self.__next_when_dec[0 : self.__sub_level] = [
-                True for x in range(self.__sub_level)
-            ]
-&gt;           if not cv2.imwrite(name, img):
-E           Failed: Timeout &gt;1.0s
+    @inc_debug
+    def find_images(
+        image: np.ndarray,
+        param: FindImageParameters,
+        page_angle: Optional[Angle],
+        debug: DebugImage,
+    ) -&gt; np.ndarray:
+        __internal_border__ = 20
+        xxx = 7
+    
+        debug.image(image, DebugImage.Level.DEBUG)
+        gray = cv2ext.force_image_to_be_grayscale(image, (xxx, xxx))
+        debug.image(gray, DebugImage.Level.DEBUG)
+        blurimg_bc = cv2ext.erode_and_dilate(gray, (xxx, xxx), xxx)
+        debug.image(blurimg_bc, DebugImage.Level.DEBUG)
+    
+        if page_angle is not None:
+            mask = remove_black_border_in_image(blurimg_bc, page_angle, debug)
+            image_no_border = cv2ext.apply_mask(image, mask)
+            debug.image(image_no_border, DebugImage.Level.DEBUG)
+            gray2 = cv2ext.force_image_to_be_grayscale(image_no_border, (xxx, xxx))
+            debug.image(gray2, DebugImage.Level.DEBUG)
+            blurimg_bc2 = cv2ext.erode_and_dilate(gray2, (xxx, xxx), xxx, True)
+            debug.image(blurimg_bc2, DebugImage.Level.DEBUG)
+            gray_no_border = blurimg_bc2
+        else:
+            gray_no_border = blurimg_bc
+        gray_bordered = cv2.copyMakeBorder(
+            gray_no_border,
+            __internal_border__,
+            __internal_border__,
+            __internal_border__,
+            __internal_border__,
+            cv2.BORDER_CONSTANT,
+            value=[255],
+        )
+        debug.image(gray_bordered, DebugImage.Level.DEBUG)
+        dilated = cv2.dilate(
+            gray_bordered,
+            cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (xxx, xxx)),
+        )
+        debug.image(dilated, DebugImage.Level.DEBUG)
+        thresholdi = cv2ext.threshold_from_gaussian_histogram_white(dilated)
+        _, threshold = cv2.threshold(
+            dilated, thresholdi, 255, cv2.THRESH_BINARY_INV
+        )
+        debug.image(threshold, DebugImage.Level.DEBUG)
+    
+        morpho1 = cv2.morphologyEx(
+            threshold,
+            cv2.MORPH_CLOSE,
+            cv2.getStructuringElement(
+                cv2.MORPH_ELLIPSE, param.kernel_morphology_size
+            ),
+        )
+        debug.image(morpho1, DebugImage.Level.DEBUG)
+&gt;       morpho2 = cv2.morphologyEx(
+            morpho1,
+            cv2.MORPH_OPEN,
+            cv2.getStructuringElement(
+                cv2.MORPH_ELLIPSE, param.kernel_morphology_size
+            ),
+        )
+E       Failed: Timeout &gt;1.0s
 
-debug_image.py:71: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
+page/find_images.py:188: Failed</failure><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/ocr-book/ocr-book/tests/failed_split_line_line_algo_3.png
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (140636115760896) ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Stack of &lt;unknown&gt; (139797971138304) ~~~~~~~~~~~~~~~~~~~~~
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 285, in _perform_spawn
     reply.run()
   File "/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/execnet/gateway_base.py", line 220, in run
