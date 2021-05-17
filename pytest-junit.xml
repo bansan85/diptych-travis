@@ -1,11 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="36" time="415.664" timestamp="2021-05-17T10:17:49.336535" hostname="fv-az214-561"><testcase classname="tests.test_features" name="test_mock_stop_at_0" time="0.048"><system-out>--------------------------------- Captured Log ---------------------------------
-
---------------------------------- Captured Out ---------------------------------
-/home/runner/work/diptych/diptych/tests/0001_0.png
-
-</system-out><system-err>--------------------------------- Captured Err ---------------------------------
-
-</system-err></testcase><testcase classname="tests.test_features" name="test_disabled_enable_debug" time="24.162"><system-out>--------------------------------- Captured Log ---------------------------------
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="36" time="357.078" timestamp="2021-05-17T10:32:18.191241" hostname="fv-az119-21"><testcase classname="tests.test_features" name="test_disabled_enable_debug" time="21.683"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/0001_debug.png
@@ -34,7 +27,14 @@ image 2 border right 221
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_2" time="16.963"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_0" time="0.053"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+/home/runner/work/diptych/diptych/tests/0001_0.png
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_2" time="15.503"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/0001_2.png
@@ -45,7 +45,7 @@ page rotation 2 0.2
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_4" time="23.401"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_4" time="20.666"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/0001_4.png
@@ -74,7 +74,7 @@ image 2 border right 221
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_1" time="14.094"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_1" time="12.414"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/0001_1.png
@@ -83,7 +83,7 @@ separation double page y=0 2484
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_3" time="23.899"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_3" time="19.730"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/0001_3.png
@@ -102,65 +102,36 @@ image 2 crop y2 3361
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_0001_png" time="21.670"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_0001_png" time="18.488"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/0001.png
-1621246723926081609 : Checking separation double page angle 90.55756528497216
-1621246723926195511 : Checking separation double page y=0 2484
-1621246725042527462 : Checking page rotation 1 0.65
-1621246726495229743 : Checking page rotation 2 0.2
-1621246729801000574 : Checking image 1 crop x1 329
-1621246729801130378 : Checking image 1 crop y1 335
-1621246729801169779 : Checking image 1 crop x2 2344
-1621246729801203579 : Checking image 1 crop y2 3222
-1621246732542518414 : Checking image 2 crop x1 171
-1621246732542625216 : Checking image 2 crop y1 648
-1621246732542661416 : Checking image 2 crop x2 2188
-1621246732542695117 : Checking image 2 crop y2 3361
-1621246732542851518 : Checking image 1 dpi 300
-1621246732542920819 : Checking image 1 border top 326
-1621246732542954820 : Checking image 1 border bottom 274
-1621246732542984620 : Checking image 1 border left 222
-1621246732543013021 : Checking image 1 border right 222
-1621246732546155660 : Checking image 2 dpi 300
-1621246732546220161 : Checking image 2 border top 643
-1621246732546251761 : Checking image 2 border bottom 131
-1621246732546280761 : Checking image 2 border left 221
-1621246732546309162 : Checking image 2 border right 221
+1621247587206683562 : Checking separation double page angle 90.55756528497216
+1621247587206787068 : Checking separation double page y=0 2484
+1621247588142104150 : Checking page rotation 1 0.65
+1621247589319649243 : Checking page rotation 2 0.2
+1621247591813579898 : Checking image 1 crop x1 329
+1621247591813701705 : Checking image 1 crop y1 335
+1621247591813739007 : Checking image 1 crop x2 2344
+1621247591813771509 : Checking image 1 crop y2 3222
+1621247594027742398 : Checking image 2 crop x1 171
+1621247594027862705 : Checking image 2 crop y1 648
+1621247594027902107 : Checking image 2 crop x2 2188
+1621247594027936109 : Checking image 2 crop y2 3361
+1621247594028106919 : Checking image 1 dpi 300
+1621247594028175122 : Checking image 1 border top 326
+1621247594028209124 : Checking image 1 border bottom 274
+1621247594028240026 : Checking image 1 border left 222
+1621247594028280928 : Checking image 1 border right 222
+1621247594030426148 : Checking image 2 dpi 300
+1621247594030508253 : Checking image 2 border top 643
+1621247594030539455 : Checking image 2 border bottom 131
+1621247594030567756 : Checking image 2 border left 221
+1621247594030595858 : Checking image 2 border right 221
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_black_border_not_removed_png" time="24.317"><system-out>--------------------------------- Captured Log ---------------------------------
-
---------------------------------- Captured Out ---------------------------------
-/home/runner/work/diptych/diptych/tests/black-border-not-removed.png
-1621246745646885515 : Checking separation double page angle 90.01516396500199
-1621246745646984417 : Checking separation double page y=0 2455
-1621246746671701766 : Checking page rotation 1 0.0
-1621246748243352279 : Checking page rotation 2 0.1
-1621246751247691713 : Checking image 1 crop x1 297
-1621246751247814614 : Checking image 1 crop y1 143
-1621246751247858515 : Checking image 1 crop x2 2309
-1621246751247899215 : Checking image 1 crop y2 3346
-1621246756852534135 : Checking image 2 crop x1 154
-1621246756852705637 : Checking image 2 crop y1 144
-1621246756852770838 : Checking image 2 crop x2 2168
-1621246756852817538 : Checking image 2 crop y2 3351
-1621246756853023741 : Checking image 1 dpi 300
-1621246756853133442 : Checking image 1 border top 131
-1621246756853174942 : Checking image 1 border bottom 153
-1621246756853210743 : Checking image 1 border left 224
-1621246756853246243 : Checking image 1 border right 224
-1621246756856220676 : Checking image 2 dpi 300
-1621246756856295577 : Checking image 2 border top 133
-1621246756856332178 : Checking image 2 border bottom 147
-1621246756856365578 : Checking image 2 border left 223
-1621246756856398678 : Checking image 2 border right 223
-
-</system-out><system-err>--------------------------------- Captured Err ---------------------------------
-
-</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_5" time="24.306"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_features" name="test_mock_stop_at_5" time="20.858"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/0001_5.png
@@ -189,782 +160,811 @@ image 2 border right 221
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_rotate_png" time="28.592"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_black_border_not_removed_png" time="20.733"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/runner/work/diptych/diptych/tests/image_failed_to_rotate.png
-1621246772537712228 : Checking separation double page angle 90.35651650869968
-1621246772537825229 : Checking separation double page y=0 2483
-1621246774549624103 : Checking page rotation 1 0.45
-1621246775949510112 : Checking page rotation 2 0.2
-1621246781617856454 : Checking image 1 crop x1 31
-1621246781617990057 : Checking image 1 crop y1 1
-1621246781618044958 : Checking image 1 crop x2 2481
-1621246781618084659 : Checking image 1 crop y2 3504
-1621246785355139159 : Checking image 2 crop x1 171
-1621246785355262661 : Checking image 2 crop y1 231
-1621246785355307062 : Checking image 2 crop x2 2259
-1621246785355348663 : Checking image 2 crop y2 3358
-1621246785355524667 : Checking image 1 dpi 300
-1621246785355611969 : Checking image 1 border top 2
-1621246785355654770 : Checking image 1 border bottom 2
-1621246785355690770 : Checking image 1 border left 15
-1621246785355726471 : Checking image 1 border right 15
-1621246785358385626 : Checking image 2 dpi 300
-1621246785358457327 : Checking image 2 border top 217
-1621246785358493928 : Checking image 2 border bottom 143
-1621246785358528229 : Checking image 2 border left 186
-1621246785358562630 : Checking image 2 border right 186
+/home/runner/work/diptych/diptych/tests/black-border-not-removed.png
+1621247605540529269 : Checking separation double page angle 90.01516396500199
+1621247605540627374 : Checking separation double page y=0 2455
+1621247606671576261 : Checking page rotation 1 0.0
+1621247608117158482 : Checking page rotation 2 0.1
+1621247610530737656 : Checking image 1 crop x1 297
+1621247610530860063 : Checking image 1 crop y1 143
+1621247610530896765 : Checking image 1 crop x2 2309
+1621247610530931067 : Checking image 1 crop y2 3346
+1621247614752368848 : Checking image 2 crop x1 154
+1621247614752492955 : Checking image 2 crop y1 144
+1621247614752532258 : Checking image 2 crop x2 2168
+1621247614752570860 : Checking image 2 crop y2 3351
+1621247614752768871 : Checking image 1 dpi 300
+1621247614752844575 : Checking image 1 border top 131
+1621247614752880277 : Checking image 1 border bottom 153
+1621247614752913479 : Checking image 1 border left 224
+1621247614752946481 : Checking image 1 border right 224
+1621247614755520225 : Checking image 2 dpi 300
+1621247614755600930 : Checking image 2 border top 133
+1621247614755633931 : Checking image 2 border bottom 147
+1621247614755664433 : Checking image 2 border left 223
+1621247614755694735 : Checking image 2 border right 223
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_2_pages_2_contours_png" time="15.995"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_2_pages_2_contours_png" time="14.728"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/2-pages-2-contours.png
-1621246767851031324 : Checking separation double page angle 90.14230271514262
-1621246767851142326 : Checking separation double page y=0 2488
-1621246768452973727 : Checking page rotation 1 0.0
-1621246769484090775 : Checking page rotation 2 0.2
-1621246770369121982 : Checking image 1 crop x1 1189
-1621246770369219284 : Checking image 1 crop y1 1751
-1621246770369254685 : Checking image 1 crop x2 1190
-1621246770369285385 : Checking image 1 crop y2 1752
-1621246772928374197 : Checking image 2 crop x1 100
-1621246772928492099 : Checking image 2 crop y1 240
-1621246772928528600 : Checking image 2 crop x2 2148
-1621246772928562100 : Checking image 2 crop y2 3240
-1621246772928738803 : Checking image 1 dpi 300
-1621246772928822405 : Checking image 1 border top 1752
-1621246772928854605 : Checking image 1 border bottom 1753
-1621246772928883405 : Checking image 1 border left 1239
-1621246772928913606 : Checking image 1 border right 1239
-1621246772931019039 : Checking image 2 dpi 300
-1621246772931141041 : Checking image 2 border top 230
-1621246772931173242 : Checking image 2 border bottom 256
-1621246772931201842 : Checking image 2 border left 206
-1621246772931230243 : Checking image 2 border right 206
+1621247624213912889 : Checking separation double page angle 90.14230271514262
+1621247624214021295 : Checking separation double page y=0 2488
+1621247624751615099 : Checking page rotation 1 0.0
+1621247625744213968 : Checking page rotation 2 0.2
+1621247626589719772 : Checking image 1 crop x1 1189
+1621247626589816577 : Checking image 1 crop y1 1751
+1621247626589852379 : Checking image 1 crop x2 1190
+1621247626589883181 : Checking image 1 crop y2 1752
+1621247628730138952 : Checking image 2 crop x1 100
+1621247628730244058 : Checking image 2 crop y1 240
+1621247628730279360 : Checking image 2 crop x2 2148
+1621247628730311562 : Checking image 2 crop y2 3240
+1621247628730493672 : Checking image 1 dpi 300
+1621247628730556975 : Checking image 1 border top 1752
+1621247628730592377 : Checking image 1 border bottom 1753
+1621247628730623979 : Checking image 1 border left 1239
+1621247628730655381 : Checking image 1 border right 1239
+1621247628732513685 : Checking image 2 dpi 300
+1621247628732591989 : Checking image 2 border top 230
+1621247628732624791 : Checking image 2 border bottom 256
+1621247628732656593 : Checking image 2 border left 206
+1621247628732717396 : Checking image 2 border right 206
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_png" time="19.423"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_rotate_png" time="25.916"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+/home/runner/work/diptych/diptych/tests/image_failed_to_rotate.png
+1621247629205350338 : Checking separation double page angle 90.35651650869968
+1621247629205447344 : Checking separation double page y=0 2483
+1621247630950865394 : Checking page rotation 1 0.45
+1621247632017143948 : Checking page rotation 2 0.2
+1621247637337455961 : Checking image 1 crop x1 31
+1621247637337584968 : Checking image 1 crop y1 1
+1621247637337624070 : Checking image 1 crop x2 2481
+1621247637337660073 : Checking image 1 crop y2 3504
+1621247640573548676 : Checking image 2 crop x1 171
+1621247640573669183 : Checking image 2 crop y1 231
+1621247640573706385 : Checking image 2 crop x2 2259
+1621247640573741387 : Checking image 2 crop y2 3358
+1621247640573911396 : Checking image 1 dpi 300
+1621247640573983700 : Checking image 1 border top 2
+1621247640574019802 : Checking image 1 border bottom 2
+1621247640574050504 : Checking image 1 border left 15
+1621247640574081606 : Checking image 1 border right 15
+1621247640576538244 : Checking image 2 dpi 300
+1621247640576622949 : Checking image 2 border top 217
+1621247640576656350 : Checking image 2 border bottom 143
+1621247640576687052 : Checking image 2 border left 186
+1621247640576737955 : Checking image 2 border right 186
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_png" time="17.074"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/wrong_split_line.png
-1621246786437293014 : Checking separation double page angle 89.95895720607972
-1621246786437400116 : Checking separation double page y=0 2466
-1621246787557638204 : Checking page rotation 1 -0.04999999999999689
-1621246788618970066 : Checking page rotation 2 0.45
-1621246790062288899 : Checking image 1 crop x1 211
-1621246790062388601 : Checking image 1 crop y1 156
-1621246790062423601 : Checking image 1 crop x2 2323
-1621246790062455902 : Checking image 1 crop y2 3363
-1621246792341211740 : Checking image 2 crop x1 123
-1621246792341326642 : Checking image 2 crop y1 164
-1621246792341378543 : Checking image 2 crop x2 2237
-1621246792341415544 : Checking image 2 crop y2 3375
-1621246792341613547 : Checking image 1 dpi 300
-1621246792341695149 : Checking image 1 border top 135
-1621246792341733050 : Checking image 1 border bottom 145
-1621246792341767250 : Checking image 1 border left 174
-1621246792341802451 : Checking image 1 border right 174
-1621246792344799707 : Checking image 2 dpi 300
-1621246792344904009 : Checking image 2 border top 141
-1621246792344939710 : Checking image 2 border bottom 135
-1621246792344984611 : Checking image 2 border left 173
-1621246792345017011 : Checking image 2 border right 173
+1621247640870584473 : Checking separation double page angle 89.95895720607972
+1621247640870681579 : Checking separation double page y=0 2466
+1621247641765471179 : Checking page rotation 1 -0.04999999999999689
+1621247642655405106 : Checking page rotation 2 0.45
+1621247643897251315 : Checking image 1 crop x1 211
+1621247643897370522 : Checking image 1 crop y1 156
+1621247643897410524 : Checking image 1 crop x2 2323
+1621247643897447227 : Checking image 1 crop y2 3363
+1621247645800811924 : Checking image 2 crop x1 123
+1621247645800926031 : Checking image 2 crop y1 164
+1621247645800963633 : Checking image 2 crop x2 2237
+1621247645800999535 : Checking image 2 crop y2 3375
+1621247645801167844 : Checking image 1 dpi 300
+1621247645801233348 : Checking image 1 border top 135
+1621247645801270450 : Checking image 1 border bottom 145
+1621247645801303652 : Checking image 1 border left 174
+1621247645801334753 : Checking image 1 border right 174
+1621247645803848994 : Checking image 2 dpi 300
+1621247645803931999 : Checking image 2 border top 141
+1621247645803966001 : Checking image 2 border bottom 135
+1621247645803997803 : Checking image 2 border left 173
+1621247645804028804 : Checking image 2 border right 173
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_crop_data_png" time="41.533"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_image_failed_to_crop_data_png" time="35.912"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/image_failed_to_crop_data.png
-1621246805569609669 : Checking separation double page angle 90.09350257645173
-1621246805569719076 : Checking separation double page y=0 2479
-1621246810314078303 : Checking page rotation 1 0.15000000000000002
-1621246811829777540 : Checking page rotation 2 0.05
-1621246823410407269 : Checking image 1 crop x1 46
-1621246823410550573 : Checking image 1 crop y1 1
-1621246823410596475 : Checking image 1 crop x2 2477
-1621246823410635776 : Checking image 1 crop y2 3505
-1621246826918933572 : Checking image 2 crop x1 164
-1621246826919048576 : Checking image 2 crop y1 217
-1621246826919089177 : Checking image 2 crop x2 2245
-1621246826919125778 : Checking image 2 crop y2 3350
-1621246826919292283 : Checking image 1 dpi 300
-1621246826919368185 : Checking image 1 border top 2
-1621246826919408486 : Checking image 1 border bottom 2
-1621246826919442187 : Checking image 1 border left 25
-1621246826919475788 : Checking image 1 border right 25
-1621246826922065467 : Checking image 2 dpi 300
-1621246826922142269 : Checking image 2 border top 206
-1621246826922178170 : Checking image 2 border bottom 148
-1621246826922212071 : Checking image 2 border left 189
-1621246826922245672 : Checking image 2 border right 189
+1621247658673296082 : Checking separation double page angle 90.09350257645173
+1621247658673411988 : Checking separation double page y=0 2479
+1621247662991041611 : Checking page rotation 1 0.15000000000000002
+1621247664118433033 : Checking page rotation 2 0.05
+1621247673653680743 : Checking image 1 crop x1 46
+1621247673653817150 : Checking image 1 crop y1 1
+1621247673653860053 : Checking image 1 crop x2 2477
+1621247673653897355 : Checking image 1 crop y2 3505
+1621247676522113963 : Checking image 2 crop x1 164
+1621247676522240570 : Checking image 2 crop y1 217
+1621247676522279872 : Checking image 2 crop x2 2245
+1621247676522318775 : Checking image 2 crop y2 3350
+1621247676522498985 : Checking image 1 dpi 300
+1621247676522587090 : Checking image 1 border top 2
+1621247676522624692 : Checking image 1 border bottom 2
+1621247676522655294 : Checking image 1 border left 25
+1621247676522705196 : Checking image 1 border right 25
+1621247676525197636 : Checking image 2 dpi 300
+1621247676525289141 : Checking image 2 border top 206
+1621247676525324543 : Checking image 2 border bottom 148
+1621247676525357845 : Checking image 2 border left 189
+1621247676525390747 : Checking image 2 border right 189
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_png" time="26.425"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_png" time="22.696"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/crop_too_much.png
-1621246806881754062 : Checking separation double page angle 90.16929865985193
-1621246806881872970 : Checking separation double page y=0 2456
-1621246808549782583 : Checking page rotation 1 -0.04999999999999689
-1621246810192709909 : Checking page rotation 2 0.2
-1621246813773385947 : Checking image 1 crop x1 302
-1621246813773496051 : Checking image 1 crop y1 148
-1621246813773533952 : Checking image 1 crop x2 2314
-1621246813773566153 : Checking image 1 crop y2 3351
-1621246818740922137 : Checking image 2 crop x1 163
-1621246818741026040 : Checking image 2 crop y1 151
-1621246818741062241 : Checking image 2 crop x2 2187
-1621246818741095242 : Checking image 2 crop y2 3363
-1621246818741261247 : Checking image 1 dpi 300
-1621246818741337449 : Checking image 1 border top 133
-1621246818741371350 : Checking image 1 border bottom 151
-1621246818741401751 : Checking image 1 border left 224
-1621246818741433152 : Checking image 1 border right 224
-1621246818744262637 : Checking image 2 dpi 300
-1621246818744339540 : Checking image 2 border top 132
-1621246818744372241 : Checking image 2 border bottom 143
-1621246818744402842 : Checking image 2 border left 218
-1621246818744435343 : Checking image 2 border right 218
+1621247658778473275 : Checking separation double page angle 90.16929865985193
+1621247658778575180 : Checking separation double page y=0 2456
+1621247660273535077 : Checking page rotation 1 -0.04999999999999689
+1621247661641255398 : Checking page rotation 2 0.2
+1621247664492164125 : Checking image 1 crop x1 302
+1621247664492283931 : Checking image 1 crop y1 148
+1621247664492320734 : Checking image 1 crop x2 2314
+1621247664492353435 : Checking image 1 crop y2 3351
+1621247668472178179 : Checking image 2 crop x1 163
+1621247668472325787 : Checking image 2 crop y1 151
+1621247668472363789 : Checking image 2 crop x2 2187
+1621247668472397591 : Checking image 2 crop y2 3363
+1621247668472571901 : Checking image 1 dpi 300
+1621247668472642005 : Checking image 1 border top 133
+1621247668472674906 : Checking image 1 border bottom 151
+1621247668472728509 : Checking image 1 border left 224
+1621247668472759911 : Checking image 1 border right 224
+1621247668475305854 : Checking image 2 dpi 300
+1621247668475389958 : Checking image 2 border top 132
+1621247668475422660 : Checking image 2 border bottom 143
+1621247668475453762 : Checking image 2 border left 218
+1621247668475487364 : Checking image 2 border right 218
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_few_png" time="19.878"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_few_png" time="17.285"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/crop_too_few.png
-1621246832611112487 : Checking separation double page angle 89.49492328400886
-1621246832611247391 : Checking separation double page y=0 2510
-1621246833746179910 : Checking page rotation 1 -0.6499999999999977
-1621246834944064559 : Checking page rotation 2 0.0
-1621246837038012019 : Checking image 1 crop x1 263
-1621246837038119316 : Checking image 1 crop y1 150
-1621246837038158215 : Checking image 1 crop x2 2377
-1621246837038191914 : Checking image 1 crop y2 3357
-1621246838659382736 : Checking image 2 crop x1 139
-1621246838659480639 : Checking image 2 crop y1 141
-1621246838659513140 : Checking image 2 crop x2 2261
-1621246838659542840 : Checking image 2 crop y2 3345
-1621246838659709645 : Checking image 1 dpi 300
-1621246838659850549 : Checking image 1 border top 129
-1621246838659894750 : Checking image 1 border bottom 150
-1621246838659926351 : Checking image 1 border left 173
-1621246838659959052 : Checking image 1 border right 173
-1621246838662833030 : Checking image 2 dpi 300
-1621246838662892532 : Checking image 2 border top 130
-1621246838662921033 : Checking image 2 border bottom 153
-1621246838662947834 : Checking image 2 border left 169
-1621246838662973934 : Checking image 2 border right 169
+1621247680569515588 : Checking separation double page angle 89.49492328400886
+1621247680569625394 : Checking separation double page y=0 2510
+1621247681433584719 : Checking page rotation 1 -0.6499999999999977
+1621247682529206955 : Checking page rotation 2 0.0
+1621247684416920830 : Checking image 1 crop x1 263
+1621247684417048038 : Checking image 1 crop y1 150
+1621247684417084840 : Checking image 1 crop x2 2377
+1621247684417118241 : Checking image 1 crop y2 3357
+1621247685794697932 : Checking image 2 crop x1 139
+1621247685794809438 : Checking image 2 crop y1 141
+1621247685794846140 : Checking image 2 crop x2 2261
+1621247685794880542 : Checking image 2 crop y2 3345
+1621247685795044251 : Checking image 1 dpi 300
+1621247685795110955 : Checking image 1 border top 129
+1621247685795145557 : Checking image 1 border bottom 150
+1621247685795178959 : Checking image 1 border left 173
+1621247685795210360 : Checking image 1 border right 173
+1621247685798061620 : Checking image 2 dpi 300
+1621247685798149825 : Checking image 2 border top 130
+1621247685798186127 : Checking image 2 border bottom 153
+1621247685798220429 : Checking image 2 border left 169
+1621247685798253931 : Checking image 2 border right 169
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_angle_split_line_png" time="25.770"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_angle_split_line_png" time="23.625"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/wrong_angle_split_line.png
-1621246838222855389 : Checking separation double page angle 90.08791528895468
-1621246838222961392 : Checking separation double page y=0 2478
-1621246839539744729 : Checking page rotation 1 0.1
-1621246840866753246 : Checking page rotation 2 0.1
-1621246847070745777 : Checking image 1 crop x1 58
-1621246847070864181 : Checking image 1 crop y1 6
-1621246847070903682 : Checking image 1 crop x2 2476
-1621246847070939483 : Checking image 1 crop y2 3501
-1621246852021224992 : Checking image 2 crop x1 166
-1621246852021336895 : Checking image 2 crop y1 218
-1621246852021373296 : Checking image 2 crop x2 2244
-1621246852021406497 : Checking image 2 crop y2 3349
-1621246852021572601 : Checking image 1 dpi 300
-1621246852021649203 : Checking image 1 border top 6
-1621246852021684304 : Checking image 1 border bottom 6
-1621246852021713405 : Checking image 1 border left 31
-1621246852021742006 : Checking image 1 border right 31
-1621246852030026226 : Checking image 2 dpi 300
-1621246852030171230 : Checking image 2 border top 209
-1621246852030214031 : Checking image 2 border bottom 147
-1621246852030247932 : Checking image 2 border left 191
-1621246852030281033 : Checking image 2 border right 191
+1621247687107143872 : Checking separation double page angle 90.08791528895468
+1621247687107238577 : Checking separation double page y=0 2478
+1621247688364120004 : Checking page rotation 1 0.1
+1621247689458082002 : Checking page rotation 2 0.1
+1621247694883203629 : Checking image 1 crop x1 58
+1621247694883336136 : Checking image 1 crop y1 6
+1621247694883374538 : Checking image 1 crop x2 2476
+1621247694883416340 : Checking image 1 crop y2 3501
+1621247699462365616 : Checking image 2 crop x1 166
+1621247699462492123 : Checking image 2 crop y1 218
+1621247699462528625 : Checking image 2 crop x2 2244
+1621247699462562827 : Checking image 2 crop y2 3349
+1621247699462743437 : Checking image 1 dpi 300
+1621247699462816841 : Checking image 1 border top 6
+1621247699462850843 : Checking image 1 border bottom 6
+1621247699462881144 : Checking image 1 border left 31
+1621247699462911346 : Checking image 1 border right 31
+1621247699470294960 : Checking image 2 dpi 300
+1621247699470381865 : Checking image 2 border top 209
+1621247699470414666 : Checking image 2 border bottom 147
+1621247699470443068 : Checking image 2 border left 191
+1621247699470471070 : Checking image 2 border right 191
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_2_png" time="27.349"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_2_png" time="24.011"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/crop_too_much_2.png
-1621246855625573211 : Checking separation double page angle 90.15285326123045
-1621246855625708914 : Checking separation double page y=0 2477
-1621246857218369317 : Checking page rotation 1 0.15000000000000002
-1621246858850107400 : Checking page rotation 2 0.2
-1621246861881059078 : Checking image 1 crop x1 330
-1621246861881164582 : Checking image 1 crop y1 132
-1621246861881203183 : Checking image 1 crop x2 2342
-1621246861881237584 : Checking image 1 crop y2 3335
-1621246865983063250 : Checking image 2 crop x1 165
-1621246865983153953 : Checking image 2 crop y1 139
-1621246865983199554 : Checking image 2 crop x2 2178
-1621246865983231455 : Checking image 2 crop y2 3345
-1621246865983394559 : Checking image 1 dpi 300
-1621246865983470762 : Checking image 1 border top 121
-1621246865983503263 : Checking image 1 border bottom 163
-1621246865983532863 : Checking image 1 border left 224
-1621246865983564764 : Checking image 1 border right 224
-1621246865986287942 : Checking image 2 dpi 300
-1621246865986363645 : Checking image 2 border top 129
-1621246865986395145 : Checking image 2 border bottom 152
-1621246865986423846 : Checking image 2 border left 223
-1621246865986452447 : Checking image 2 border right 223
+1621247700432987924 : Checking separation double page angle 90.15285326123045
+1621247700433094530 : Checking separation double page y=0 2477
+1621247702050062382 : Checking page rotation 1 0.15000000000000002
+1621247703845840270 : Checking page rotation 2 0.2
+1621247706403258006 : Checking image 1 crop x1 330
+1621247706403369812 : Checking image 1 crop y1 132
+1621247706403403814 : Checking image 1 crop x2 2342
+1621247706403434816 : Checking image 1 crop y2 3335
+1621247709775831304 : Checking image 2 crop x1 165
+1621247709775937610 : Checking image 2 crop y1 139
+1621247709775987312 : Checking image 2 crop x2 2178
+1621247709776020814 : Checking image 2 crop y2 3345
+1621247709776197924 : Checking image 1 dpi 300
+1621247709776279129 : Checking image 1 border top 121
+1621247709776311030 : Checking image 1 border bottom 163
+1621247709776358633 : Checking image 1 border left 224
+1621247709776391535 : Checking image 1 border right 224
+1621247709779124188 : Checking image 2 dpi 300
+1621247709779206692 : Checking image 2 border top 129
+1621247709779237394 : Checking image 2 border bottom 152
+1621247709779266996 : Checking image 2 border left 223
+1621247709779295697 : Checking image 2 border right 223
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_angle_page_lower_split_line_png" time="26.444"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_angle_page_lower_split_line_png" time="25.072"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/angle_page_lower_split_line.png
-1621246870855014023 : Checking separation double page angle 89.74412725181848
-1621246870855126326 : Checking separation double page y=0 2472
-1621246872305040188 : Checking page rotation 1 -0.14999999999999067
-1621246873628426397 : Checking page rotation 2 0.1
-1621246875422911160 : Checking image 1 crop x1 241
-1621246875423023664 : Checking image 1 crop y1 156
-1621246875423061165 : Checking image 1 crop x2 2357
-1621246875423096866 : Checking image 1 crop y2 3368
-1621246879211302431 : Checking image 2 crop x1 151
-1621246879211429935 : Checking image 2 crop y1 146
-1621246879211474436 : Checking image 2 crop x2 2261
-1621246879211553138 : Checking image 2 crop y2 3351
-1621246879211730343 : Checking image 1 dpi 300
-1621246879211811145 : Checking image 1 border top 140
-1621246879211848546 : Checking image 1 border bottom 135
-1621246879211882447 : Checking image 1 border left 172
-1621246879211914848 : Checking image 1 border right 172
-1621246879214809525 : Checking image 2 dpi 300
-1621246879214889328 : Checking image 2 border top 131
-1621246879214953129 : Checking image 2 border bottom 151
-1621246879214988530 : Checking image 2 border left 175
-1621246879215029731 : Checking image 2 border right 175
+1621247717808009028 : Checking separation double page angle 89.74412725181848
+1621247717808107033 : Checking separation double page y=0 2472
+1621247719226700842 : Checking page rotation 1 -0.14999999999999067
+1621247720422377640 : Checking page rotation 2 0.1
+1621247721942060621 : Checking image 1 crop x1 241
+1621247721942158927 : Checking image 1 crop y1 156
+1621247721942186428 : Checking image 1 crop x2 2357
+1621247721942213830 : Checking image 1 crop y2 3368
+1621247725301041216 : Checking image 2 crop x1 151
+1621247725301163023 : Checking image 2 crop y1 146
+1621247725301200925 : Checking image 2 crop x2 2261
+1621247725301236327 : Checking image 2 crop y2 3351
+1621247725301402137 : Checking image 1 dpi 300
+1621247725301470040 : Checking image 1 border top 140
+1621247725301502942 : Checking image 1 border bottom 135
+1621247725301534344 : Checking image 1 border left 172
+1621247725301565846 : Checking image 1 border right 172
+1621247725304189093 : Checking image 2 dpi 300
+1621247725304276598 : Checking image 2 border top 131
+1621247725304312100 : Checking image 2 border bottom 151
+1621247725304345602 : Checking image 2 border left 175
+1621247725304378003 : Checking image 2 border right 175
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_2_png" time="33.798"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_2_png" time="29.267"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/wrong_split_line_2.png
-1621246883779433108 : Checking separation double page angle 90.23635161124103
-1621246883779534510 : Checking separation double page y=0 2437
-1621246885366996937 : Checking page rotation 1 0.2
-1621246886967783205 : Checking page rotation 2 0.2
-1621246892172764755 : Checking image 1 crop x1 294
-1621246892172865658 : Checking image 1 crop y1 136
-1621246892172899359 : Checking image 1 crop x2 2325
-1621246892172933059 : Checking image 1 crop y2 3376
-1621246899788234955 : Checking image 2 crop x1 138
-1621246899788346958 : Checking image 2 crop y1 190
-1621246899788385659 : Checking image 2 crop x2 2174
-1621246899788420660 : Checking image 2 crop y2 3389
-1621246899788602065 : Checking image 1 dpi 300
-1621246899788680367 : Checking image 1 border top 131
-1621246899788714868 : Checking image 1 border bottom 116
-1621246899788747269 : Checking image 1 border left 214
-1621246899788780570 : Checking image 1 border right 214
-1621246899791626945 : Checking image 2 dpi 300
-1621246899791705747 : Checking image 2 border top 181
-1621246899791739648 : Checking image 2 border bottom 107
-1621246899791772049 : Checking image 2 border left 212
-1621246899791803650 : Checking image 2 border right 212
+1621247725380580073 : Checking separation double page angle 90.23635161124103
+1621247725380680879 : Checking separation double page y=0 2437
+1621247727123674543 : Checking page rotation 1 0.2
+1621247728639242963 : Checking page rotation 2 0.2
+1621247733143490332 : Checking image 1 crop x1 294
+1621247733143612939 : Checking image 1 crop y1 136
+1621247733143650841 : Checking image 1 crop x2 2325
+1621247733143690043 : Checking image 1 crop y2 3376
+1621247739059506037 : Checking image 2 crop x1 138
+1621247739059625243 : Checking image 2 crop y1 190
+1621247739059664746 : Checking image 2 crop x2 2174
+1621247739059701448 : Checking image 2 crop y2 3389
+1621247739059876458 : Checking image 1 dpi 300
+1621247739059948162 : Checking image 1 border top 131
+1621247739059996664 : Checking image 1 border bottom 116
+1621247739060029166 : Checking image 1 border left 214
+1621247739060060168 : Checking image 1 border right 214
+1621247739062793521 : Checking image 2 dpi 300
+1621247739062871125 : Checking image 2 border top 181
+1621247739062901127 : Checking image 2 border bottom 107
+1621247739062928628 : Checking image 2 border left 212
+1621247739062955930 : Checking image 2 border right 212
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_wave_split_line_png" time="33.449"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_wave_split_line_png" time="28.438"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/wrong_wave_split_line.png
-1621246896067884769 : Checking separation double page angle 90.42461655762611
-1621246896068015572 : Checking separation double page y=0 2502
-1621246898267995811 : Checking page rotation 1 -0.09999999999999377
-1621246899968611431 : Checking page rotation 2 0.85
-1621246906023245413 : Checking image 1 crop x1 384
-1621246906023368417 : Checking image 1 crop y1 178
-1621246906023408618 : Checking image 1 crop x2 2412
-1621246906023446619 : Checking image 1 crop y2 3374
-1621246912645461901 : Checking image 2 crop x1 7
-1621246912645632305 : Checking image 2 crop y1 0
-1621246912645675906 : Checking image 2 crop x2 2411
-1621246912645718508 : Checking image 2 crop y2 3505
-1621246912645887512 : Checking image 1 dpi 300
-1621246912645965914 : Checking image 1 border top 173
-1621246912646006815 : Checking image 1 border bottom 118
-1621246912646042616 : Checking image 1 border left 216
-1621246912646078017 : Checking image 1 border right 216
-1621246912648783189 : Checking image 2 dpi 300
-1621246912648856091 : Checking image 2 border top 1
-1621246912648893592 : Checking image 2 border bottom 1
-1621246912648928993 : Checking image 2 border left 38
-1621246912648964394 : Checking image 2 border right 38
+1621247741553124334 : Checking separation double page angle 90.42461655762611
+1621247741553232341 : Checking separation double page y=0 2502
+1621247742838725849 : Checking page rotation 1 -0.09999999999999377
+1621247744012009064 : Checking page rotation 2 0.85
+1621247748394675070 : Checking image 1 crop x1 384
+1621247748394793277 : Checking image 1 crop y1 178
+1621247748394827378 : Checking image 1 crop x2 2412
+1621247748394858680 : Checking image 1 crop y2 3374
+1621247753728596870 : Checking image 2 crop x1 7
+1621247753728746478 : Checking image 2 crop y1 0
+1621247753728780980 : Checking image 2 crop x2 2411
+1621247753728814082 : Checking image 2 crop y2 3505
+1621247753728952190 : Checking image 1 dpi 300
+1621247753729014293 : Checking image 1 border top 173
+1621247753729043695 : Checking image 1 border bottom 118
+1621247753729070696 : Checking image 1 border left 216
+1621247753729097098 : Checking image 1 border right 216
+1621247753731555535 : Checking image 2 dpi 300
+1621247753731641840 : Checking image 2 border top 1
+1621247753731693043 : Checking image 2 border bottom 1
+1621247753731726445 : Checking image 2 border left 38
+1621247753731759247 : Checking image 2 border right 38
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_small_wave_png" time="24.992"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_small_wave_png" time="19.919"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/small_wave.png
-1621246917801353853 : Checking separation double page angle 90.56494929955075
-1621246917801456356 : Checking separation double page y=0 2495
-1621246919477836920 : Checking page rotation 1 0.7
-1621246920983518784 : Checking page rotation 2 0.65
-1621246922496744552 : Checking image 1 crop x1 322
-1621246922496852955 : Checking image 1 crop y1 199
-1621246922496891056 : Checking image 1 crop x2 2351
-1621246922496923257 : Checking image 1 crop y2 3394
-1621246924776911826 : Checking image 2 crop x1 130
-1621246924777026329 : Checking image 2 crop y1 222
-1621246924777116132 : Checking image 2 crop x2 2163
-1621246924777172633 : Checking image 2 crop y2 3420
-1621246924777349138 : Checking image 1 dpi 300
-1621246924777428740 : Checking image 1 border top 181
-1621246924777462641 : Checking image 1 border bottom 111
-1621246924777493442 : Checking image 1 border left 215
-1621246924777525543 : Checking image 1 border right 215
-1621246924780364120 : Checking image 2 dpi 300
-1621246924780429021 : Checking image 2 border top 197
-1621246924780460222 : Checking image 2 border bottom 92
-1621246924780489623 : Checking image 2 border left 213
-1621246924780518424 : Checking image 2 border right 213
+1621247752687710019 : Checking separation double page angle 90.56494929955075
+1621247752687818825 : Checking separation double page y=0 2495
+1621247754189544265 : Checking page rotation 1 0.7
+1621247755558592981 : Checking page rotation 2 0.65
+1621247757006927747 : Checking image 1 crop x1 322
+1621247757007045253 : Checking image 1 crop y1 199
+1621247757007081855 : Checking image 1 crop x2 2351
+1621247757007114457 : Checking image 1 crop y2 3394
+1621247758977648688 : Checking image 2 crop x1 130
+1621247758977764995 : Checking image 2 crop y1 222
+1621247758977802497 : Checking image 2 crop x2 2163
+1621247758977839099 : Checking image 2 crop y2 3420
+1621247758978023809 : Checking image 1 dpi 300
+1621247758978092413 : Checking image 1 border top 181
+1621247758978127115 : Checking image 1 border bottom 111
+1621247758978158817 : Checking image 1 border left 215
+1621247758978189518 : Checking image 1 border right 215
+1621247758981083481 : Checking image 2 dpi 300
+1621247758981160285 : Checking image 2 border top 197
+1621247758981208988 : Checking image 2 border bottom 92
+1621247758981238389 : Checking image 2 border left 213
+1621247758981266791 : Checking image 2 border right 213
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_line_algo_png" time="22.998"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_line_algo_png" time="19.877"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/no_split_line_line_algo.png
-1621246926139628829 : Checking separation double page angle 89.47691469185418
-1621246926139733632 : Checking separation double page y=0 2476
-1621246927289310379 : Checking page rotation 1 -0.14999999999999067
-1621246929076380942 : Checking page rotation 2 -0.14999999999999067
-1621246931060225220 : Checking image 1 crop x1 205
-1621246931060348023 : Checking image 1 crop y1 158
-1621246931060389424 : Checking image 1 crop x2 2320
-1621246931060427025 : Checking image 1 crop y2 3366
-1621246935665883867 : Checking image 2 crop x1 185
-1621246935666000470 : Checking image 2 crop y1 225
-1621246935666042071 : Checking image 2 crop x2 2204
-1621246935666078772 : Checking image 2 crop y2 3362
-1621246935666252677 : Checking image 1 dpi 300
-1621246935666332379 : Checking image 1 border top 144
-1621246935666370380 : Checking image 1 border bottom 134
-1621246935666404181 : Checking image 1 border left 172
-1621246935666437182 : Checking image 1 border right 172
-1621246935669100853 : Checking image 2 dpi 300
-1621246935669184356 : Checking image 2 border top 223
-1621246935669221857 : Checking image 2 border bottom 127
-1621246935669255058 : Checking image 2 border left 220
-1621246935669288158 : Checking image 2 border right 220
+1621247765984251577 : Checking separation double page angle 89.47691469185418
+1621247765984344282 : Checking separation double page y=0 2476
+1621247766869029747 : Checking page rotation 1 -0.14999999999999067
+1621247768147786489 : Checking page rotation 2 -0.14999999999999067
+1621247769774452822 : Checking image 1 crop x1 205
+1621247769774579629 : Checking image 1 crop y1 158
+1621247769774616231 : Checking image 1 crop x2 2320
+1621247769774651933 : Checking image 1 crop y2 3366
+1621247773629160070 : Checking image 2 crop x1 185
+1621247773629285377 : Checking image 2 crop y1 225
+1621247773629321679 : Checking image 2 crop x2 2204
+1621247773629357781 : Checking image 2 crop y2 3362
+1621247773629538491 : Checking image 1 dpi 300
+1621247773629608995 : Checking image 1 border top 144
+1621247773629640897 : Checking image 1 border bottom 134
+1621247773629671798 : Checking image 1 border left 172
+1621247773629701800 : Checking image 1 border right 172
+1621247773632295445 : Checking image 2 dpi 300
+1621247773632381150 : Checking image 2 border top 223
+1621247773632413452 : Checking image 2 border bottom 127
+1621247773632443954 : Checking image 2 border left 220
+1621247773632474255 : Checking image 2 border right 220
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_3_png" time="27.338"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_3_png" time="22.220"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/wrong_split_line_3.png
-1621246940714753631 : Checking separation double page angle 90.40515247895009
-1621246940714857434 : Checking separation double page y=0 2495
-1621246942173854127 : Checking page rotation 1 0.2
-1621246943202013258 : Checking page rotation 2 0.85
-1621246945277330834 : Checking image 1 crop x1 331
-1621246945277434636 : Checking image 1 crop y1 166
-1621246945277471137 : Checking image 1 crop x2 2377
-1621246945277506638 : Checking image 1 crop y2 3375
-1621246952152335395 : Checking image 2 crop x1 103
-1621246952152445598 : Checking image 2 crop y1 207
-1621246952152499499 : Checking image 2 crop x2 2136
-1621246952152533600 : Checking image 2 crop y2 3414
-1621246952152739706 : Checking image 1 dpi 300
-1621246952152872209 : Checking image 1 border top 158
-1621246952152920211 : Checking image 1 border bottom 120
-1621246952152954311 : Checking image 1 border left 207
-1621246952152989112 : Checking image 1 border right 207
-1621246952155856490 : Checking image 2 dpi 300
-1621246952155928392 : Checking image 2 border top 199
-1621246952155959393 : Checking image 2 border bottom 81
-1621246952155988294 : Checking image 2 border left 213
-1621246952156017094 : Checking image 2 border right 213
+1621247771776994414 : Checking separation double page angle 90.40515247895009
+1621247771777101320 : Checking separation double page y=0 2495
+1621247773039413134 : Checking page rotation 1 0.2
+1621247773992998751 : Checking page rotation 2 0.85
+1621247775834377699 : Checking image 1 crop x1 331
+1621247775834495406 : Checking image 1 crop y1 166
+1621247775834532508 : Checking image 1 crop x2 2377
+1621247775834569810 : Checking image 1 crop y2 3375
+1621247781220085177 : Checking image 2 crop x1 103
+1621247781220188483 : Checking image 2 crop y1 207
+1621247781220224985 : Checking image 2 crop x2 2136
+1621247781220260287 : Checking image 2 crop y2 3414
+1621247781220453798 : Checking image 1 dpi 300
+1621247781220521602 : Checking image 1 border top 158
+1621247781220557504 : Checking image 1 border bottom 120
+1621247781220590306 : Checking image 1 border left 207
+1621247781220621908 : Checking image 1 border right 207
+1621247781223344560 : Checking image 2 dpi 300
+1621247781223435865 : Checking image 2 border top 199
+1621247781223472267 : Checking image 2 border bottom 81
+1621247781223505869 : Checking image 2 border left 213
+1621247781223538971 : Checking image 2 border right 213
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_failed_split_line_line_algo_png" time="16.989"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_failed_split_line_line_algo_png" time="14.644"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/failed_split_line_line_algo.png
-1621246946697065664 : Checking separation double page angle 90.0093502548779
-1621246946697186067 : Checking separation double page y=0 2574
-1621246947546300551 : Checking page rotation 1 0.0
-1621246948179228484 : Checking page rotation 2 0.0
-1621246950893210723 : Checking image 1 crop x1 411
-1621246950893408928 : Checking image 1 crop y1 2927
-1621246950893463730 : Checking image 1 crop x2 2422
-1621246950893504231 : Checking image 1 crop y2 3172
-1621246952688071592 : Checking image 2 crop x1 1191
-1621246952688201195 : Checking image 2 crop y1 1745
-1621246952688245196 : Checking image 2 crop x2 1192
-1621246952688282397 : Checking image 2 crop y2 1746
-1621246952688441002 : Checking image 1 dpi 300
-1621246952688526904 : Checking image 1 border top 2920
-1621246952688563405 : Checking image 1 border bottom 322
-1621246952688596806 : Checking image 1 border left 224
-1621246952688630007 : Checking image 1 border right 224
-1621246952691162375 : Checking image 2 dpi 300
-1621246952691228777 : Checking image 2 border top 1752
-1621246952691267178 : Checking image 2 border bottom 1753
-1621246952691300879 : Checking image 2 border left 1239
-1621246952691343480 : Checking image 2 border right 1239
+1621247783438900652 : Checking separation double page angle 90.0093502548779
+1621247783438994157 : Checking separation double page y=0 2574
+1621247784136969013 : Checking page rotation 1 0.0
+1621247784640641669 : Checking page rotation 2 0.0
+1621247786722804177 : Checking image 1 crop x1 411
+1621247786722931484 : Checking image 1 crop y1 2927
+1621247786722970986 : Checking image 1 crop x2 2422
+1621247786723007088 : Checking image 1 crop y2 3172
+1621247788298100434 : Checking image 2 crop x1 1191
+1621247788298195139 : Checking image 2 crop y1 1745
+1621247788298225241 : Checking image 2 crop x2 1192
+1621247788298253043 : Checking image 2 crop y2 1746
+1621247788298367749 : Checking image 1 dpi 300
+1621247788298436453 : Checking image 1 border top 2920
+1621247788298464654 : Checking image 1 border bottom 322
+1621247788298512257 : Checking image 1 border left 224
+1621247788298542959 : Checking image 1 border right 224
+1621247788300353460 : Checking image 2 dpi 300
+1621247788300437665 : Checking image 2 border top 1752
+1621247788300468967 : Checking image 2 border bottom 1753
+1621247788300495668 : Checking image 2 border left 1239
+1621247788300522070 : Checking image 2 border right 1239
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_3_png" time="22.332"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_much_3_png" time="18.069"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/crop_too_much_3.png
-1621246965769023611 : Checking separation double page angle 89.5934556679346
-1621246965769123014 : Checking separation double page y=0 2499
-1621246966904874877 : Checking page rotation 1 -0.8999999999999949
-1621246968607587097 : Checking page rotation 2 -0.04999999999999689
-1621246971785014860 : Checking image 1 crop x1 374
-1621246971785123163 : Checking image 1 crop y1 258
-1621246971785160764 : Checking image 1 crop x2 2385
-1621246971785192865 : Checking image 1 crop y2 3459
-1621246974473021811 : Checking image 2 crop x1 164
-1621246974473135714 : Checking image 2 crop y1 229
-1621246974473175615 : Checking image 2 crop x2 2183
-1621246974473213616 : Checking image 2 crop y2 3416
-1621246974473405622 : Checking image 1 dpi 300
-1621246974473506224 : Checking image 1 border top 239
-1621246974473538325 : Checking image 1 border bottom 46
-1621246974473568126 : Checking image 1 border left 224
-1621246974473598727 : Checking image 1 border right 224
-1621246974476669510 : Checking image 2 dpi 300
-1621246974476734712 : Checking image 2 border top 210
-1621246974476765112 : Checking image 2 border bottom 90
-1621246974476793713 : Checking image 2 border left 220
-1621246974476823514 : Checking image 2 border right 220
+1621247792465988839 : Checking separation double page angle 89.5934556679346
+1621247792466085644 : Checking separation double page y=0 2499
+1621247793508481194 : Checking page rotation 1 -0.8999999999999949
+1621247794799576266 : Checking page rotation 2 -0.04999999999999689
+1621247797276436642 : Checking image 1 crop x1 374
+1621247797276557549 : Checking image 1 crop y1 258
+1621247797276594351 : Checking image 1 crop x2 2385
+1621247797276627253 : Checking image 1 crop y2 3459
+1621247799291291166 : Checking image 2 crop x1 164
+1621247799291405372 : Checking image 2 crop y1 229
+1621247799291439574 : Checking image 2 crop x2 2183
+1621247799291472576 : Checking image 2 crop y2 3416
+1621247799291635285 : Checking image 1 dpi 300
+1621247799291717790 : Checking image 1 border top 239
+1621247799291758592 : Checking image 1 border bottom 46
+1621247799291792494 : Checking image 1 border left 224
+1621247799291824096 : Checking image 1 border right 224
+1621247799294600051 : Checking image 2 dpi 300
+1621247799294683456 : Checking image 2 border top 210
+1621247799294717658 : Checking image 2 border bottom 90
+1621247799294749960 : Checking image 2 border left 220
+1621247799294783362 : Checking image 2 border right 220
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_failed_split_line_line_algo_2_png" time="24.045"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_failed_split_line_line_algo_2_png" time="20.397"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/failed_split_line_line_algo_2.png
-1621246967658532490 : Checking separation double page angle 90.03732329462368
-1621246967658652894 : Checking separation double page y=0 2499
-1621246969238534086 : Checking page rotation 1 -0.09999999999999377
-1621246970809057026 : Checking page rotation 2 0.5499999999999999
-1621246974025016407 : Checking image 1 crop x1 273
-1621246974025136310 : Checking image 1 crop y1 147
-1621246974025173911 : Checking image 1 crop x2 2386
-1621246974025208312 : Checking image 1 crop y2 3352
-1621246976697935124 : Checking image 2 crop x1 122
-1621246976698045927 : Checking image 2 crop y1 155
-1621246976698083928 : Checking image 2 crop x2 2246
-1621246976698119829 : Checking image 2 crop y2 3350
-1621246976698291434 : Checking image 1 dpi 300
-1621246976698366436 : Checking image 1 border top 137
-1621246976698402337 : Checking image 1 border bottom 145
-1621246976698433637 : Checking image 1 border left 173
-1621246976698464438 : Checking image 1 border right 173
-1621246976701883631 : Checking image 2 dpi 300
-1621246976701964633 : Checking image 2 border top 133
-1621246976701998634 : Checking image 2 border bottom 159
-1621246976702029735 : Checking image 2 border left 168
-1621246976702063435 : Checking image 2 border right 168
+1621247801538912646 : Checking separation double page angle 90.03732329462368
+1621247801539009052 : Checking separation double page y=0 2499
+1621247802977956369 : Checking page rotation 1 -0.09999999999999377
+1621247804038175242 : Checking page rotation 2 0.5499999999999999
+1621247806439022023 : Checking image 1 crop x1 273
+1621247806439149030 : Checking image 1 crop y1 147
+1621247806439182732 : Checking image 1 crop x2 2386
+1621247806439215634 : Checking image 1 crop y2 3352
+1621247808658600038 : Checking image 2 crop x1 122
+1621247808658721945 : Checking image 2 crop y1 155
+1621247808658758347 : Checking image 2 crop x2 2246
+1621247808658795449 : Checking image 2 crop y2 3350
+1621247808658973859 : Checking image 1 dpi 300
+1621247808659040962 : Checking image 1 border top 137
+1621247808659072964 : Checking image 1 border bottom 145
+1621247808659101266 : Checking image 1 border left 173
+1621247808659129067 : Checking image 1 border right 173
+1621247808661687611 : Checking image 2 dpi 300
+1621247808661772115 : Checking image 2 border top 133
+1621247808661802317 : Checking image 2 border bottom 159
+1621247808661836519 : Checking image 2 border left 168
+1621247808661866521 : Checking image 2 border right 168
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_wave_split_line_2_png" time="28.420"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_wave_split_line_2_png" time="22.780"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/wrong_wave_split_line_2.png
-1621246993797563058 : Checking separation double page angle 90.7708958311329
-1621246993798047471 : Checking separation double page y=0 2490
-1621246995142676398 : Checking page rotation 1 0.2
-1621246996746018361 : Checking page rotation 2 1.65
-1621246998594067715 : Checking image 1 crop x1 227
-1621246998594177418 : Checking image 1 crop y1 147
-1621246998594214819 : Checking image 1 crop x2 2342
-1621246998594250220 : Checking image 1 crop y2 3353
-1621247002891476542 : Checking image 2 crop x1 106
-1621247002891583145 : Checking image 2 crop y1 195
-1621247002891620946 : Checking image 2 crop x2 2231
-1621247002891655847 : Checking image 2 crop y2 3398
-1621247002891832752 : Checking image 1 dpi 300
-1621247002891913054 : Checking image 1 border top 136
-1621247002891947655 : Checking image 1 border bottom 145
-1621247002891978656 : Checking image 1 border left 172
-1621247002892010956 : Checking image 1 border right 172
-1621247002894840733 : Checking image 2 dpi 300
-1621247002894915135 : Checking image 2 border top 166
-1621247002894950636 : Checking image 2 border bottom 117
-1621247002894980837 : Checking image 2 border left 167
-1621247002895011038 : Checking image 2 border right 167
+1621247814867242615 : Checking separation double page angle 90.7708958311329
+1621247814867347521 : Checking separation double page y=0 2490
+1621247816006981525 : Checking page rotation 1 0.2
+1621247817196789538 : Checking page rotation 2 1.65
+1621247818634834549 : Checking image 1 crop x1 227
+1621247818634952555 : Checking image 1 crop y1 147
+1621247818634989857 : Checking image 1 crop x2 2342
+1621247818635025859 : Checking image 1 crop y2 3353
+1621247822065808456 : Checking image 2 crop x1 106
+1621247822065931163 : Checking image 2 crop y1 195
+1621247822065971265 : Checking image 2 crop x2 2231
+1621247822066010768 : Checking image 2 crop y2 3398
+1621247822066183177 : Checking image 1 dpi 300
+1621247822066255981 : Checking image 1 border top 136
+1621247822066293884 : Checking image 1 border bottom 145
+1621247822066335786 : Checking image 1 border left 172
+1621247822066370688 : Checking image 1 border right 172
+1621247822069199946 : Checking image 2 dpi 300
+1621247822069290551 : Checking image 2 border top 166
+1621247822069326853 : Checking image 2 border bottom 117
+1621247822069360855 : Checking image 2 border left 167
+1621247822069394157 : Checking image 2 border right 167
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_wave_split_line_3_png" time="25.551"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_wave_split_line_3_png" time="21.404"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/wrong_wave_split_line_3.png
-1621246994838159749 : Checking separation double page angle 90.12715931778824
-1621246994838273652 : Checking separation double page y=0 2514
-1621246996613505964 : Checking page rotation 1 0.05
-1621246998029697898 : Checking page rotation 2 0.2
-1621247000222187000 : Checking image 1 crop x1 273
-1621247000222303303 : Checking image 1 crop y1 220
-1621247000222358705 : Checking image 1 crop x2 2383
-1621247000222395606 : Checking image 1 crop y2 3423
-1621247002266920092 : Checking image 2 crop x1 116
-1621247002267045196 : Checking image 2 crop y1 225
-1621247002267087997 : Checking image 2 crop x2 2242
-1621247002267127798 : Checking image 2 crop y2 3415
-1621247002267304003 : Checking image 1 dpi 300
-1621247002267387905 : Checking image 1 border top 202
-1621247002267428806 : Checking image 1 border bottom 82
-1621247002267465107 : Checking image 1 border left 175
-1621247002267501108 : Checking image 1 border right 175
-1621247002270135379 : Checking image 2 dpi 300
-1621247002270208481 : Checking image 2 border top 204
-1621247002270245782 : Checking image 2 border bottom 93
-1621247002270281083 : Checking image 2 border left 167
-1621247002270316384 : Checking image 2 border right 167
+1621247824295721325 : Checking separation double page angle 90.12715931778824
+1621247824295829231 : Checking separation double page y=0 2514
+1621247825536052980 : Checking page rotation 1 0.05
+1621247826667053613 : Checking page rotation 2 0.2
+1621247828475901190 : Checking image 1 crop x1 273
+1621247828476036998 : Checking image 1 crop y1 220
+1621247828476085300 : Checking image 1 crop x2 2383
+1621247828476120602 : Checking image 1 crop y2 3423
+1621247830088375903 : Checking image 2 crop x1 116
+1621247830088500110 : Checking image 2 crop y1 225
+1621247830088538712 : Checking image 2 crop x2 2242
+1621247830088578314 : Checking image 2 crop y2 3415
+1621247830088780625 : Checking image 1 dpi 300
+1621247830088858030 : Checking image 1 border top 202
+1621247830088894732 : Checking image 1 border bottom 82
+1621247830088928034 : Checking image 1 border left 175
+1621247830088960635 : Checking image 1 border right 175
+1621247830091475976 : Checking image 2 dpi 300
+1621247830091558681 : Checking image 2 border top 204
+1621247830091591383 : Checking image 2 border bottom 93
+1621247830091622184 : Checking image 2 border left 167
+1621247830091652586 : Checking image 2 border right 167
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_wave_algo_2_png" time="21.789"><system-out>--------------------------------- Captured Log ---------------------------------
-
---------------------------------- Captured Out ---------------------------------
-/home/runner/work/diptych/diptych/tests/no_split_line_wave_algo_2.png
-1621247017019187553 : Checking separation double page angle 90.43362571535843
-1621247017019297256 : Checking separation double page y=0 2473
-1621247018341748558 : Checking page rotation 1 1.05
-1621247019718102520 : Checking page rotation 2 0.15000000000000002
-1621247022042290555 : Checking image 1 crop x1 267
-1621247022042431058 : Checking image 1 crop y1 210
-1621247022042473460 : Checking image 1 crop x2 2343
-1621247022042512261 : Checking image 1 crop y2 3412
-1621247024061452055 : Checking image 2 crop x1 165
-1621247024061576759 : Checking image 2 crop y1 241
-1621247024061619060 : Checking image 2 crop x2 2250
-1621247024061658561 : Checking image 2 crop y2 3433
-1621247024061843966 : Checking image 1 dpi 300
-1621247024061931268 : Checking image 1 border top 192
-1621247024061969469 : Checking image 1 border bottom 93
-1621247024062004270 : Checking image 1 border left 192
-1621247024062038371 : Checking image 1 border right 192
-1621247024064819547 : Checking image 2 dpi 300
-1621247024064903949 : Checking image 2 border top 224
-1621247024064940750 : Checking image 2 border bottom 71
-1621247024064974651 : Checking image 2 border left 187
-1621247024065008252 : Checking image 2 border right 187
-
-</system-out><system-err>--------------------------------- Captured Err ---------------------------------
-
-</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_wave_algo_png" time="37.001"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_wave_algo_png" time="30.571"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/no_split_line_wave_algo.png
-1621247017410566949 : Checking separation double page angle 89.79018091440821
-1621247017410682752 : Checking separation double page y=0 2483
-1621247020678624477 : Checking page rotation 1 0.0
-1621247022176268197 : Checking page rotation 2 -0.44999999999999746
-1621247033059837362 : Checking image 1 crop x1 97
-1621247033059929764 : Checking image 1 crop y1 74
-1621247033059966265 : Checking image 1 crop x2 2489
-1621247033060000366 : Checking image 1 crop y2 3505
-1621247039854689508 : Checking image 2 crop x1 164
-1621247039854805012 : Checking image 2 crop y1 267
-1621247039854846413 : Checking image 2 crop x2 2239
-1621247039854881214 : Checking image 2 crop y2 3380
-1621247039855079519 : Checking image 1 dpi 300
-1621247039855164521 : Checking image 1 border top 38
-1621247039855199622 : Checking image 1 border bottom 38
-1621247039855231523 : Checking image 1 border left 44
-1621247039855264824 : Checking image 1 border right 44
-1621247039858299906 : Checking image 2 dpi 300
-1621247039858397009 : Checking image 2 border top 257
-1621247039858435110 : Checking image 2 border bottom 117
-1621247039858467311 : Checking image 2 border left 192
-1621247039858499312 : Checking image 2 border right 192
+1621247834566234024 : Checking separation double page angle 89.79018091440821
+1621247834566330530 : Checking separation double page y=0 2483
+1621247837096281530 : Checking page rotation 1 0.0
+1621247838148580773 : Checking page rotation 2 -0.44999999999999746
+1621247846885217840 : Checking image 1 crop x1 97
+1621247846885300944 : Checking image 1 crop y1 74
+1621247846885331446 : Checking image 1 crop x2 2489
+1621247846885360748 : Checking image 1 crop y2 3505
+1621247852603018991 : Checking image 2 crop x1 164
+1621247852603132397 : Checking image 2 crop y1 267
+1621247852603191301 : Checking image 2 crop x2 2239
+1621247852603227003 : Checking image 2 crop y2 3380
+1621247852603413513 : Checking image 1 dpi 300
+1621247852603480717 : Checking image 1 border top 38
+1621247852603513519 : Checking image 1 border bottom 38
+1621247852603546520 : Checking image 1 border left 44
+1621247852603577522 : Checking image 1 border right 44
+1621247852606439382 : Checking image 2 dpi 300
+1621247852606530087 : Checking image 2 border top 257
+1621247852606568190 : Checking image 2 border bottom 117
+1621247852606602091 : Checking image 2 border left 192
+1621247852606635693 : Checking image 2 border right 192
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_few_2_png" time="23.980"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_wave_algo_2_png" time="18.299"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
-/home/runner/work/diptych/diptych/tests/crop_too_few_2.png
-1621247039160379762 : Checking separation double page angle 90.35461351371423
-1621247039160515466 : Checking separation double page y=0 2533
-1621247040482894460 : Checking page rotation 1 1.0999999999999999
-1621247041935551490 : Checking page rotation 2 0.0
-1621247044906377715 : Checking image 1 crop x1 289
-1621247044906502419 : Checking image 1 crop y1 165
-1621247044906543720 : Checking image 1 crop x2 2400
-1621247044906584321 : Checking image 1 crop y2 3367
-1621247048058965324 : Checking image 2 crop x1 152
-1621247048059083927 : Checking image 2 crop y1 190
-1621247048059124728 : Checking image 2 crop x2 2273
-1621247048059164929 : Checking image 2 crop y2 3385
-1621247048059336034 : Checking image 1 dpi 300
-1621247048059416236 : Checking image 1 border top 157
-1621247048059453237 : Checking image 1 border bottom 128
-1621247048059487238 : Checking image 1 border left 174
-1621247048059522239 : Checking image 1 border right 174
-1621247048062271814 : Checking image 2 dpi 300
-1621247048062341216 : Checking image 2 border top 175
-1621247048062376817 : Checking image 2 border bottom 116
-1621247048062410817 : Checking image 2 border left 169
-1621247048062444918 : Checking image 2 border right 169
+/home/runner/work/diptych/diptych/tests/no_split_line_wave_algo_2.png
+1621247842651251083 : Checking separation double page angle 90.43362571535843
+1621247842651357289 : Checking separation double page y=0 2473
+1621247843755258922 : Checking page rotation 1 1.05
+1621247844792965726 : Checking page rotation 2 0.15000000000000002
+1621247846687172254 : Checking image 1 crop x1 267
+1621247846687297661 : Checking image 1 crop y1 210
+1621247846687333663 : Checking image 1 crop x2 2343
+1621247846687369265 : Checking image 1 crop y2 3412
+1621247848393380059 : Checking image 2 crop x1 165
+1621247848393499565 : Checking image 2 crop y1 241
+1621247848393552268 : Checking image 2 crop x2 2250
+1621247848393587670 : Checking image 2 crop y2 3433
+1621247848393782781 : Checking image 1 dpi 300
+1621247848393855585 : Checking image 1 border top 192
+1621247848393887387 : Checking image 1 border bottom 93
+1621247848393918389 : Checking image 1 border left 192
+1621247848393948490 : Checking image 1 border right 192
+1621247848396372126 : Checking image 2 dpi 300
+1621247848396453631 : Checking image 2 border top 224
+1621247848396484732 : Checking image 2 border bottom 71
+1621247848396531735 : Checking image 2 border left 187
+1621247848396561837 : Checking image 2 border right 187
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_failed_detect_rectangle_png" time="22.115"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_failed_detect_rectangle_png" time="18.824"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/failed_detect_rectangle.png
-1621247055986489998 : Checking separation double page angle 90.242273842964
-1621247055986606101 : Checking separation double page y=0 2475
-1621247057440357775 : Checking page rotation 1 0.2
-1621247059228026692 : Checking page rotation 2 0.2
-1621247060560096692 : Checking image 1 crop x1 257
-1621247060560253796 : Checking image 1 crop y1 201
-1621247060560295197 : Checking image 1 crop x2 2333
-1621247060560330698 : Checking image 1 crop y2 3402
-1621247062021246078 : Checking image 2 crop x1 137
-1621247062021355281 : Checking image 2 crop y1 215
-1621247062021396182 : Checking image 2 crop x2 2220
-1621247062021431683 : Checking image 2 crop y2 3406
-1621247062021605787 : Checking image 1 dpi 300
-1621247062021684490 : Checking image 1 border top 188
-1621247062021719291 : Checking image 1 border bottom 98
-1621247062021751591 : Checking image 1 border left 192
-1621247062021784592 : Checking image 1 border right 192
-1621247062024676171 : Checking image 2 dpi 300
-1621247062024747973 : Checking image 2 border top 201
-1621247062024781374 : Checking image 2 border bottom 95
-1621247062024812675 : Checking image 2 border left 188
-1621247062024843875 : Checking image 2 border right 188
+1621247862258712951 : Checking separation double page angle 90.242273842964
+1621247862258822357 : Checking separation double page y=0 2475
+1621247863376919149 : Checking page rotation 1 0.2
+1621247864746555523 : Checking page rotation 2 0.2
+1621247865922128333 : Checking image 1 crop x1 257
+1621247865922256140 : Checking image 1 crop y1 201
+1621247865922295443 : Checking image 1 crop x2 2333
+1621247865922332445 : Checking image 1 crop y2 3402
+1621247867207086767 : Checking image 2 crop x1 137
+1621247867207214574 : Checking image 2 crop y1 215
+1621247867207255776 : Checking image 2 crop x2 2220
+1621247867207294378 : Checking image 2 crop y2 3406
+1621247867207464888 : Checking image 1 dpi 300
+1621247867207536892 : Checking image 1 border top 188
+1621247867207571594 : Checking image 1 border bottom 98
+1621247867207605296 : Checking image 1 border left 192
+1621247867207637898 : Checking image 1 border right 192
+1621247867210066734 : Checking image 2 dpi 300
+1621247867210145238 : Checking image 2 border top 201
+1621247867210173940 : Checking image 2 border bottom 95
+1621247867210200741 : Checking image 2 border left 188
+1621247867210227343 : Checking image 2 border right 188
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_single_page_png" time="6.802"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_crop_too_few_2_png" time="19.125"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+/home/runner/work/diptych/diptych/tests/crop_too_few_2.png
+1621247864860480901 : Checking separation double page angle 90.35461351371423
+1621247864860593407 : Checking separation double page y=0 2533
+1621247865908369963 : Checking page rotation 1 1.0999999999999999
+1621247866979472425 : Checking page rotation 2 0.0
+1621247869326411874 : Checking image 1 crop x1 289
+1621247869326533480 : Checking image 1 crop y1 165
+1621247869326568982 : Checking image 1 crop x2 2400
+1621247869326601984 : Checking image 1 crop y2 3367
+1621247871797866746 : Checking image 2 crop x1 152
+1621247871797959652 : Checking image 2 crop y1 190
+1621247871797985653 : Checking image 2 crop x2 2273
+1621247871798010254 : Checking image 2 crop y2 3385
+1621247871798146462 : Checking image 1 dpi 300
+1621247871798195465 : Checking image 1 border top 157
+1621247871798219666 : Checking image 1 border bottom 128
+1621247871798242667 : Checking image 1 border left 174
+1621247871798265469 : Checking image 1 border right 174
+1621247871800927418 : Checking image 2 dpi 300
+1621247871801009822 : Checking image 2 border top 175
+1621247871801043224 : Checking image 2 border bottom 116
+1621247871801074626 : Checking image 2 border left 169
+1621247871801105428 : Checking image 2 border right 169
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_single_page_png" time="6.014"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/single_page.png
-1621247051717286350 : Checking separation double page angle 89.93006318861008
-1621247051717411053 : Checking separation double page y=0 2472
-1621247052598357334 : Checking page rotation 1 0.0
-1621247052722709002 : Checking page rotation 2 0.0
-1621247054354187389 : Checking image 1 crop x1 1
-1621247054354286392 : Checking image 1 crop y1 8
-1621247054354327793 : Checking image 1 crop x2 2470
-1621247054354364294 : Checking image 1 crop y2 3505
-1621247054498351094 : Checking image 2 crop x1 0
-1621247054498434796 : Checking image 2 crop y1 0
-1621247054498468597 : Checking image 2 crop x2 0
-1621247054498500298 : Checking image 2 crop y2 0
-1621247054498569800 : Checking image 1 dpi 300
-1621247054498639401 : Checking image 1 border top 5
-1621247054498682703 : Checking image 1 border bottom 5
-1621247054498716504 : Checking image 1 border left 6
-1621247054498750004 : Checking image 1 border right 6
-1621247054505241380 : Checking image 2 border top 0
-1621247054505316182 : Checking image 2 border bottom 0
-1621247054505348683 : Checking image 2 border left 0
-1621247054505380284 : Checking image 2 border right 0
+1621247870530371833 : Checking separation double page angle 89.93006318861008
+1621247870530476539 : Checking separation double page y=0 2472
+1621247871353309974 : Checking page rotation 1 0.0
+1621247871447440241 : Checking page rotation 2 0.0
+1621247872795733575 : Checking image 1 crop x1 1
+1621247872795829580 : Checking image 1 crop y1 8
+1621247872795866982 : Checking image 1 crop x2 2470
+1621247872795899284 : Checking image 1 crop y2 3505
+1621247872913002936 : Checking image 2 crop x1 0
+1621247872913063339 : Checking image 2 crop y1 0
+1621247872913084740 : Checking image 2 crop x2 0
+1621247872913104842 : Checking image 2 crop y2 0
+1621247872913153044 : Checking image 1 dpi 300
+1621247872913199647 : Checking image 1 border top 5
+1621247872913227148 : Checking image 1 border bottom 5
+1621247872913248750 : Checking image 1 border left 6
+1621247872913270051 : Checking image 1 border right 6
+1621247872919197182 : Checking image 2 border top 0
+1621247872919260086 : Checking image 2 border bottom 0
+1621247872919287387 : Checking image 2 border left 0
+1621247872919314189 : Checking image 2 border right 0
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_4_png" time="13.607"><system-out>--------------------------------- Captured Log ---------------------------------
-
---------------------------------- Captured Out ---------------------------------
-/home/runner/work/diptych/diptych/tests/wrong_split_line_4.png
-1621247063985901339 : Checking separation double page angle 90.92587744884125
-1621247063986012542 : Checking separation double page y=0 58
-1621247064091576110 : Checking page rotation 1 0.5499999999999999
-1621247065545453798 : Checking page rotation 2 1.0999999999999999
-1621247066355169291 : Checking image 1 crop x1 0
-1621247066355249293 : Checking image 1 crop y1 0
-1621247066355283294 : Checking image 1 crop x2 0
-1621247066355317195 : Checking image 1 crop y2 0
-1621247068507838748 : Checking image 2 crop x1 290
-1621247068507958952 : Checking image 2 crop y1 330
-1621247068507998853 : Checking image 2 crop x2 2314
-1621247068508036954 : Checking image 2 crop y2 3217
-1621247068508217059 : Checking image 1 border top 0
-1621247068508265060 : Checking image 1 border bottom 0
-1621247068508299961 : Checking image 1 border left 0
-1621247068508332462 : Checking image 1 border right 0
-1621247068508390063 : Checking image 2 dpi 300
-1621247068508460465 : Checking image 2 border top 322
-1621247068508497166 : Checking image 2 border bottom 278
-1621247068508530467 : Checking image 2 border left 218
-1621247068508563268 : Checking image 2 border right 218
-
-</system-out><system-err>--------------------------------- Captured Err ---------------------------------
-
-</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_wave_algo_3_png" time="11.975"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_no_split_line_wave_algo_3_png" time="10.006"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/no_split_line_wave_algo_3.png
-1621247070422942873 : Checking separation double page angle 90.18184445198425
-1621247070423065977 : Checking separation double page y=0 2405
-1621247071288333037 : Checking page rotation 1 0.0
-1621247071473908868 : Checking page rotation 2 0.0
-1621247073487414961 : Checking image 1 crop x1 184
-1621247073487523064 : Checking image 1 crop y1 2957
-1621247073487559465 : Checking image 1 crop x2 2201
-1621247073487590466 : Checking image 1 crop y2 3202
-1621247073989658579 : Checking image 2 crop x1 0
-1621247073989734781 : Checking image 2 crop y1 0
-1621247073989764782 : Checking image 2 crop x2 0
-1621247073989793082 : Checking image 2 crop y2 0
-1621247073989862384 : Checking image 1 dpi 300
-1621247073989930086 : Checking image 1 border top 2950
-1621247073989966987 : Checking image 1 border bottom 292
-1621247073989998588 : Checking image 1 border left 221
-1621247073990030289 : Checking image 1 border right 221
-1621247073996985177 : Checking image 2 border top 0
-1621247073997056279 : Checking image 2 border bottom 0
-1621247073997086280 : Checking image 2 border left 0
-1621247073997115881 : Checking image 2 border right 0
+1621247878599033656 : Checking separation double page angle 90.18184445198425
+1621247878599160864 : Checking separation double page y=0 2405
+1621247879370999292 : Checking page rotation 1 0.0
+1621247879511635770 : Checking page rotation 2 0.0
+1621247881344131195 : Checking image 1 crop x1 184
+1621247881344234201 : Checking image 1 crop y1 2957
+1621247881344270303 : Checking image 1 crop x2 2201
+1621247881344301405 : Checking image 1 crop y2 3202
+1621247881774873317 : Checking image 2 crop x1 0
+1621247881774954322 : Checking image 2 crop y1 0
+1621247881775045127 : Checking image 2 crop x2 0
+1621247881775079929 : Checking image 2 crop y2 0
+1621247881775157033 : Checking image 1 dpi 300
+1621247881775229937 : Checking image 1 border top 2950
+1621247881775267340 : Checking image 1 border bottom 292
+1621247881775301841 : Checking image 1 border left 221
+1621247881775335143 : Checking image 1 border right 221
+1621247881780238618 : Checking image 2 border top 0
+1621247881780324723 : Checking image 2 border bottom 0
+1621247881780357025 : Checking image 2 border left 0
+1621247881780389026 : Checking image 2 border right 0
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
-</system-err></testcase><testcase classname="tests.test_images" name="test_failed_split_line_line_algo_3_png" time="14.315"><system-out>--------------------------------- Captured Log ---------------------------------
+</system-err></testcase><testcase classname="tests.test_images" name="test_wrong_split_line_4_png" time="10.851"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+/home/runner/work/diptych/diptych/tests/wrong_split_line_4.png
+1621247880545940396 : Checking separation double page angle 90.92587744884125
+1621247880546056002 : Checking separation double page y=0 58
+1621247880627412158 : Checking page rotation 1 0.5499999999999999
+1621247881694852336 : Checking page rotation 2 1.0999999999999999
+1621247882382284933 : Checking image 1 crop x1 0
+1621247882382373038 : Checking image 1 crop y1 0
+1621247882382400840 : Checking image 1 crop x2 0
+1621247882382427141 : Checking image 1 crop y2 0
+1621247884134892682 : Checking image 2 crop x1 290
+1621247884135003888 : Checking image 2 crop y1 330
+1621247884135035690 : Checking image 2 crop x2 2314
+1621247884135065691 : Checking image 2 crop y2 3217
+1621247884135209999 : Checking image 1 border top 0
+1621247884135242401 : Checking image 1 border bottom 0
+1621247884135268603 : Checking image 1 border left 0
+1621247884135294004 : Checking image 1 border right 0
+1621247884135335906 : Checking image 2 dpi 300
+1621247884135392610 : Checking image 2 border top 322
+1621247884135421611 : Checking image 2 border bottom 278
+1621247884135448213 : Checking image 2 border left 218
+1621247884135474314 : Checking image 2 border right 218
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="tests.test_images" name="test_failed_split_line_line_algo_3_png" time="11.418"><system-out>--------------------------------- Captured Log ---------------------------------
 
 --------------------------------- Captured Out ---------------------------------
 /home/runner/work/diptych/diptych/tests/failed_split_line_line_algo_3.png
-1621247076790848670 : Checking separation double page angle 90.02403976140027
-1621247076790971073 : Checking separation double page y=0 39
-1621247076866110717 : Checking page rotation 1 0.0
-1621247077854015086 : Checking page rotation 2 0.0
-1621247078174216294 : Checking image 1 crop x1 0
-1621247078174297897 : Checking image 1 crop y1 0
-1621247078174333398 : Checking image 1 crop x2 0
-1621247078174367198 : Checking image 1 crop y2 0
-1621247082838408949 : Checking image 2 crop x1 249
-1621247082838518852 : Checking image 2 crop y1 154
-1621247082838558353 : Checking image 2 crop x2 2264
-1621247082838596154 : Checking image 2 crop y2 3361
-1621247082838767759 : Checking image 1 border top 0
-1621247082838814460 : Checking image 1 border bottom 0
-1621247082839066467 : Checking image 1 border left 0
-1621247082839112368 : Checking image 1 border right 0
-1621247082839174670 : Checking image 2 dpi 300
-1621247082839249772 : Checking image 2 border top 146
-1621247082839289073 : Checking image 2 border bottom 134
-1621247082839324274 : Checking image 2 border left 222
-1621247082839359275 : Checking image 2 border right 222
+1621247888756538282 : Checking separation double page angle 90.02403976140027
+1621247888756665089 : Checking separation double page y=0 39
+1621247888817477296 : Checking page rotation 1 0.0
+1621247889463458283 : Checking page rotation 2 0.0
+1621247889709519568 : Checking image 1 crop x1 0
+1621247889709595172 : Checking image 1 crop y1 0
+1621247889709628274 : Checking image 1 crop x2 0
+1621247889709659376 : Checking image 1 crop y2 0
+1621247893272474483 : Checking image 2 crop x1 249
+1621247893272635192 : Checking image 2 crop y1 154
+1621247893272738898 : Checking image 2 crop x2 2264
+1621247893272804002 : Checking image 2 crop y2 3361
+1621247893273083818 : Checking image 1 border top 0
+1621247893273152121 : Checking image 1 border bottom 0
+1621247893273209425 : Checking image 1 border left 0
+1621247893273268628 : Checking image 1 border right 0
+1621247893273362233 : Checking image 2 dpi 300
+1621247893273475340 : Checking image 2 border top 146
+1621247893273538143 : Checking image 2 border bottom 134
+1621247893273597146 : Checking image 2 border left 222
+1621247893273655150 : Checking image 2 border right 222
 
 </system-out><system-err>--------------------------------- Captured Err ---------------------------------
 
